@@ -4,3 +4,15 @@
   padding: 2rem;
   text-align: center;
 }
+
+@font-face {
+  font-family: "Gilroy";
+  font-weight: normal;
+  src: url("./fonts/Gilroy-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-weight: bold;
+  src: url("./fonts/Gilroy-Bold.ttf") format("truetype");
+}
