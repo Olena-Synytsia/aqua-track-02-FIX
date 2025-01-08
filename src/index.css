@@ -1,11 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Poppins", serif;
+  line-height: 24px;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,4 +43,48 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+body {
+  margin: 0;
+}
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .container {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .container {
+    max-width: 375px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0 auto;
+  }
+}
+
+/* TABLET */
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin: 0 auto;
+  }
+}
+
+/* DESKTOP */
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin: 0 auto;
+  }
 }
