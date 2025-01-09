@@ -1,5 +1,4 @@
 .item {
-  width: 149px;
   border-radius: 15px;
   background: #fff;
   display: flex;
@@ -56,4 +55,32 @@
   height: 14px;
   cursor: pointer;
   color: #323f47;
+}
+
+@media (min-width: 768px) {
+  .item {
+    gap: 20px;
+    padding: 20px;
+  }
+  .icon {
+    width: 44px;
+    height: 45px;
+  }
+  .indicators {
+    gap: 0;
+  }
+  .value {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+  .time {
+    line-height: 22.4px;
+  }
+  .buttons {
+    gap: 14px;
+  }
+  .btn {
+    width: 16px;
+    height: 16px;
+  }
 }

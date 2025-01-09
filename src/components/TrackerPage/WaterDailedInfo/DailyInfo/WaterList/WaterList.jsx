@@ -6,8 +6,8 @@ const WaterList = () => {
     <ul className={s.list}>
       <WaterItem />
       <WaterItem />
-      {/* <WaterItem />
-      <WaterItem /> */}
+      <WaterItem />
+      <WaterItem />
     </ul>
   );
 };

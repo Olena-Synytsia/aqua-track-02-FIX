@@ -1,12 +1,13 @@
 import { AiOutlineDelete } from "react-icons/ai";
-import { FaGlassWater } from "react-icons/fa6";
 import { FiEdit2 } from "react-icons/fi";
 import s from "./WaterItem.module.css";
 
 const WaterItem = ({ id, value = "250 ml", time = "07:00" }) => {
   return (
     <li className={s.item}>
-      <FaGlassWater className={s.icon} />
+      <svg className={s.icon}>
+        <use href="src/assets/sprite.svg#icon-mage_water-glass-fill"></use>
+      </svg>
       <div className={s.indicators}>
         <p className={s.value}>{value}</p>
         <p className={s.time}>{time}</p>

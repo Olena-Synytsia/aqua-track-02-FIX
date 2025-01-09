@@ -19,3 +19,9 @@
   background-color: #fff;
   border-radius: 9px;
 }
+
+@media (min-width: 768px) {
+  .list {
+    gap: 32px;
+  }
+}
