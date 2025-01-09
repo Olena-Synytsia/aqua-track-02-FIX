@@ -1,0 +1,21 @@
+.myScroll .os-scrollbar {
+    --os-size: 8px;
+    --os-track-bg: #FFFFFF;
+    --os-track-bg-hover: #FFFFFF;
+    --os-handle-bg: #323F47;
+    --os-track-border-radius: 9px;
+    --os-handle-border-radius: 9px;
+    --os-handle-max-size: 150px;
+    --os-handle-bg-hover: #323F47;
+    --os-handle-bg-active: #323F47;
+}
+
+.myScroll .os-scrollbar:hover {
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .myScroll .os-scrollbar {
+        --os-handle-max-size: 235px;
+    }
+}
