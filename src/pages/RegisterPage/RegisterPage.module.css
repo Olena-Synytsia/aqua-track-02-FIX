@@ -1,0 +1,90 @@
+/* .container {
+  width: 500px;
+}
+
+.title {
+  font-size: 32px;
+  text-align: left;
+  padding: 32px;
+}
+
+.form {
+}
+
+.formBody {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.titleSingUp {
+  font-size: 20px;
+  text-align: left;
+}
+
+.formEl {
+  text-align: left;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+}
+
+.svgSingUp {
+  fill: none;
+  stroke: #323f47;
+}
+
+.inputWrap {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  border: 1px solid teal;
+  height: 40px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 40px;
+  width: 100%;
+}
+
+.labelIcons {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.spanIcons {
+}
+
+.textError {
+  color: red;
+}
+
+.divBtn {
+  text-align: center;
+}
+
+.singUpBtn {
+  width: 100px;
+  height: 40px;
+  border: 1px solid grey;
+  background-color: teal;
+  color: azure;
+}
+
+.text {
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.spanLink {
+  padding-left: 3px;
+} */
