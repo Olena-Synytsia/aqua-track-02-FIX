@@ -1,7 +1,8 @@
+import WaterDetailedInfo from "../../components/TrackerPage/WaterDailedInfo/WaterDetailedInfo.jsx";
+
 const TrackerPage = () => {
-  return <h1>TrackerPage</h1>;
   // <WaterMainInfo />
-  // <WaterDetailedInfo />
+  return <WaterDetailedInfo />;
 };
 
 export default TrackerPage;

@@ -1,0 +1,14 @@
+.dailyInfo {
+  width: 343px;
+  background-color: #f0eff4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.textAndBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
