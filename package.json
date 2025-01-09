@@ -23,11 +23,17 @@
     "query-string": "^9.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.2",
+    "react-icons": "^5.4.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
+<<<<<<< HEAD
     "recharts": "^2.15.0",
     "redux-persist": "^6.0.0",
     "swagger-ui-express": "^5.0.1",
+=======
+    "redux-persist": "^6.0.0",
+>>>>>>> b335bc70d910bea7e9c7b870b38d1c6994c982b9
     "yup": "^1.6.1"
   },
   "devDependencies": {
