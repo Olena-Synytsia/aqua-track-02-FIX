@@ -1,0 +1,21 @@
+.dailyInfo {
+  width: 343px;
+  background-color: #f0eff4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.textAndBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .dailyInfo {
+    width: 704px;
+    padding: 20px 32px;
+  }
+}

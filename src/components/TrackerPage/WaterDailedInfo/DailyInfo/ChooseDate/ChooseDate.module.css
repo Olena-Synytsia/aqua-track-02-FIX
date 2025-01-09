@@ -1,0 +1,16 @@
+.chooseDate {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  color: #323f47;
+}
+
+@media (min-width: 768px) {
+  .chooseDate {
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: -0.28px;
+  }
+}
