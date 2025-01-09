@@ -1,14 +1,7 @@
-import { Text, StyleSheet, View } from "react-native";
-import React, { Component } from "react";
+import React from "react";
 
-export default class WaterDailyNorma extends Component {
-  render() {
-    return (
-      <View>
-        <Text>WaterDailyNorma</Text>
-      </View>
-    );
-  }
-}
+const WaterDailyNorma = () => {
+  return <div>WaterDailyNorma</div>;
+};
 
-const styles = StyleSheet.create({});
+export default WaterDailyNorma;

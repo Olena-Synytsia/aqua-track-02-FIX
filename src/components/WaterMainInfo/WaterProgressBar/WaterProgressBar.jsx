@@ -1,14 +1,7 @@
-import { Text, StyleSheet, View } from "react-native";
-import React, { Component } from "react";
+import React from "react";
 
-export default class WaterProgressBar extends Component {
-  render() {
-    return (
-      <View>
-        <Text>WaterProgressBar</Text>
-      </View>
-    );
-  }
-}
+const WaterProgressBar = () => {
+  return <div>WaterProgressBar</div>;
+};
 
-const styles = StyleSheet.create({});
+export default WaterProgressBar;

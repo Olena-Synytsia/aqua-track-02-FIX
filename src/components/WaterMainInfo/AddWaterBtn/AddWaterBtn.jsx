@@ -1,14 +1,7 @@
-import { Text, StyleSheet, View } from "react-native";
-import React, { Component } from "react";
+import React from "react";
 
-export default class AddWaterBtn extends Component {
-  render() {
-    return (
-      <View>
-        <Text>AddWaterBtn</Text>
-      </View>
-    );
-  }
-}
+const AddWaterBtn = () => {
+  return <div>AddWaterBtn</div>;
+};
 
-const styles = StyleSheet.create({});
+export default AddWaterBtn;
