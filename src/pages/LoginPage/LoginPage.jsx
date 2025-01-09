@@ -1,7 +1,9 @@
 const LoginPage = () => {
-  return <h1>LoginPage</h1>;
-  // <SignInPage />
+  return (
+    <div>LoginPage</div>
+      // <SignInPage />
   // <AdvantagesSection />
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

@@ -4,7 +4,7 @@ import WaterProgressBar from "./WaterProgressBar/WaterProgressBar.jsx";
 import css from "./WaterMainInfo.module.css";
 import { default as bottel1x } from "../../shared/images/trackerPage/bottel@x1.webp";
 import { default as bottel2x } from "../../shared/images/trackerPage/bottel@x.webp";
-import LoginPage from "../../pages/LoginPage/LoginPage.jsx";
+import Logo from "../../components/Logo/Logo.jsx";
 
 const WaterMainInfo = () => {
   return (
