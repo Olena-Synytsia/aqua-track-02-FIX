@@ -1,0 +1,189 @@
+.section {
+  width: 343px;
+  height: 411px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background-color: #f0eff4;
+  padding: 16px;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+.appInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 311px;
+  gap: 32px;
+  margin-top: 74px;
+  margin-bottom: 67px;
+}
+.titleList {
+  width: 311px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 16px;
+}
+.title {
+  color: #2f2f2f;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.84px;
+}
+.titleApp {
+  color: #323f47;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: -0.38px;
+  text-align: start;
+}
+.linkApp {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+}
+.signup {
+  display: flex;
+  padding: 14px 19px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  background-color: var(--Accent, #9be1a0);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.signup:active,
+.signup:hover {
+  background-color: #87d28d;
+}
+.signup:disabled {
+  color: #bcbcbc;
+  background-color: #e6e6e6;
+}
+.signup p {
+  color: #323f47;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+}
+.signin {
+  display: flex;
+  padding: 14px 28px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  border: 1px solid #323f47;
+  color: #323f47;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.signin:active,
+.signin:hover {
+  border: 1px solid #87d28d;
+  color: #87d28d;
+}
+.signup:disabled {
+  border: 1px solid #323f47;
+  opacity: 0.2;
+  color: #323f47;
+}
+.signin p {
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+}
+@media screen and (min-width: 768px) {
+  .section {
+    width: 704px;
+    height: 498px;
+    padding: 32px;
+    padding-top: 32px;
+  }
+  .appInfo {
+    width: 547px;
+    gap: 32px;
+    padding-left: 32px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .titleList {
+    width: 547px;
+  }
+  .title {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.96px;
+  }
+  .titleApp {
+    font-size: 64px;
+    line-height: 70px;
+    letter-spacing: -0.64px;
+    width: 547px;
+  }
+  .linkApp {
+    gap: 16px;
+  }
+  .signup {
+    padding: 18px 40px;
+  }
+  .signup p {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+  .signin {
+    padding: 18px 40px;
+  }
+  .signin p {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .section {
+    width: 672px;
+    height: 736px;
+  }
+  .appInfo {
+    margin-top: 132px;
+    margin-bottom: 188px;
+  }
+  .titleApp {
+    font-size: 80px;
+    line-height: 76px;
+    letter-spacing: -0.8px;
+  }
+  .signup {
+    padding: 18px 40px;
+  }
+  .signup p {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+  .signin {
+    padding: 18px 40px;
+  }
+  .signin p {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+}
