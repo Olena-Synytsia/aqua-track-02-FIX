@@ -1,0 +1,99 @@
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 295px;
+  height: 106px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.title {
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 700;
+  color: #000000;
+}
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.percentBar {
+    font-size: 10px;
+    line-height: 1.2;
+    color: #000000;
+}
+.valueLabel {
+    display: none;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #9be1a0;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+.slider:hover .valueLabel {
+  display: block;
+}
+.fifty {
+  text-align: center;
+}
+
+.slider:global {
+  height: 6px !important;
+  pointer-events: none;
+  padding: 0 !important;
+}
+
+.customTooltip {
+  background-color: #9be1a0 !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  border-radius: 8px !important;
+}
+
+.customArrow::before {
+  background-color: #9be1a0 !important;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    left: 204px;
+    top: 322px;
+    gap: 6px;
+    width: 295px;
+    height: 106px;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 15px;
+    line-height: 1.49;
+    font-weight: 700;
+  }
+
+  .percentBar {
+    font-size: 12px;
+    line-height: 1.86;
+  }
+
+  .slider:global {
+    height: 8px !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    left: 188px;
+    top: 450px;
+  }
+}
