@@ -1,0 +1,229 @@
+.wrapper {
+  background-image: url("../../../assets/img/Rectangle-mob-x1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 343px;
+  height: 353px;
+  position: relative;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+  .wrapper {
+    background-image: url("../../../assets/img/Rectangle-mob-x2.jpg");
+  }
+}
+
+.test {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.avatar {
+  width: 26px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle1 {
+  left: 0;
+  z-index: 3;
+}
+.circle2 {
+  z-index: 2;
+  margin-left: -9.5px;
+}
+.circle3 {
+  z-index: 1;
+  margin-left: -9.5px;
+}
+
+.customersList {
+  display: flex;
+  width: 61.29px;
+}
+
+.customersContainer {
+  display: flex;
+  padding: 10px 14px;
+  border-radius: 30px;
+  background-color: #fff;
+  width: 160px;
+  align-items: center;
+  gap: 3.77px;
+  position: absolute;
+  left: 16px;
+  bottom: 96px;
+}
+
+.customerText {
+  font-weight: 700;
+  font-size: 12px;
+  color: #323f47;
+  line-height: 14px;
+  display: block;
+  width: 68px;
+}
+
+.customerText span {
+  color: #9be1a0;
+}
+
+.tagList {
+  display: flex;
+  width: 168px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px;
+  position: absolute;
+  right: 16px;
+  bottom: 32px;
+}
+
+.tagList li {
+  padding: 9px 12px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagText {
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 8px;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.iconDot {
+  width: 8px;
+  height: 8px;
+  /* fill: #9be1a0;
+  stroke: #9be1a0; */
+  background-color: #9be1a0;
+  border-radius: 50%;
+}
+
+.tagItem1 {
+  background-color: #323f47;
+}
+
+.tagItem1 p {
+  color: #fff;
+}
+
+.tagItem2 {
+  background-color: #9be1a0;
+}
+
+.tagItem2 p {
+  color: #323f47;
+}
+
+.tagItem3 {
+  background-color: #fff;
+}
+
+.tagItem3 p {
+  color: #323f47;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    background-image: url("../../../assets/img/Rectangle-tab-x1.jpg");
+    width: 704px;
+    height: 446px;
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
+    .wrapper {
+      background-image: url("../../../assets/img/Rectangle-tab-x2.jpg");
+    }
+  }
+
+  .customersContainer {
+    left: 32px;
+    padding: 10px 20px;
+    width: 237px;
+  }
+
+  .avatar {
+    width: 47px;
+    height: 47px;
+  }
+
+  .customerText {
+    font-size: 15px;
+    line-height: 22px;
+    width: 90px;
+  }
+
+  .customersList {
+    width: 103px;
+  }
+
+  .circle2 {
+    margin-left: -19px;
+  }
+  .circle3 {
+    margin-left: -19px;
+  }
+
+  .tagList {
+    width: 242px;
+    gap: 10px;
+    right: 32px;
+  }
+
+  .tagList li {
+    padding: 11px 16px;
+  }
+
+  .tagText {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    background-image: url("../../../assets/img/Rectangle-desc-x1.jpg");
+    width: 672px;
+    height: 736px;
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
+    .wrapper {
+      background-image: url("../../../assets/img/Rectangle-desc-x2.jpg");
+    }
+  }
+
+  .customersContainer {
+    left: 32px;
+    bottom: 132px;
+    width: 237px;
+  }
+
+  .tagList {
+    bottom: 64px;
+  }
+}
