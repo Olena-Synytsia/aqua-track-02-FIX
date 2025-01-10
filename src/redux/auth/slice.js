@@ -6,7 +6,7 @@ import {
   refreshToken,
   register,
   updateUser,
-} from "./operations";
+} from "./operations.js";
 
 const initialState = {
   userInfo: null,
