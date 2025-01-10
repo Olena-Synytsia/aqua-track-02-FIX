@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authApi, setAuthHeader } from "../auth/operations";
+import { authApi, setAuthHeader } from "../auth/operations.js";
 
 export const deleteWaterRecord = createAsyncThunk(
   "water/deleteRecord",
