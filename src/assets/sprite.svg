@@ -46,5 +46,8 @@
 <symbol id="icon-chevron-right" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.5556" d="M12 24l8-8-8-8"></path>
 </symbol>
+<symbol id="icon-chevron-down-1" viewBox="0 0 32 32">
+<path fill="none" stroke="#fff" style="stroke: var(--color1, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M8 12l8 8 8-8"></path>
+</symbol>
 </defs>
 </svg>
