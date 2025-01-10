@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Logo from "../HomePage/WelcomeSection/Logo/Logo";
 import s from "./SingUpForm.module.css";
+import { setEmail } from "../../redux/auth/slice.js";
 
 const schema = yup.object({
   email: yup
@@ -49,6 +50,7 @@ const SignUpForm = () => {
 
     try {
       await dispatch(register({ email, password })).unwrap();
+      dispatch(setEmail(email)); // зберегти email
       navigate("/tracker");
     } catch (error) {
       setNotification(error.message);
