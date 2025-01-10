@@ -8,7 +8,7 @@ import Logo from "../../components/Logo/Logo.jsx";
 
 const WaterMainInfo = () => {
   return (
-    <div className={css.waterMainInfo}>
+    <div className={css.container}>
       <Logo className={css.logoTracker} />
       <WaterDailyNorma />
       <WaterProgressBar />
