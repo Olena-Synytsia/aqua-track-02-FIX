@@ -4,6 +4,8 @@ const WaterDetailedInfo = () => {
   return (
     <>
       <DailyInfo />
+      <MonthInfo />
+      <UserPanel />
     </>
   );
 };
