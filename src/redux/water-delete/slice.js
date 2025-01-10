@@ -28,4 +28,4 @@ const waterSlice = createSlice({
 });
 
 export const { clearError } = waterSlice.actions;
-export default waterSlice.reducer;
+export const waterDeleteModal = waterSlice.reducer;
