@@ -16,8 +16,11 @@ const schema = yup.object({
     .required("Email is required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .max(20, "Password must be at most 20 characters")
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must include one uppercase letter, one lowercase letter, one number, and one special character"
+    )
     .required("Password is required"),
   repeatPassword: yup
     .string()
@@ -108,7 +111,7 @@ const SignUpForm = () => {
                         viewBox="0 0 32 32"
                       >
                         <use
-                          href={`/src/icons/symbol-defs.svg#${
+                          href={`/src/assets/sprite.svg#${
                             passwordVisible ? "icon-eye" : "icon-eye-off"
                           }`}
                         ></use>
@@ -147,7 +150,7 @@ const SignUpForm = () => {
                         viewBox="0 0 32 32"
                       >
                         <use
-                          href={`/src/icons/symbol-defs.svg#${
+                          href={`/src/assets/sprite.svg#${
                             repeatPasswordVisible ? "icon-eye" : "icon-eye-off"
                           }`}
                         ></use>
