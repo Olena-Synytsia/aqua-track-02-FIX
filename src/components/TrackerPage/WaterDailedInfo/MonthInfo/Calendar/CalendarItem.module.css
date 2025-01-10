@@ -1,4 +1,4 @@
-/* .calendar-item {
+/* .calendaritem {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,14 +10,14 @@
     cursor: pointer;
   }
   
-  .calendar-item.empty {
+  .calendaritem.empty {
     background-color: #f8d7da;
   }
   
-  .calendar-item.half {
+  .calendaritem.half {
     background-color: #fff3cd;
   }
   
-  .calendar-item.full {
+  .calendaritem.full {
     background-color: #d4edda;
   } */
