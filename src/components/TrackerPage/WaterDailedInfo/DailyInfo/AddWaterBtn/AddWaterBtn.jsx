@@ -4,7 +4,7 @@ const AddWaterBtn = () => {
   return (
     <button className={s.addBtn}>
       <svg className={s.iconPlus}>
-        <use href="src/assets/sprite.svg#icon-Ellipse-13"></use>
+        <use href="src/assets/sprite.svg#icon-plus"></use>
       </svg>
       Add water
     </button>
