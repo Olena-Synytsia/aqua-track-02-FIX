@@ -6,9 +6,9 @@ const WelcomePage = () => {
   return (
     <div className="container">
       <div className={welcStyle.welcomeContainer}>
-        <WelcomeSection />
-        <AdvantagesSection />
+        <WelcomeSection /> <AdvantagesSection />
       </div>
+      )
     </div>
   );
 };

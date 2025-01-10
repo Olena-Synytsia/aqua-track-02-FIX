@@ -1,7 +1,13 @@
+import UserBar from "./UserBar/UserBar.jsx";
+import UserName from "./UserName/UserName.jsx";
+
 const UserPanel = () => {
-  return <h1>UserPanel</h1>;
-  // <UserName />
-  // <UserBar />
+  return (
+    <>
+      <UserName />
+      <UserBar />
+    </>
+  );
 };
 
 export default UserPanel;

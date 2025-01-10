@@ -28,6 +28,13 @@ const userSlice = createSlice({
       state.tokens = null;
       state.isAuthenticated = false;
     },
+    setEmail(state, action) {
+      if (state.userInfo) {
+        state.userInfo.email = action.payload; // Оновлюємо email у userInfo
+      } else {
+        state.userInfo = { email: action.payload };
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,5 +84,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearError, clearUser } = userSlice.actions;
+export const { clearError, clearUser, setEmail } = userSlice.actions;
 export const authReducer = userSlice.reducer;

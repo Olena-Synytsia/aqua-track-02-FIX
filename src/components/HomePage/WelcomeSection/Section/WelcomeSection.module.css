@@ -64,6 +64,7 @@
 .signup:active,
 .signup:hover {
   background-color: #87d28d;
+  transform: translateY(4px);
 }
 .signup:disabled {
   color: #bcbcbc;
@@ -94,6 +95,7 @@
 .signin:hover {
   border: 1px solid #87d28d;
   color: #87d28d;
+  transform: translateY(4px);
 }
 .signup:disabled {
   border: 1px solid #323f47;

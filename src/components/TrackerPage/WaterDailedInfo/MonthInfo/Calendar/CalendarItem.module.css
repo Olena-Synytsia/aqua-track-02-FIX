@@ -1,0 +1,23 @@
+/* .calendaritem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .calendaritem.empty {
+    background-color: #f8d7da;
+  }
+  
+  .calendaritem.half {
+    background-color: #fff3cd;
+  }
+  
+  .calendaritem.full {
+    background-color: #d4edda;
+  } */
