@@ -1,8 +1,15 @@
 .dailyNorma {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  flex-direction: column;
+  position: absolute;
+  left: 16px;
+  top: 122px;
+  background-color: var(--white);
+  border-radius: 15px;
+  padding: 12px;
+  z-index: 2;
 }
+
 .title {
   pointer-events: none;
   font-size: 14px;
@@ -11,6 +18,7 @@
   margin-bottom: 6px;
   color: var(--dark-blue);
 }
+
 .subtitle {
   pointer-events: none;
   font-size: 10px;
