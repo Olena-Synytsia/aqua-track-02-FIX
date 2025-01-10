@@ -49,7 +49,6 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
   }
 });
 
-
 // Отримання інформаіі про поточного окристувача //
 export const fetchCurrentUser = createAsyncThunk(
   "fetchCurrent",
@@ -103,7 +102,9 @@ export const refreshToken = createAsyncThunk(
       const { data } = await authApi.post("/users/refresh-token", { refresh });
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message || "Failed to refresh token");
+      return thunkApi.rejectWithValue(
+        error.message || "Failed to refresh token"
+      );
     }
   }
 );
