@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UserBarPopover from "../UserBarPopover/UserBarPopover.jsx";
+import s from "./UserBarBtn.module.css";
 
 const UserBarBtn = ({ userName, avatarUrl }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -10,8 +11,8 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
 
   return (
     <div>
-      <button type="button" onClick={handleButtonClick}>
-        <span>{userName}</span>
+      <button className={s.btnUser} type="button" onClick={handleButtonClick}>
+        <span className={s.name}>{userName}</span>
         <img
           src={avatarUrl}
           alt="User Avatar"
@@ -23,15 +24,8 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
           }}
         />
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          width="16"
+          height="16"
           style={{
             marginLeft: "8px",
             cursor: "pointer",
@@ -39,7 +33,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
             transition: "transform 0.3s ease",
           }}
         >
-          <path d="M12 18L6 12H18L12 18Z" />
+          <use href="src/assets/sprite.svg#icon-chevron-down-1"></use>
         </svg>
       </button>
       {isPopoverOpen && (
