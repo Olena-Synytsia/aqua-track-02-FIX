@@ -3,15 +3,17 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  border-radius: 30px;
   background-color: transparent;
   border: none;
   text-align: center;
   font-size: 16px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: bold;
+  transition: 150ms ease-in;
   line-height: 24px;
   letter-spacing: -0.16px;
-  color: #323f47;
+  /* color: #323f47; */
 }
 
 .btn__Primary {

@@ -1,6 +1,6 @@
 // import React from "react";
 import clsx from "clsx";
-import { assents as sprite } from "../../../assets/index";
+import { icons as sprite } from "../../../assets/icon/index.js";
 import css from "./AddWaterBtn.module.css";
 import { useModalContext } from "../../../context/ModalContext";
 import WaterModal from "../WaterModal/WaterModal";
