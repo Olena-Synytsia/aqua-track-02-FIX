@@ -1,0 +1,46 @@
+.btnssettlog {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 15px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 137px;
+  z-index: 1000;
+  margin-top: 4px;
+  height: 72px;
+}
+.btnset,
+.btnout {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: none;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+}
+.btnout {
+  color: #323f4766;
+}
+.icon {
+  stroke: #323f47;
+  fill: #323f47;
+  stroke-width: 1;
+  width: 20px;
+  height: 20px;
+}
+.iconout {
+  stroke: #323f4766;
+  rotate: 90deg;
+  stroke-width: 3;
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .btnssettlog {
+    width: 100%;
+  }
+}

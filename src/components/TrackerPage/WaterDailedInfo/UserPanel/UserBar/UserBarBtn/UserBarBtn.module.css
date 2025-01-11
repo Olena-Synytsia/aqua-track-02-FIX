@@ -4,6 +4,7 @@
   flex-direction: row;
   border-radius: 30px;
   align-items: center;
+  padding: 6px 12px;
 }
 .name {
   font-family: Poppins;
