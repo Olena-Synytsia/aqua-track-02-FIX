@@ -12,7 +12,6 @@ const WaterModal = ({ operationType, onClose }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      console.log(e.key);
       if (e.key === "Escape") {
         onClose();
       }
