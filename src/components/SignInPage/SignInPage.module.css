@@ -1,0 +1,49 @@
+.signInContainer {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 343px;
+  height: 780px;
+  background: #f0eff4;
+  border-radius: 30px;
+}
+
+.logo {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  color: #323f47;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.11111;
+  width: 114px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .signInContainer {
+    width: 704px;
+    height: 960px;
+  }
+
+  .logo {
+    top: 32px;
+    left: 32px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    width: 155px;
+
+  }
+}
+ 
+@media (min-width: 1440px) {
+  .signInContainer {
+    width: 672px;
+    height: 736px;
+  }
+}
