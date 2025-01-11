@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import UserBarPopover from "../UserBarPopover/UserBarPopover.jsx";
 import s from "./UserBarBtn.module.css";
 
 const UserBarBtn = ({ userName, avatarUrl }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const buttonRef = useRef(null);
 
   const handleButtonClick = () => {
     setIsPopoverOpen((prev) => !prev); // Перемикає стан поповеру
@@ -16,8 +17,13 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
         position: "relative",
       }}
     >
-      <div className={s.same}>
-        <button className={s.btnUser} type="button" onClick={handleButtonClick}>
+      <div>
+        <button
+          className={s.btnUser}
+          type="button"
+          ref={buttonRef}
+          onClick={handleButtonClick}
+        >
           <span className={s.name}>{userName}</span>
           <img
             src={avatarUrl}
@@ -45,7 +51,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
         </button>
       </div>
       {isPopoverOpen && (
-        <div className={s.same}>
+        <div>
           <UserBarPopover onClose={() => setIsPopoverOpen(false)} />
         </div>
       )}

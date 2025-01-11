@@ -10,6 +10,7 @@
   z-index: 1000;
   margin-top: 4px;
   height: 72px;
+  overflow: hidden;
 }
 .btnset,
 .btnout {
@@ -20,6 +21,8 @@
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
+  height: 36px;
+  background-color: #ffffff;
 }
 .btnout {
   color: #323f4766;
@@ -42,5 +45,9 @@
 @media screen and (min-width: 768px) {
   .btnssettlog {
     width: 100%;
+  }
+  .btnset,
+  .btnout {
+    height: 41px;
   }
 }
