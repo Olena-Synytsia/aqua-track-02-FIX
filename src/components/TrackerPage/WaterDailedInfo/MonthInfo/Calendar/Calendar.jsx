@@ -1,9 +1,16 @@
-// import React from "react";
-import CalendarItem from "./CalendarItem.jsx";
-import dayjs from "dayjs";
+import{ useState } from "react";
+import CalendarItem from "./CalendarItem";
 import s from "./Calendar.module.css";
+import dayjs from "dayjs";
 
-function Calendar({ selectedDate }) {
+const Calendar = ({ setSelectedDate }) => {
+  const [selectedDate, setLocalSelectedDate] = useState(dayjs().format("YYYY-MM-DD"));
+
+  const handleDateChange = (newDate) => {
+    setLocalSelectedDate(newDate);
+    setSelectedDate(newDate); 
+  };
+
   const daysInMonth = dayjs(selectedDate).daysInMonth();
   const startOfMonth = dayjs(selectedDate).startOf("month").day();
   const days = [];
@@ -13,10 +20,21 @@ function Calendar({ selectedDate }) {
   }
 
   for (let day = 1; day <= daysInMonth; day++) {
-    days.push(<CalendarItem key={day} day={day} selectedDate={selectedDate} />);
+    days.push(
+      <CalendarItem
+        key={day}
+        day={day}
+        selectedDate={selectedDate}
+        onDateSelect={handleDateChange} 
+      />
+    );
   }
 
-  return <div className={s.calendargrid}>{days}</div>;
-}
+  return (
+    <div>
+      <div className={s.calendargrid}>{days}</div>
+    </div>
+  );
+};
 
 export default Calendar;
