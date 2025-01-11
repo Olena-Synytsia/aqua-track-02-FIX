@@ -8,7 +8,6 @@ const WelcomePage = () => {
       <div className={welcStyle.welcomeContainer}>
         <WelcomeSection /> <AdvantagesSection />
       </div>
-      )
     </div>
   );
 };
