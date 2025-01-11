@@ -25,3 +25,9 @@
     gap: 32px;
   }
 }
+
+@media (min-width: 1440px) {
+  .list {
+    gap: 16px;
+  }
+}

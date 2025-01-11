@@ -17,6 +17,7 @@
 .iconPlus {
   width: 30px;
   height: 30px;
-  fill: #9be1a0;
-  stroke: #323f47;
+  stroke-width: 0;
+  background-color: #9be1a0;
+  border-radius: 50%;
 }
