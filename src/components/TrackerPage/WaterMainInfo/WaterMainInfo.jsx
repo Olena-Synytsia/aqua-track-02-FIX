@@ -6,7 +6,7 @@ import css from "./WaterMainInfo.module.css";
 
 import { default as bottel1x } from "../../../assets/img/index.js";
 import { default as bottel2x } from "../../../assets/img/index.js";
-import Logo from "../../../assets/sprite.svg";
+import Logo from "../../../shared/components/Logo/Logo";
 
 const WaterMainInfo = () => {
   return (
