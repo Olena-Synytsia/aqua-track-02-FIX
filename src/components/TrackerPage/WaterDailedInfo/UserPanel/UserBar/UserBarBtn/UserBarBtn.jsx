@@ -27,6 +27,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
               height: "38px",
               borderRadius: "50%",
               marginLeft: "8px",
+              objectFit: "cover",
             }}
           />
           <svg
