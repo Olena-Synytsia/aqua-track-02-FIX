@@ -13,3 +13,7 @@ const WaterDetailedInfo = () => {
   );
 };
 export default WaterDetailedInfo;
+
+{
+  /* <div className={`${s.waterdetdiv} container`}></div> */
+}
