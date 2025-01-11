@@ -1,0 +1,43 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  width: 343px;
+  position: relative;
+  padding: 40px 20px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
+  h2 {
+    width: 248px;
+    font-family: Poppins;
+    color: #323f47;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.iconBtn {
+  width: 24px;
+  height: 24px;
+  color: #323f47;
+}

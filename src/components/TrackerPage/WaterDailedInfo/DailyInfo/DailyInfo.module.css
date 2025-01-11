@@ -1,9 +1,9 @@
 .dailyInfo {
-  width: 343px;
+  width: 100%;
   background-color: #f0eff4;
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 40px;
   gap: 24px;
 }
 
@@ -15,7 +15,6 @@
 
 @media (min-width: 768px) {
   .dailyInfo {
-    width: 704px;
-    padding: 20px 32px;
+    width: 100%;
   }
 }
