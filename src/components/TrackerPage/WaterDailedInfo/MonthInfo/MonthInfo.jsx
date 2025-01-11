@@ -12,7 +12,7 @@ const MonthInfo = () => {
 
   return (
     <div className={s.monthinfo}>
-      <h1>Month Overview</h1>
+      
       <CalendarPagination
         selectedDate={selectedDate}
         onDateChange={handleDateChange}

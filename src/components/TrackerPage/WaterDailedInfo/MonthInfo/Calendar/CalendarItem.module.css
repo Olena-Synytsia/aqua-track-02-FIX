@@ -1,23 +1,73 @@
-/* .calendaritem {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-  }
+.calendaritem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 15px;
   
-  .calendaritem.empty {
-    background-color: #f8d7da;
-  }
-  
-  .calendaritem.half {
-    background-color: #fff3cd;
-  }
-  
-  .calendaritem.full {
-    background-color: #d4edda;
-  } */
+}
+
+.btnstyle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 15px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+margin-bottom: 5px;
+
+  /* transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 0.9rem;
+  font-family: Arial, sans-serif;
+  font-weight: bold; */
+}
+
+.calendaritemfull {
+  background-color: #fff;; 
+
+}
+
+
+.calendaritemhalf {
+  background: rgba(50, 63, 71, 0.2);
+
+}
+
+
+/* button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+} */
+
+
+.day {
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+
+}
+.day:active {
+  color: #9be1a0;
+}
+
+
+.percentage-value {
+font-size: 12px;
+position: absolute;
+bottom: -20px;
+left: 50%;
+transform: translateX(-50%);
+line-height: 1.86667;
+color: rgba(47, 47, 47, 0.6);
+
+}
