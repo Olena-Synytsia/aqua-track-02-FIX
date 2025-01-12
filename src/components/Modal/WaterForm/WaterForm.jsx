@@ -21,9 +21,9 @@ const WaterForm = ({ initialData, operationType, onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      waterAmount: initialData.waterAmount || 50,
+      waterAmount: initialData?.waterAmount || 50,
       time:
-        initialData.time ||
+        initialData?.time ||
         new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
