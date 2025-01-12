@@ -35,8 +35,8 @@ const WaterModal = ({ operationType, onClose }) => {
         <button onClick={onClose} className={s.closeBtn}>
           <IoCloseOutline className={s.iconBtn} />
         </button>
+        <WaterForm onClose={onClose} />
       </div>
-      <WaterForm />
     </div>
   );
 };
