@@ -5,8 +5,9 @@
   border-radius: 15px;
   position: absolute;
   top: 100%;
+  width: 100%;
   left: 0;
-  min-width: 137px;
+  /* min-width: 137px; */
   z-index: 1000;
   margin-top: 4px;
   height: 72px;
@@ -16,13 +17,18 @@
 .btnout {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
+  padding-left: 20px;
   border: none;
+  gap: 8px;
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
   height: 36px;
   background-color: #ffffff;
+}
+.btnset {
+  padding-left: 18px;
 }
 .btnout {
   color: #323f4766;
@@ -43,9 +49,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .btnssettlog {
-    width: 100%;
-  }
   .btnset,
   .btnout {
     height: 41px;
