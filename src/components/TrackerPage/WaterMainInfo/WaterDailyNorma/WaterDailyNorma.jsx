@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { selectUser } from "../../../redux/auth/selectors";
+import { selectUser } from "../../../../redux/auth/selectors";
 import css from "./WaterDailyNorma.module.css";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 const WaterDailyNorma = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const user = useSelector(selectUser);
 
   const dailyUserGoal = user.dailyWaterNorm;
@@ -12,9 +12,9 @@ const WaterDailyNorma = () => {
   return (
     <div className={css.dailyNorma} data-tour="step-2">
       <a className={css.title}>
-        {dailyUserGoal} {t("waterMainInfo.l")}
+        {dailyUserGoal} {"waterMainInfo.l"}
       </a>
-      <a className={css.subtitle}>{t("waterMainInfo.norma")}</a>
+      <a className={css.subtitle}>{"waterMainInfo.norma"}</a>
     </div>
   );
 };

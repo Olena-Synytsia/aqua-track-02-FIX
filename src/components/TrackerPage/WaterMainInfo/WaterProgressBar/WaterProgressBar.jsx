@@ -4,10 +4,13 @@ import Box from "@mui/material/Box";
 import css from "./WaterProgressBar.module.css";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectDate, selectPercentDay } from "../../../redux/water/selectors";
+import {
+  selectDate,
+  selectPercentDay,
+} from "../../../../redux/water/selectors.js";
 import { useEffect } from "react";
-import { apiGetWaterDay } from "../../../redux/water/operation";
-import { useTranslation } from "react-i18next";
+import { apiGetWaterDay } from "../../../../redux/water/operations.js";
+// import { useTranslation } from "react-i18next";
 
 const CustomTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -37,7 +40,7 @@ function ValueLabelComponent(props) {
   );
 }
 const WaterProgressBar = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const selectedDate = useSelector(selectDate);
   const percentDay = useSelector(selectPercentDay);
   const dispatch = useDispatch();
@@ -58,18 +61,18 @@ const WaterProgressBar = () => {
   };
 
   const months = {
-    january: t("ChooseDate.january"),
-    february: t("ChooseDate.february"),
-    march: t("ChooseDate.march"),
-    april: t("ChooseDate.april"),
-    may: t("ChooseDate.may"),
-    june: t("ChooseDate.june"),
-    july: t("ChooseDate.july"),
-    august: t("ChooseDate.august"),
-    september: t("ChooseDate.september"),
-    october: t("ChooseDate.october"),
-    november: t("ChooseDate.november"),
-    december: t("ChooseDate.december"),
+    january: "ChooseDate.january",
+    february: "ChooseDate.february",
+    march: "ChooseDate.march",
+    april: "ChooseDate.april",
+    may: "ChooseDate.may",
+    june: "ChooseDate.june",
+    july: "ChooseDate.july",
+    august: "ChooseDate.august",
+    september: "ChooseDate.september",
+    october: "ChooseDate.october",
+    november: "ChooseDate.november",
+    december: "ChooseDate.december",
   };
 
   const formatDate = (date) => {
