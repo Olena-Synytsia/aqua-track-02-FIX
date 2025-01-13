@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import TrackerPage from "./pages/TrackerPage/TrackerPage";
+import TrackerPage from "./pages/TrackerPage/TrackerPage.jsx";
 import SharedLayout from "./components/SharedLayout";
 
 function App() {
