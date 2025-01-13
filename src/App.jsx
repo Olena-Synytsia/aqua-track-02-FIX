@@ -20,7 +20,7 @@ function App() {
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<WelcomePage />} />
         <Route
-          path="signup"
+          path="/signup"
           element={
             <RestrictedRoute
               component={<RegisterPage />}

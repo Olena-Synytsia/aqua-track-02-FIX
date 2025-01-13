@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const authApi = axios.create({
-  baseURL: "https://aqua-api-fkf8.onrender.com/",
+  baseURL: "https://aqua-api-fkf8.onrender.com",
 });
 
 export const setAuthHeader = (token) => {
@@ -43,7 +43,7 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
   }
   setAuthHeader(token);
   try {
-    await authApi.post("auth/logout");
+    await authApi.post("/auth/logout");
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
