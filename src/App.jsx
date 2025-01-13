@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import TrackerPage from "./pages/TrackerPage/TrackerPage.jsx";
+import TrackerPage from "./src/pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
