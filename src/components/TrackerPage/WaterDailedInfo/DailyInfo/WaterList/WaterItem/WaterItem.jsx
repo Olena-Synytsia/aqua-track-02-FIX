@@ -6,7 +6,7 @@ import WaterModal from "../../../../../Modal/WaterModal/WaterModal.jsx";
 import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../../../redux/dailyInfoSlice.js";
 
-const WaterItem = ({ id, time, volume }) => {
+const WaterItem = ({ time, volume }) => {
   const dispatch = useDispatch();
   const formateVolume = (volume) => {
     if (volume < 1000) {
