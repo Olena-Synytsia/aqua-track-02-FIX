@@ -61,7 +61,7 @@ export const fetchCurrentUser = createAsyncThunk(
     setAuthHeader(token);
     try {
       //   setAuthHeader(token);
-      const { data } = await authApi.get("/users/me");
+      const { data } = await authApi.get("/users");
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -73,7 +73,7 @@ export const fetchCurrentUser = createAsyncThunk(
 
 // Оновлення даних користувача //
 export const updateUser = createAsyncThunk(
-  "user/update",
+  "users/update",
   async (userData, thunkApi) => {
     const token = thunkApi.getState().auth.token;
 
@@ -92,14 +92,14 @@ export const updateUser = createAsyncThunk(
 
 // Нові токени //
 export const refreshToken = createAsyncThunk(
-  "user/refreshToken",
+  "/auth/refresh",
   async (_, thunkApi) => {
     const refresh = thunkApi.getState().auth.token;
 
     if (!refresh) return thunkApi.rejectWithValue("No refresh token provided");
 
     try {
-      const { data } = await authApi.post("/users/refresh-token", { refresh });
+      const { data } = await authApi.post("/auth/refresh", { refresh });
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(
