@@ -44,15 +44,15 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (data) => {
-    if (data.password !== data.repeatPassword) {
-      setNotification("Passwords do not match!");
-      return;
-    }
+    // if (data.password !== data.repeatPassword) {
+    //   setNotification("Passwords do not match!");
+    //   return;
+    // }
 
-    const { email, password } = data;
+    const { email, password, repeatPassword } = data;
 
     try {
-      await dispatch(register({ email, password })).unwrap();
+      await dispatch(register({ email, password, repeatPassword })).unwrap();
       dispatch(setEmail(email)); // зберегти email
       navigate("/tracker");
     } catch (error) {
