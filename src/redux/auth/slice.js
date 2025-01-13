@@ -9,8 +9,8 @@ import {
 } from "./operations.js";
 
 const initialState = {
-  userInfo: null,
-  tokens: null,
+  userInfo: "",
+  accessToken: "",
   isAuthenticated: false,
   loading: false,
   error: null,
@@ -24,8 +24,8 @@ const userSlice = createSlice({
       state.error = null;
     },
     clearUser(state) {
-      state.userInfo = null;
-      state.tokens = null;
+      state.userInfo = "";
+      state.tokens = "";
       state.isAuthenticated = false;
     },
     setEmail(state, action) {
@@ -38,9 +38,12 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(register.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(register.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
-        state.tokens = action.payload.tokens;
+        state.accessToken = action.payload.accessToken;
         state.isAuthenticated = true;
         state.loading = false;
         state.error = null;
@@ -51,7 +54,7 @@ const userSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
-        state.tokens = action.payload.tokens;
+        state.accessToken = action.payload.accessToken;
         state.isAuthenticated = true;
         state.loading = false;
         state.error = null;
@@ -74,11 +77,11 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
-        state.tokens = action.payload;
+        state.accessToken = action.payload;
       })
       .addCase(logout.fulfilled, (state) => {
         state.userInfo = null;
-        state.tokens = null;
+        state.accessToken = null;
         state.isAuthenticated = false;
       });
   },
