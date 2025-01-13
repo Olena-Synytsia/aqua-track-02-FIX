@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const authApi = axios.create({
-  baseURL: "https://nodejs-hw-mongodb-7-pomm.onrender.com",
+  baseURL: "https://aqua-api-fkf8.onrender.com/",
 });
 
 export const setAuthHeader = (token) => {
@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
   "register",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await authApi.post("/users/signup", credentials);
+      const { data } = await authApi.post("/auth/signup", credentials);
       setAuthHeader(data.token);
       return data;
     } catch (error) {
@@ -26,7 +26,7 @@ export const login = createAsyncThunk(
   "login",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await authApi.post("/users/signin", credentials);
+      const { data } = await authApi.post("/auth/signin", credentials);
       setAuthHeader(data.token);
       return data;
     } catch (error) {
@@ -43,7 +43,7 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
   }
   setAuthHeader(token);
   try {
-    await authApi.post("users/logout");
+    await authApi.post("auth/logout");
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
