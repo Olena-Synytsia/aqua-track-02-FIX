@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import WaterItem from "./WaterItem/WaterItem.jsx";
 import s from "./WaterList.module.css";
-import { selectWaterItem } from "../../../../../redux/dailyInfoSlice.js";
+import { selectWaterItem } from "../../../../../redux/dailyInfo/dailyInfoSlice.js";
 
 const WaterList = () => {
   const waterItems = useSelector(selectWaterItem);

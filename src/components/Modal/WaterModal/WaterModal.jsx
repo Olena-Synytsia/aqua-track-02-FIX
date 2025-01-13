@@ -3,7 +3,7 @@ import s from "./WaterModal.module.css";
 import { useEffect } from "react";
 import WaterForm from "../WaterForm/WaterForm.jsx";
 import { useSelector } from "react-redux";
-import { selectOperationType } from "../../../redux/dailyInfoSlice.js";
+import { selectOperationType } from "../../../redux/dailyInfo/dailyInfoSlice.js";
 
 const WaterModal = ({ onClose }) => {
   const handleBackdropClick = (e) => {

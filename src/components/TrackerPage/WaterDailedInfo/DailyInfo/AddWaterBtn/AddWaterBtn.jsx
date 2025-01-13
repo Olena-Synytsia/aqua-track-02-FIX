@@ -2,7 +2,7 @@ import { useState } from "react";
 import WaterModal from "../../../../Modal/WaterModal/WaterModal.jsx";
 import s from "./AddWaterBtn.module.css";
 import { useDispatch } from "react-redux";
-import { setOperationType } from "../../../../../redux/dailyInfoSlice.js";
+import { setOperationType } from "../../../../../redux/dailyInfo/dailyInfoSlice.js";
 
 const AddWaterBtn = () => {
   const dispatch = useDispatch();

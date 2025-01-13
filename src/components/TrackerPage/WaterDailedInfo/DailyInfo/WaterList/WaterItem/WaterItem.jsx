@@ -4,7 +4,7 @@ import s from "./WaterItem.module.css";
 import { useState } from "react";
 import WaterModal from "../../../../../Modal/WaterModal/WaterModal.jsx";
 import { useDispatch } from "react-redux";
-import { setOperationType } from "../../../../../../redux/dailyInfoSlice.js";
+import { setOperationType } from "../../../../../../redux/dailyInfo/dailyInfoSlice.js";
 
 const WaterItem = ({ time, volume }) => {
   const dispatch = useDispatch();

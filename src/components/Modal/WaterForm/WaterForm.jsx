@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   addItems,
   selectOperationType,
-} from "../../../redux/dailyInfoSlice.js";
+} from "../../../redux/dailyInfo/dailyInfoSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const WaterForm = ({ initialData, onClose }) => {
