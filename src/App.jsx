@@ -9,7 +9,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TrackerPage from "./pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
-import { PrivateRoute } from "./components/PrivateRoute";
+// import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 
 function App() {
@@ -35,9 +35,10 @@ function App() {
           }
         />
         <Route
-          path="contacts"
+          path="/tracker"
           element={
-            <PrivateRoute component={<TrackerPage />} redirectTo="/signin" />
+            <TrackerPage />
+            // <PrivateRoute component={<TrackerPage />} redirectTo="/signin" />
           }
         />
       </Route>
