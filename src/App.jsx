@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-// import TrackerPage from "./pages/TrackerPage/TrackerPage";
+import TrackerPage from "./pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
 // import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
@@ -34,12 +34,13 @@ function App() {
             <RestrictedRoute component={<LoginPage />} redirectTo="/signup" />
           }
         />
-        {/* <Route
-          path="contacts"
+        <Route
+          path="/tracker"
           element={
-            <PrivateRoute component={<TrackerPage />} redirectTo="/signin" />
+            <TrackerPage />
+            // <PrivateRoute component={<TrackerPage />} redirectTo="/signin" />
           }
-        /> */}
+        />
       </Route>
     </Routes>
   );
