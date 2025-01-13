@@ -3,10 +3,8 @@ import css from "../AddWaterBtn/AddWaterBtn.modal.css";
 import { icons as sprite } from "../../../../shared/icons";
 import { useModalContext } from "../../../../context/useModalContext.jsx";
 import WaterModal from "../../../Modal/WaterModal/WaterModal";
-// import { useTranslation } from "react-i18next";
 
 const AddWaterBtn = ({ isPrimary = true }) => {
-  // const { t } = useTranslation();
   const { openModal } = useModalContext();
 
   return (
