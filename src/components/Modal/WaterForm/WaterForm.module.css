@@ -1,0 +1,103 @@
+.form {
+  padding-top: 24px;
+  h3 {
+    color: #323f47;
+    text-align: start;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.16px;
+  }
+}
+
+.formText {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: #2f2f2f;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+}
+
+.counter {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+}
+
+.counterBtn {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.counterValue {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  background-color: #323f47;
+  padding: 11px 20px;
+  border-radius: 30px;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  color: #323f47;
+}
+
+.input {
+  width: 303px;
+  margin-bottom: 24px;
+  display: flex;
+  padding: 14px 16px;
+  align-items: flex-start;
+  background-color: transparent;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 15px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  color: #2f2f2f;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.nameInputUsed {
+  margin-bottom: 8px;
+}
+
+.saveBtn {
+  display: flex;
+  padding: 14px 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  background: #9be1a0;
+  box-shadow: none;
+  color: #323f47;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+  border: none;
+}
