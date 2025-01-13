@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const authApi = axios.create({
-  baseURL: "https://aqua-api-fkf8.onrender.com/",
+  baseURL: "https://aqua-api-fkf8.onrender.com",
 });
 
 export const setAuthHeader = (token) => {
@@ -43,7 +43,7 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
   }
   setAuthHeader(token);
   try {
-    await authApi.post("auth/logout");
+    await authApi.post("/auth/logout");
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
@@ -61,7 +61,7 @@ export const fetchCurrentUser = createAsyncThunk(
     setAuthHeader(token);
     try {
       //   setAuthHeader(token);
-      const { data } = await authApi.get("/users/me");
+      const { data } = await authApi.get("/users");
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -73,7 +73,7 @@ export const fetchCurrentUser = createAsyncThunk(
 
 // Оновлення даних користувача //
 export const updateUser = createAsyncThunk(
-  "user/update",
+  "users/update",
   async (userData, thunkApi) => {
     const token = thunkApi.getState().auth.token;
 
@@ -92,14 +92,14 @@ export const updateUser = createAsyncThunk(
 
 // Нові токени //
 export const refreshToken = createAsyncThunk(
-  "user/refreshToken",
+  "/auth/refresh",
   async (_, thunkApi) => {
     const refresh = thunkApi.getState().auth.token;
 
     if (!refresh) return thunkApi.rejectWithValue("No refresh token provided");
 
     try {
-      const { data } = await authApi.post("/users/refresh-token", { refresh });
+      const { data } = await authApi.post("/auth/refresh", { refresh });
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(
