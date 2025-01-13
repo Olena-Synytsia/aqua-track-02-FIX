@@ -1,4 +1,4 @@
-// import { useState } from "react";
+// import React from "react";
 import { useState } from "react";
 import s from "./CalendarItem.module.css";
 import clsx from "clsx";
@@ -29,7 +29,8 @@ const CalendarItem = ({ day, selectedDate }) => {
         [s.calendaritemfull]: percentage >= 100,
         // [s.calendaritemhalf]: percentage >= 50 && percentage < 100,
         // [s.calendaritemempty]: percentage < 50,
-        [s.calendaritemhalf]: percentage  < 100,
+        [s.calendaritemhalf]: percentage > 0 && percentage < 100,
+
         [s.btnstyle]: true
         
       })}
