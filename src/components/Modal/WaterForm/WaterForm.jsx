@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   addItems,
   selectOperationType,
+  updateItem,
 } from "../../../redux/dailyInfo/dailyInfoSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,6 +29,7 @@ const WaterForm = ({ initialData, onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
+      id: initialData?.id || 1,
       volume: initialData?.volume || 50,
       time:
         initialData?.time ||
@@ -46,7 +48,8 @@ const WaterForm = ({ initialData, onClose }) => {
   const onSubmit = (data) => {
     if (operationType === "add") {
       dispatch(addItems(data));
-      onClose();
+    } else {
+      dispatch(updateItem(data));
     }
     console.log(data);
     onClose();
