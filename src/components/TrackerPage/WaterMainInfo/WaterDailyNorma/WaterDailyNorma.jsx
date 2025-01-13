@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { selectUser } from "../../../../redux/auth/selectors";
+import { selectUserInfo } from "../../../../redux/auth/selectors";
 import css from "./WaterDailyNorma.module.css";
 // import { useTranslation } from "react-i18next";
 
 const WaterDailyNorma = () => {
   // const { t } = useTranslation();
-  const user = useSelector(selectUser);
+  const user = useSelector(selectUserInfo);
 
   const dailyUserGoal = user.dailyWaterNorm;
 
