@@ -1,14 +1,16 @@
 import { useState } from "react";
 import WaterModal from "../../../../Modal/WaterModal/WaterModal.jsx";
 import s from "./AddWaterBtn.module.css";
+import { useDispatch } from "react-redux";
+import { setOperationType } from "../../../../../redux/dailyInfoSlice.js";
 
 const AddWaterBtn = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [operationType, setOperationType] = useState("");
 
   const handleAdd = () => {
     setIsOpen(true);
-    setOperationType("add");
+    dispatch(setOperationType("add"));
   };
 
   return (
@@ -19,12 +21,7 @@ const AddWaterBtn = () => {
         </svg>
         Add water
       </button>
-      {isOpen && (
-        <WaterModal
-          operationType={operationType}
-          onClose={() => setIsOpen(false)}
-        />
-      )}
+      {isOpen && <WaterModal onClose={() => setIsOpen(false)} />}
     </>
   );
 };
