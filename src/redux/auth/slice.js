@@ -46,8 +46,8 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
-        // state.isRegistered = true;
-        state.isLoggedIn = true; // запис у local store
+        state.isRegistered = true;
+        // state.isLoggedIn = true; // запис у local store
         state.loading = false;
         state.error = null;
       })

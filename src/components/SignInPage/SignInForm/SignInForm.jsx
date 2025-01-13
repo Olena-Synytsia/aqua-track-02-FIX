@@ -11,6 +11,7 @@ import {
   selectIsLoggedIn,
 } from "../../../redux/auth/selectors";
 import s from "./SignInForm.module.css";
+import { setEmail } from "../../../redux/auth/slice";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -49,8 +50,10 @@ const SignInForm = () => {
   };
 
   const onSubmit = async (data) => {
+    const { email, password } = data;
     try {
-      const response = await dispatch(login(data));
+      const response = await dispatch(login({ email, password }));
+      dispatch(setEmail(email)); // зберегти email
       if (!response.userExists) {
         showMessage("User not found. Please register first.");
         return;

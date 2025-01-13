@@ -24,7 +24,7 @@ function App() {
           element={
             <RestrictedRoute
               component={<RegisterPage />}
-              redirectTo="/signin"
+              redirectTo="/tracker"
             />
           }
         />
