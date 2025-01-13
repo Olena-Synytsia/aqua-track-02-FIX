@@ -9,6 +9,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TrackerPage from "./pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
+// import { PrivateRoute } from "./components/PrivateRoute";
+import { RestrictedRoute } from "./components/RestrictedRoute";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -17,38 +19,31 @@ function App() {
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<WelcomePage />} />
-        <Route path="signup" element={<RegisterPage />} />
-        <Route path="signin" element={<LoginPage />} />
-        <Route path="tracker" element={<TrackerPage />} />
+        <Route
+          path="/signup"
+          element={
+            <RestrictedRoute
+              component={<RegisterPage />}
+              redirectTo="/signin"
+            />
+          }
+        />
+        <Route
+          path="signin"
+          element={
+            <RestrictedRoute component={<LoginPage />} redirectTo="/signup" />
+          }
+        />
+        <Route
+          path="/tracker"
+          element={
+            <TrackerPage />
+            // <PrivateRoute component={<TrackerPage />} redirectTo="/signin" />
+          }
+        />
       </Route>
     </Routes>
   );
 }
 
 export default App;
-
-{
-  /* <Routes>
-  <Route path="/" element={<SharedLayout />}>
-    <Route index element={<WelcomePage />} />
-    <Route
-      path="signup"
-      element={
-        <RestrictedRoute component={<RegisterPage />} redirectTo="/signin" />
-      }
-    />
-    <Route
-      path="signin"
-      element={
-        <RestrictedRoute component={<LoginPage />} redirectTo="/signup" />
-      }
-    />
-    <Route
-      path="contacts"
-      element={
-        <PrivateRoute component={<TrackerPage />} redirectTo="/signin" />
-      }
-    />
-  </Route>
-</Routes>; */
-}

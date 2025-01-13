@@ -2,19 +2,20 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const authApi = axios.create({
-  baseURL: "https://aqua-api-fkf8.onrender.com/",
+  baseURL: "https://aqua-api-fkf8.onrender.com",
 });
 
-export const setAuthHeader = (token) => {
-  authApi.defaults.headers.common.Authorization = `Bearer ${token}`;
+export const setAuthHeader = (accessToken) => {
+  authApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 };
 
 export const register = createAsyncThunk(
   "register",
   async (credentials, thunkApi) => {
     try {
+      // console.log(credentials);
       const { data } = await authApi.post("/auth/signup", credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.accessToken);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Registration failed");
@@ -27,7 +28,7 @@ export const login = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signin", credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.accessToken);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Login failed");
@@ -36,14 +37,14 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
-  const token = thunkApi.getState().auth.token;
+  const accessToken = thunkApi.getState().auth.accessToken;
 
-  if (!token) {
+  if (!accessToken) {
     return thunkApi.rejectWithValue("No token found");
   }
-  setAuthHeader(token);
+  setAuthHeader(accessToken);
   try {
-    await authApi.post("auth/logout");
+    await authApi.post("/auth/logout");
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
@@ -53,15 +54,15 @@ export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
 export const fetchCurrentUser = createAsyncThunk(
   "fetchCurrent",
   async (_, thunkApi) => {
-    const token = thunkApi.getState().auth.token;
+    const accessToken = thunkApi.getState().auth.accessToken;
 
-    if (!token) {
+    if (!accessToken) {
       return thunkApi.rejectWithValue("No token found");
     }
-    setAuthHeader(token);
+    setAuthHeader(accessToken);
     try {
       //   setAuthHeader(token);
-      const { data } = await authApi.get("/users/me");
+      const { data } = await authApi.get("/users");
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -73,14 +74,14 @@ export const fetchCurrentUser = createAsyncThunk(
 
 // Оновлення даних користувача //
 export const updateUser = createAsyncThunk(
-  "user/update",
+  "users/update",
   async (userData, thunkApi) => {
-    const token = thunkApi.getState().auth.token;
+    const accessToken = thunkApi.getState().auth.accessToken;
 
-    if (!token) {
+    if (!accessToken) {
       return thunkApi.rejectWithValue("No token found");
     }
-    setAuthHeader(token);
+    setAuthHeader(accessToken);
     try {
       const { data } = await authApi.put("/users/update", userData);
       return data;
@@ -92,14 +93,14 @@ export const updateUser = createAsyncThunk(
 
 // Нові токени //
 export const refreshToken = createAsyncThunk(
-  "user/refreshToken",
+  "/auth/refresh",
   async (_, thunkApi) => {
-    const refresh = thunkApi.getState().auth.token;
+    const refresh = thunkApi.getState().auth.accessToken;
 
     if (!refresh) return thunkApi.rejectWithValue("No refresh token provided");
 
     try {
-      const { data } = await authApi.post("/users/refresh-token", { refresh });
+      const { data } = await authApi.post("/auth/refresh", { refresh });
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(

@@ -4,19 +4,13 @@ import WaterProgressBar from "./WaterProgressBar/WaterProgressBar";
 
 import css from "./WaterMainInfo.module.css";
 
-import { default as bottel1x } from "../../../assets/img/index.js";
-import { default as bottel2x } from "../../../assets/img/index.js";
+import bottleDescX1 from "../../../assets/img/bottle-desc-x1.jpg";
+import bottleDescX2 from "../../../assets/img/bottle-desc-x2.jpg";
 import Logo from "../../HomePage/WelcomeSection/Logo/Logo";
 
 const WaterMainInfo = () => {
   return (
-    <div
-      data-aos="fade-right"
-      data-aos-anchor="#example-anchor"
-      data-aos-offset="500"
-      data-aos-duration="500"
-      className={css.container}
-    >
+    <div className={css.container}>
       <Logo className={css.logoTracker} />
       <WaterDailyNorma />
       <WaterProgressBar />
@@ -24,8 +18,8 @@ const WaterMainInfo = () => {
       <div className={css.imageContainer}>
         <img
           className={css.image}
-          src={bottel1x}
-          srcSet={`${bottel1x} 1x, ${bottel2x} 2x`}
+          src={bottleDescX1}
+          srcSet={`${bottleDescX1} 1x, ${bottleDescX2} 2x`}
           alt="Water bottel image"
         />
       </div>

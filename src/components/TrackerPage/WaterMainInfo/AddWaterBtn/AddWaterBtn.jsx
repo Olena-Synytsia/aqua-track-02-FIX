@@ -1,12 +1,10 @@
 import clsx from "clsx";
-import css from "./AddWaterBtn.module.css";
-import { icons as sprite } from "../../../../assets/icon/index.js";
-import { useModalContext } from "../../../context/useModalContext";
-import WaterModal from "../../WaterModal/WaterModal";
-import { useTranslation } from "react-i18next";
+import css from "../AddWaterBtn/AddWaterBtn.modal.css";
+import { icons as sprite } from "../../../../shared/icons";
+import { useModalContext } from "../../../../context/useModalContext.jsx";
+import WaterModal from "../../../Modal/WaterModal/WaterModal";
 
 const AddWaterBtn = ({ isPrimary = true }) => {
-  const { t } = useTranslation();
   const { openModal } = useModalContext();
 
   return (
@@ -26,7 +24,7 @@ const AddWaterBtn = ({ isPrimary = true }) => {
         >
           <use xlinkHref={`${sprite}#plus-add-water`} />
         </svg>
-        {t("waterMainInfo.btn")}
+        {"waterMainInfo.btn"}
       </button>
     </div>
   );
