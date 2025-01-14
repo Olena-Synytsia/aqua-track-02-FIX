@@ -9,7 +9,7 @@ const UserBar = () => {
     <div>
       <UserBarBtn
         userName={Btnname}
-        avatarUrl="https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg"
+        avatarUrl="https://akvo.com.ua/image/catalog/stati/213.jpg"
       />
     </div>
   );

@@ -3,14 +3,25 @@ import { FiEdit2 } from "react-icons/fi";
 import s from "./WaterItem.module.css";
 import { useState } from "react";
 import WaterModal from "../../../../../Modal/WaterModal/WaterModal.jsx";
+import { useDispatch } from "react-redux";
+import { setOperationType } from "../../../../../../redux/dailyInfo/dailyInfoSlice.js";
 
-const WaterItem = ({ id, value = "250 ml", time = "07:00" }) => {
+const WaterItem = ({ time, volume }) => {
+  const dispatch = useDispatch();
+  const formateVolume = (volume) => {
+    if (volume < 1000) {
+      return `${volume} ml`;
+    } else {
+      let result = (volume / 1000).toFixed(3);
+      return result.replace(/\.?0+$/, "") + " L";
+    }
+  };
+
   const [isOpen, setIsOpen] = useState(false);
-  const [operationType, setOperationType] = useState("");
 
   const handleEdit = () => {
     setIsOpen(true);
-    setOperationType("edit");
+    dispatch(setOperationType("edit"));
   };
   return (
     <>
@@ -19,24 +30,19 @@ const WaterItem = ({ id, value = "250 ml", time = "07:00" }) => {
           <use href="src/assets/sprite.svg#icon-mage_water-glass-fill"></use>
         </svg>
         <div className={s.indicators}>
-          <p className={s.value}>{value}</p>
+          <p className={s.value}>{formateVolume(volume)}</p>
           <p className={s.time}>{time}</p>
         </div>
         <div className={s.buttons}>
           <button className={s.btn} onClick={handleEdit}>
             <FiEdit2 />
           </button>
-          <button className={s.btn} onClick={id}>
+          <button className={s.btn}>
             <AiOutlineDelete />
           </button>
         </div>
       </li>
-      {isOpen && (
-        <WaterModal
-          operationType={operationType}
-          onClose={() => setIsOpen(false)}
-        />
-      )}
+      {isOpen && <WaterModal onClose={() => setIsOpen(false)} />}
     </>
   );
 };

@@ -126,7 +126,6 @@ input:focus {
   border: none;
   border-radius: 30px;
   background-color: #9be1a0;
-  color: azure;
   align-items: center;
   justify-content: center;
   font-family: Poppins;
@@ -172,6 +171,20 @@ input:focus {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #323f47;
+}
+
+.notification {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  background-color: #ef5050;
+  border-radius: 2px solid red;
+  color: #f0eff4;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: fade-in 0.5s ease;
 }
 
 @media screen and (min-width: 768px) {

@@ -2,8 +2,10 @@ import { IoCloseOutline } from "react-icons/io5";
 import s from "./WaterModal.module.css";
 import { useEffect } from "react";
 import WaterForm from "../WaterForm/WaterForm.jsx";
+import { useSelector } from "react-redux";
+import { selectOperationType } from "../../../redux/dailyInfo/dailyInfoSlice.js";
 
-const WaterModal = ({ operationType, onClose }) => {
+const WaterModal = ({ onClose }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -22,6 +24,8 @@ const WaterModal = ({ operationType, onClose }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
+
+  const operationType = useSelector(selectOperationType);
 
   const title =
     operationType === "add" ? "Add water" : "Edit the entered amount of water";

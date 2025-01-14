@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import css from "../AddWaterBtn/AddWaterBtn.modal.css";
-import { icons as sprite } from "../../../../shared/icons";
+import css from "./AddWaterBtn.module.css";
+import WaterModal from "../../../Modal/WaterModal/WaterModal.jsx";
 import { useModalContext } from "../../../../context/useModalContext.jsx";
-import WaterModal from "../../../Modal/WaterModal/WaterModal";
 
 const AddWaterBtn = ({ isPrimary = true }) => {
   const { openModal } = useModalContext();
@@ -17,14 +16,10 @@ const AddWaterBtn = ({ isPrimary = true }) => {
         type="button"
         onClick={() => openModal(<WaterModal operationType={"add"} />)}
       >
-        <svg
-          className={clsx(css.btn__svg, { [css.btn__svg_primary]: isPrimary })}
-          width="24"
-          height="24"
-        >
-          <use xlinkHref={`${sprite}#plus-add-water`} />
+        <svg className={css.iconPlus}>
+          <use href="src/assets/sprite.svg#icon-plus"></use>
         </svg>
-        {"waterMainInfo.btn"}
+        Add water
       </button>
     </div>
   );
