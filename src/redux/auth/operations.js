@@ -13,7 +13,6 @@ export const register = createAsyncThunk(
   "register",
   async (credentials, thunkApi) => {
     try {
-      // console.log(credentials);
       const { data } = await authApi.post("/auth/signup", credentials);
       setAuthHeader(data.accessToken);
       return data;
