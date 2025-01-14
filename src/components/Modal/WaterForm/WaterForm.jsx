@@ -17,7 +17,7 @@ const WaterForm = ({ initialData, onClose }) => {
     volume: Yup.number()
       .required("Please enter the amount of water.")
       .min(1, "The minimum amount is 1ml.")
-      .max(5000, "The maximum amount is 5000ml."),
+      .max(15000, "The maximum amount is 15000ml."),
     time: Yup.string()
       .required("Please enter the time.")
       .matches(
@@ -92,7 +92,7 @@ const WaterForm = ({ initialData, onClose }) => {
         className={s.input}
         type="number"
         min="1"
-        max="5000"
+        max="15000"
         value={volume === 0 ? "" : volume}
         onChange={(e) => setValue("volume", Number(e.target.value))}
       />
