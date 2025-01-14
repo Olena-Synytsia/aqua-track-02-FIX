@@ -24,14 +24,14 @@ function App() {
           element={
             <RestrictedRoute
               component={<RegisterPage />}
-              redirectTo="/signin"
+              redirectTo="/tracker"
             />
           }
         />
         <Route
           path="signin"
           element={
-            <RestrictedRoute component={<LoginPage />} redirectTo="/signup" />
+            <RestrictedRoute component={<LoginPage />} redirectTo="/tracker" />
           }
         />
         <Route

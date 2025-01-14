@@ -11,7 +11,8 @@ import {
 const initialState = {
   userInfo: "",
   accessToken: "",
-  isAuthenticated: false,
+  isLoggedIn: false,
+  isRegistered: false,
   loading: false,
   error: null,
 };
@@ -26,7 +27,8 @@ const userSlice = createSlice({
     clearUser(state) {
       state.userInfo = "";
       state.tokens = "";
-      state.isAuthenticated = false;
+      state.isLoggedIn = false;
+      state.isRegistered = false;
     },
     setEmail(state, action) {
       if (state.userInfo) {
@@ -44,7 +46,8 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
-        state.isAuthenticated = true;
+        state.isRegistered = true;
+        // state.isLoggedIn = true; // запис у local store
         state.loading = false;
         state.error = null;
       })
@@ -55,7 +58,7 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
-        state.isAuthenticated = true;
+        state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
       })
@@ -65,7 +68,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.userInfo = action.payload;
-        state.isAuthenticated = true;
+        state.isLoggedIn = true;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.error = action.payload;
@@ -82,7 +85,8 @@ const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.userInfo = null;
         state.accessToken = null;
-        state.isAuthenticated = false;
+        state.isLoggedIn = false;
+        state.isRegistered = false;
       });
   },
 });

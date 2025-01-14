@@ -8,16 +8,14 @@ import { login } from "../../../redux/auth/operations";
 import {
   // selectError,
   selectLoading,
-  selectIsAuthenticated,
+  selectIsLoggedIn,
 } from "../../../redux/auth/selectors";
 import s from "./SignInForm.module.css";
+import { setEmail } from "../../../redux/auth/slice";
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Invalid email")
-    .required("Email is required"),
-    password: yup
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
     .matches(
@@ -32,7 +30,7 @@ const SignInForm = () => {
 
   // const error = useSelector(selectError);
   const loading = useSelector(selectLoading);
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isAuthenticated = useSelector(selectIsLoggedIn);
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [notification, setNotification] = useState("");
@@ -52,19 +50,24 @@ const SignInForm = () => {
   };
 
   const onSubmit = async (data) => {
+    const { email, password } = data;
     try {
-      const response = await dispatch(login(data)); 
+      const response = await dispatch(login({ email, password }));
+      dispatch(setEmail(email)); // зберегти email
       if (!response.userExists) {
         showMessage("User not found. Please register first.");
         return;
       }
-      showMessage("Login successful!", "success"); 
+      showMessage("Login successful!", "success");
     } catch (err) {
       if (err.response) {
         if (err.response.status === 400) {
           showMessage("Bad request. Please check your inputs.", "error");
         } else if (err.response.status === 404) {
-          showMessage("User not found. Please check your credentials.", "error");
+          showMessage(
+            "User not found. Please check your credentials.",
+            "error"
+          );
         } else {
           showMessage("An error occurred. Please try again later.", "error");
         }
@@ -96,7 +99,9 @@ const SignInForm = () => {
               onBlur: () => trigger("email"),
             })}
           />
-          {errors.email && <div className={s.error}>{errors.email.message}</div>}
+          {errors.email && (
+            <div className={s.error}>{errors.email.message}</div>
+          )}
         </div>
 
         <div className={s.formElement}>
@@ -104,26 +109,26 @@ const SignInForm = () => {
             Password
           </label>
           <div className={s.passwordWrapper}>
-          <input
-            id="password"
-            type={passwordVisible ? "text" : "password"}
-            placeholder="Enter your password"
-            className={`${s.input} ${errors.password ? s.inputError : ""}`}
-            {...register("password", {
-              required: true,
-              onBlur: () => trigger("password"),
-            })}
-          />
+            <input
+              id="password"
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Enter your password"
+              className={`${s.input} ${errors.password ? s.inputError : ""}`}
+              {...register("password", {
+                required: true,
+                onBlur: () => trigger("password"),
+              })}
+            />
             <span
               className={s.togglePassword}
               onClick={() => setPasswordVisible((prev) => !prev)}
             >
               <svg className={s.eyeIcon}>
-              <use
-                href={`/src/assets/sprite.svg#${
-                  passwordVisible ? "icon-eye" : "icon-eye-off"
-                }`}
-              ></use>
+                <use
+                  href={`/src/assets/sprite.svg#${
+                    passwordVisible ? "icon-eye" : "icon-eye-off"
+                  }`}
+                ></use>
               </svg>
             </span>
           </div>
@@ -146,7 +151,11 @@ const SignInForm = () => {
       </form>
       {notification && (
         <div
-          className={`${s.notification} ${notification.type === "error" ? s.notificationError : s.notificationSuccess}`}
+          className={`${s.notification} ${
+            notification.type === "error"
+              ? s.notificationError
+              : s.notificationSuccess
+          }`}
         >
           {/* {notification.text} */}
         </div>

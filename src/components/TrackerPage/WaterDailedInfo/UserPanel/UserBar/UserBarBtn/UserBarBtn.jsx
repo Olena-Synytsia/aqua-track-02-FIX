@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import UserBarPopover from "../UserBarPopover/UserBarPopover.jsx";
 import s from "./UserBarBtn.module.css";
+import { useSelector } from "react-redux";
 
 const UserBarBtn = ({ userName, avatarUrl }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const buttonRef = useRef(null);
+  const selectedImage = useSelector((state) => state.image.selectedImage);
 
   const handleButtonClick = () => {
     setIsPopoverOpen((prev) => !prev); // Перемикає стан поповеру
@@ -26,7 +28,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
         >
           <span className={s.name}>{userName}</span>
           <img
-            src={avatarUrl}
+            src={selectedImage || avatarUrl}
             alt="User Avatar"
             style={{
               width: "38px",
