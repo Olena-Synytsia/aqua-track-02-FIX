@@ -1,14 +1,13 @@
-
 .form {
-    width: 311px;
-    height: 348px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: none;
-    gap: 32px;
-  }
-  
+  width: 311px;
+  height: 348px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  gap: 32px;
+}
+
 .title {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -18,15 +17,14 @@
   text-align: left;
 }
 
-
-  /* .formGroup {
+/* .formGroup {
     width: 100%;  
     display: flex;
     flex-direction: column;
   } */
-  
+
 .formElement {
-  width: 100%;  
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -44,7 +42,7 @@
 
 .input {
   font-family: "Poppins", sans-serif;
-  width: 100%;
+  width: 100% !important;
   border: 1px solid rgba(47, 47, 47, 0.2);
   height: 50px;
   border-radius: 15px;
@@ -53,7 +51,7 @@
   font-size: 14px;
   line-height: 1.28571;
   color: rgba(47, 47, 47, 0.6);
-  box-sizing: border-box; 
+  box-sizing: border-box;
   background: #f0eff4;
 }
 
@@ -80,7 +78,7 @@
 
 .passwordWrapper {
   position: relative;
-  width: 100%; 
+  width: 100%;
 }
 
 .eyeIcon {
@@ -167,8 +165,6 @@
   color: white;
 } */
 
-
-
 @media screen and (min-width: 768px) {
   .form {
     width: 436px;
@@ -186,7 +182,7 @@
     font-size: 16px;
     line-height: 1.5;
   }
-  
+
   .input {
     height: 56px;
     font-weight: 400;
@@ -240,7 +236,6 @@
   } */
 }
 
- 
 @media (min-width: 1440px) {
   .form {
     width: 436px;

@@ -5,9 +5,11 @@ import s from "./TrackerPage.module.css";
 const TrackerPage = () => {
   return (
     <>
-      <div className={s.wrapperTracker}>
-        <WaterMainInfo />
-        <WaterDetailedInfo />
+      <div className="container">
+        <div className={s.wrapperTracker}>
+          <WaterMainInfo />
+          <WaterDetailedInfo />
+        </div>
       </div>
     </>
   );
