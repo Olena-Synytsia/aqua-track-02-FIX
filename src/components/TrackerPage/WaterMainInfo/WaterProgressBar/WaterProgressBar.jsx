@@ -1,8 +1,8 @@
-// import Slider from "@mui/material/Slider";
+import Slider from "@mui/material/Slider";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-// import Box from "@mui/material/Box";
+import Box from "@mui/material/Box";
 import css from "./WaterProgressBar.module.css";
-// import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectDate,
