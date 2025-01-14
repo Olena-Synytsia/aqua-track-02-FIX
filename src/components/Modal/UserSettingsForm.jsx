@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import style from "./UserSettingsForm.module.css";
 import { AiOutlineUpload } from "react-icons/ai";
+import { setImage } from "../../redux/avatar/slice";
+import { useDispatch } from "react-redux";
 
 const DEFAULT_AVATAR_URL =
   "https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg";
@@ -29,6 +31,7 @@ const schema = yup.object().shape({
 
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const [preview, setPreview] = useState(DEFAULT_AVATAR_URL);
+  const dispatch = useDispatch();
 
   const savedData = useMemo(() => {
     return JSON.parse(localStorage.getItem("userSettings")) || {};
@@ -90,8 +93,9 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       avatarPreview: preview,
     };
     localStorage.setItem("userSettings", JSON.stringify(dataToSave));
+    dispatch(setImage(preview));
     onSubmit(dataToSave);
-    onClose(); 
+    onClose();
   };
 
   return (
