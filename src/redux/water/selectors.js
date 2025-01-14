@@ -9,7 +9,7 @@ export const selectDate = (state) => state.water.selectDate;
 export const selectWaterDay = (state) => state.water.selectWaterDay;
 export const selectPercentDay = (state) => state.water.selectPercentDay;
 
-// other selectors
+// selects for DailyInfo
 
 // export const selectWater = (state) => state.water.water;
 // export const selectWater = (state) => state.water.water;

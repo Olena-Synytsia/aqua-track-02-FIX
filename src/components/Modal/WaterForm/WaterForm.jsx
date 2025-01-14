@@ -3,10 +3,18 @@ import { RxMinusCircled, RxPlusCircled } from "react-icons/rx";
 import s from "./WaterForm.module.css";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  addItems,
+  selectOperationType,
+  updateItem,
+} from "../../../redux/dailyInfo/dailyInfoSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
-const WaterForm = ({ initialData, operationType, onClose }) => {
+const WaterForm = ({ initialData, onClose }) => {
+  const operationType = useSelector(selectOperationType);
+  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
-    waterAmount: Yup.number()
+    volume: Yup.number()
       .required("Please enter the amount of water.")
       .min(1, "The minimum amount is 1ml.")
       .max(5000, "The maximum amount is 5000ml."),
@@ -21,7 +29,8 @@ const WaterForm = ({ initialData, operationType, onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      waterAmount: initialData?.waterAmount || 50,
+      id: initialData?.id || 1,
+      volume: initialData?.volume || 50,
       time:
         initialData?.time ||
         new Date().toLocaleTimeString([], {
@@ -31,13 +40,17 @@ const WaterForm = ({ initialData, operationType, onClose }) => {
     },
   });
 
-  const waterAmount = watch("waterAmount");
+  const volume = watch("volume");
 
-  const incrementWater = () => setValue("waterAmount", waterAmount + 50);
-  const decrementWater = () =>
-    setValue("waterAmount", Math.max(1, waterAmount - 50));
+  const incrementWater = () => setValue("volume", volume + 50);
+  const decrementWater = () => setValue("volume", Math.max(1, volume - 50));
 
   const onSubmit = (data) => {
+    if (operationType === "add") {
+      dispatch(addItems(data));
+    } else {
+      dispatch(updateItem(data));
+    }
     console.log(data);
     onClose();
   };
@@ -54,10 +67,10 @@ const WaterForm = ({ initialData, operationType, onClose }) => {
           <RxMinusCircled className={s.iconBtn} />
         </button>
         <Controller
-          name="waterAmount"
+          name="volume"
           control={control}
           render={({ field }) => (
-            <p name="waterAmount" className={s.counterValue}>
+            <p name="volume" className={s.counterValue}>
               {field.value} ml
             </p>
           )}
@@ -80,8 +93,8 @@ const WaterForm = ({ initialData, operationType, onClose }) => {
         type="number"
         min="1"
         max="5000"
-        value={waterAmount === 0 ? "" : waterAmount}
-        onChange={(e) => setValue("waterAmount", Number(e.target.value))}
+        value={volume === 0 ? "" : volume}
+        onChange={(e) => setValue("volume", Number(e.target.value))}
       />
       <button type="submit" className={s.saveBtn}>
         Save
