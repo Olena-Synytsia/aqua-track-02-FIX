@@ -1,4 +1,4 @@
-// import { useState } from "react";
+// import React from "react";
 import { useState } from "react";
 import s from "./CalendarItem.module.css";
 import clsx from "clsx";
@@ -27,24 +27,23 @@ const CalendarItem = ({ day, selectedDate }) => {
 
   return (
     <div className={s.calendaritem}>
-      <button
-        className={clsx({
-          [s.calendaritemfull]: percentage >= 100,
-          // [s.calendaritemhalf]: percentage >= 50 && percentage < 100,
-          // [s.calendaritemempty]: percentage < 50,
-          [s.calendaritemhalf]: percentage < 100,
-          [s.btnstyle]: true,
-        })}
-        onClick={fetchWaterData}
-      >
-        <div className={s.day}>{day}</div>{" "}
-        <div className={s.percentage}>
-          {" "}
-          <div className={s["percentage-value"]}>
-            {percentage.toFixed(1)}%
-          </div>{" "}
-        </div>{" "}
-      </button>
+    <button 
+    className={clsx({
+        [s.calendaritemfull]: percentage >= 100,
+        [s.calendaritemhalf]: percentage  < 100,
+        [s.btnstyle]: true
+        
+      })}
+      onClick={fetchWaterData}
+    >
+      <div className={s.day}>{day}</div>{" "}
+      <div className={s.percentage}>
+        {" "}
+        <div className={s["percentage-value"]}>{percentage.toFixed(1)}%</div>
+        {" "}
+      </div>
+      {" "}
+    </button>
     </div>
   );
 };

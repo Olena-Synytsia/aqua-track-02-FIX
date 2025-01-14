@@ -4,7 +4,7 @@ import s from "./RegisterPage.module.css";
 
 const RegisterPage = () => {
   return (
-    <div className={s.section}>
+    <div className="container">
       <div className={s.registerPage}>
         <div className={s.ignUpForm}>
           <SignUpForm />
