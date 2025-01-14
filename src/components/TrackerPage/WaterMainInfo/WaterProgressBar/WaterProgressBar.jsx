@@ -40,7 +40,7 @@ import {
 // }
 const WaterProgressBar = () => {
   const selectedDate = useSelector(selectDate);
-  const percentDay = useSelector(selectPercentDay);
+  // const percentDay = useSelector(selectPercentDay);
   const dispatch = useDispatch();
 
   useEffect(() => {
