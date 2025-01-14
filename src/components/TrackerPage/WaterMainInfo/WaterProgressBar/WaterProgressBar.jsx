@@ -123,9 +123,9 @@ const WaterProgressBar = () => {
           }}
         />
         <div className={css.percentBar}>
-          <a>0%</a>
-          <a className={css.fifty}>50%</a>
-          <a>100%</a>
+          <span>0%</span>
+          <span className={css.fifty}>50%</span>
+          <span>100%</span>
         </div>
       </Box>
     </div>
