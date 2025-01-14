@@ -1,35 +1,32 @@
-import { useEffect } from "react";
 import ReactDOM from "react-dom";
+import style from "./LogOutModal.module.css";
 
-const LogOutModal = ({ onClose, userBarRef }) => {
-  const handleOutsideClick = (e) => {
-    if (userBarRef.current && !userBarRef.current.contains(e.target)) {
-      onClose();
-    }
+const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
+  const handleLogOutClick = () => {
+    onLogOut();
+    onClose();
   };
 
-  useEffect(() => {
-    document.addEventListener("click", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
   return ReactDOM.createPortal(
-    <div
-      style={{
-        position: "absolute",
-        top: "50%",
-        right: "50%",
-        backgroundColor: "white",
-        padding: "20px",
-        zIndex: 1000,
-      }}
-    >
-      <h3>Do you really want to leave?</h3>
-      <button>Log Out</button>
-      <button onClick={onClose}>Cancel</button>
+    <div className={style.modalOverlay} onClick={onClose}>
+      <div
+        className={style.modalContainer}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button className={style.closeButton} onClick={onClose}>
+          &times;
+        </button>
+        <h2 className={style.title}>Log out</h2>
+        <p className={style.message}>Do you really want to leave?</p>
+        <div className={style.buttonContainer}>
+          <button className={style.logOutButton} onClick={handleLogOutClick}>
+            Log out
+          </button>
+          <button className={style.cancelButton} onClick={onClose}>
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>,
     document.body
   );
