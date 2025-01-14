@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectUserInfo } from "../../../../redux/auth/selectors";
+import { selectUserInfo } from "../../../../redux/auth/selectors.js";
 import css from "./WaterDailyNorma.module.css";
 
 const WaterDailyNorma = () => {
@@ -9,10 +9,10 @@ const WaterDailyNorma = () => {
 
   return (
     <div className={css.dailyNorma} data-tour="step-2">
-      <a className={css.title}>
+      <div className={css.title}>
         {dailyUserGoal} {"waterMainInfo.l"}
-      </a>
-      <a className={css.subtitle}>{"waterMainInfo.norma"}</a>
+      </div>
+      <div className={css.subtitle}>{"waterMainInfo.norma"}</div>
     </div>
   );
 };
