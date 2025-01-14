@@ -49,10 +49,10 @@ const SignUpForm = () => {
     //   return;
     // }
 
-    const { email, password, repeatPassword } = data;
+    const { email, password } = data;
 
     try {
-      await dispatch(register({ email, password, repeatPassword })).unwrap();
+      await dispatch(register({ email, password })).unwrap();
       dispatch(setEmail(email)); // зберегти email
       navigate("/tracker");
     } catch (error) {
