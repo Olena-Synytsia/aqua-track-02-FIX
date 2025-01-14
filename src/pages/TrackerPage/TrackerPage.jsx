@@ -6,7 +6,7 @@ const TrackerPage = () => {
   return (
     <>
       <div className={s.wrapperTracker}>
-        <WaterMainInfo />
+        {/* <WaterMainInfo /> */}
         <WaterDetailedInfo />
       </div>
     </>
