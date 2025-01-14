@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import css from "../AddWaterBtn/AddWaterBtn.module.css";
-// import sprite from "../../";
-import { useModalContext } from "../../../../context/useModalContext.jsx";
+import css from "./AddWaterBtn.module.css";
 import WaterModal from "../../../Modal/WaterModal/WaterModal.jsx";
+import { useModalContext } from "../../../../context/useModalContext.jsx";
 
 const AddWaterBtn = ({ isPrimary = true }) => {
   const { openModal } = useModalContext();
