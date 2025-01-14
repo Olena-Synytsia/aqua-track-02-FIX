@@ -4,8 +4,9 @@ flex-direction:row;
   align-items: center;
 
   margin-bottom: 24px;
- gap: 311px;
+ /* gap: 311px; */
  position: relative;
+ justify-content: space-between;
 }
 .month {
 font-weight: 700;
@@ -33,19 +34,21 @@ letter-spacing: -0.01em;
 color: #323f47;
 
 }
-/* .pagination {
-  display: flex;
-  flex-direction:row;
-    align-items: center;
-    gap: 20px;
-} */
+
+.pagination {
+display: flex;
+ justify-content: center;
+ align-items: center;
+  
+}
 
 .iconpie {
 height: 24px;
 width: 24px;
-position: absolute;
+
+/* position: absolute;
 top: 50%;
 right: 0;
-transform: translateY(-50%);
+transform: translateY(-50%); */
 
   }

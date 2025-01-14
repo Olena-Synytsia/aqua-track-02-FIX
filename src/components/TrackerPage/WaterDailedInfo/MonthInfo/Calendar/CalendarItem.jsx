@@ -42,7 +42,7 @@ const CalendarItem = ({ day, selectedDate }) => {
         <div className={s["percentage-value"]}>{percentage.toFixed(1)}%</div>
         {" "}
       </div>
-      {" "}
+      {/* {" "} */}
     </button>
     </div>
   );

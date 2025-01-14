@@ -1,6 +1,42 @@
-.calendargrid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 35px 43px;
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .calendargrid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(6, 1fr);
+  gap: 20px 18px;
+    
+  }
 }
+
+@media screen and (min-width: 375px) {
+  .calendargrid {
+    display: grid;
+  width: 100%;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px 18px;
+  }
+}
+
+/* TABLET */
+
+@media screen and (min-width: 768px) {
+  .calendargrid {
+    /* max-width: 704px; */
+    grid-template-columns: repeat(8, 1fr);
+    gap: 15px 48px;
+  }
+}
+
+/* DESKTOP */
+
+@media screen and (min-width: 1440px) {
+  .calendargrid {
+    /* max-width: 608px; */
+    grid-template-columns: repeat(8, 1fr);
+  gap: 43px 35px;
+  }
+}
+
+
 

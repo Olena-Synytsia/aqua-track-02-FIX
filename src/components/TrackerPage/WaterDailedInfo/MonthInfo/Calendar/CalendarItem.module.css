@@ -3,8 +3,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 15px;
-  right: 0;
+  width: 38px;
+  height: 65px;
 }
 
 .btnstyle {
@@ -57,4 +57,20 @@ transform: translateX(-50%);
 line-height: 1.86667;
 color: rgba(47, 47, 47, 0.6);
 
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .calendaritem  {
+    width: 28px;
+    height: 44px;
+    
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .calendaritem  {
+    width: 28px;
+    height: 44px;
+  }
 }
