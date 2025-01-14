@@ -1,0 +1,173 @@
+/* Секция для загрузки аватара */
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.avatarPreview {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.avatarUploadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: #2F2F2F;
+  font-size: 16px;
+  cursor: pointer;
+  gap: 8px;
+  position: relative;
+}
+
+.uploadIcon {
+  /* font-size: 20px; */
+  width: 18px;
+  height: 18px;
+}
+
+.avatarInput {
+  display: none;
+}
+
+.errorText {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Общий стиль для групп полей формы */
+.formGroup {
+  margin-bottom: 24px;
+  gap: 14px;
+}
+
+.userDetails {
+  line-height: 20px;
+  letter-spacing: -1%;
+  color: 323F47;
+  font-size: 16px;
+  font-weight: bold; 
+  
+}
+
+
+.saveBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background-color: #218838;
+}
+
+/* +++++++++++++++++++ */
+
+/* Общий стиль для текстовых полей, полей ввода email и чисел */
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  color: black;
+  background-color: #ffffff; /* Белый фон */
+  border: 1px solid #cccccc; /* Светло-серая рамка */
+  border-radius: 15px; /* Скругленные углы */
+  font-size: 14px;
+
+  width: 303px;
+  height: 46px;
+  box-sizing: border-box; /* Учитывать padding в ширине */
+  margin-top: 8px;
+}
+
+/* Стили для полей при фокусе */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #28a745; /* Зеленый цвет рамки при фокусе */
+  box-shadow: 0 0 4px rgba(40, 167, 69, 0.5); /* Тень при фокусе */
+}
+
+/* Стили для обертки радио-кнопок */
+.radioGroup {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Скрываем стандартные радио-кнопки */
+input[type="radio"] {
+  display: none;
+}
+
+/* Стили для кастомных радио-кнопок */
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.radioCustom {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #cccccc;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+input[type="radio"]:checked + .radioCustom {
+  border-color: #28a745;
+  background-color: #28a745;
+}
+
+.radioCustom::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: none;
+}
+
+input[type="radio"]:checked + .radioCustom::after {
+  display: block;
+}
+
+/* Стиль для текста ошибок */
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.infoMessage {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.icon {
+  color: #6FCF97;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 8px;
+}
