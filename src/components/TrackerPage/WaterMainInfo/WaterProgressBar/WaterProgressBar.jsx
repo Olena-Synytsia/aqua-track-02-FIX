@@ -74,15 +74,18 @@ const WaterProgressBar = () => {
           min={0}
           max={100}
           step={1}
-          renderThumb={(props) => (
+          renderThumb={(props, state) => (
             <div
               {...props}
+              key={state.index}
               className={css.thumb}
               data-tooltip-id="progress-tooltip"
               data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
             />
           )}
-          renderTrack={(props) => <div {...props} className={css.track} />}
+          renderTrack={(props, state) => (
+            <div {...props} key={state.index} className={css.track} />
+          )}
         />
       </div>
 
