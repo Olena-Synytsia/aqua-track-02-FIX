@@ -1,11 +1,10 @@
-import css from "./WaterMainInfo.module.css";
-
-import bottleDescX1 from "../../../assets/img/bottle-desc-x1.jpg";
-import bottleDescX2 from "../../../assets/img/bottle-desc-x2.jpg";
-import WaterDailyNorma from "./WaterDailyNorma/WaterDailyNorma";
-import AddWaterBtn from "../WaterDailedInfo/DailyInfo/AddWaterBtn/AddWaterBtn";
-import Logo from "../../HomePage/WelcomeSection/Logo/Logo";
+// import AddWaterBtn from "../WaterMainInfo/AddWaterBtn/AddWaterBtn.jsx";
+import WaterDailyNorma from "./WaterDailyNorma/WaterDailyNorma.jsx";
 import WaterProgressBar from "./WaterProgressBar/WaterProgressBar.jsx";
+import bottleDescX1 from "../../../assets/img/bottle-desc-x1.jpg";
+// import bottleDescX2 from "../../../assets/img/bottle-desc-x2.jpg";
+import Logo from "../../HomePage/WelcomeSection/Logo/Logo";
+import css from "./WaterMainInfo.module.css";
 
 const WaterMainInfo = () => {
   return (
@@ -13,7 +12,7 @@ const WaterMainInfo = () => {
       <Logo className={css.logoTracker} />
       <WaterDailyNorma />
       <WaterProgressBar />
-      <AddWaterBtn />
+      {/* <AddWaterBtn /> */}
       <div className={css.imageContainer}>
         <img
           className={css.image}
