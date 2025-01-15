@@ -1,94 +1,118 @@
-/* Базові стилі */
 .container {
-  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 8px;
+  width: 200px;
+  height: auto;
+  border-radius: 15px;
+  padding: 16px;
+  background-color: var(--white);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
 .title {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--color-darkblue);
+  text-align: center;
 }
 
 .sliderWrapper {
-  margin: 20px 0;
+  position: relative;
+  width: 100%;
 }
 
 .thumb {
-  background-color: #323f47;
+  background-color: var(--color-darkblue);
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 2px solid var(--white);
 }
 
 .track {
-  background-color: #ccc;
-  height: 4px;
+  background-color: var(--accent);
+  height: 6px;
+  border-radius: 3px;
 }
 
 .percentBar {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-darkblue);
+  opacity: 0.8;
+}
+
+.valueLabel {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1;
+  display: none;
+}
+
+.sliderWrapper:hover .valueLabel {
+  display: block;
 }
 
 .fifty {
   text-align: center;
 }
 
-/* Мобільні пристрої: від 320px */
-@media screen and (min-width: 320px) {
-  .container {
-    padding: 15px; /* Зменшити відступи для мобільних */
-  }
-
-  .title {
-    font-size: 18px; /* Менший шрифт для мобільних */
-  }
+.customTooltip {
+  background-color: #9be1a0 !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
 }
 
-/* Адаптивність з 375px */
-@media screen and (min-width: 375px) {
-  .container {
-    padding: 18px; /* Невеликі корективи */
-  }
-
-  .title {
-    font-size: 19px;
-  }
+.customArrow::before {
+  background-color: #9be1a0 !important;
 }
 
-/* Планшети: від 768px */
 @media screen and (min-width: 768px) {
   .container {
-    padding: 20px; /* Стандартні відступи для планшетів */
+    gap: 10px;
+    width: 300px;
+    padding: 20px;
   }
 
   .title {
-    font-size: 22px; /* Збільшити шрифт для планшетів */
+    font-size: 16px;
+    line-height: 1.4;
   }
 
-  .sliderWrapper {
-    margin: 30px 0; /* Збільшити відступи для планшетів */
+  .percentBar {
+    font-size: 14px;
   }
 }
 
-/* Десктоп: від 1440px */
 @media screen and (min-width: 1440px) {
   .container {
-    left: 188px;
-    top: 450px;
-    padding: 40px; /* Додаткові відступи для великих екранів */
+    gap: 12px;
+    width: 350px;
+    padding: 24px;
   }
 
   .title {
-    font-size: 24px; /* Збільшити шрифт для десктопів */
+    font-size: 18px;
   }
 
-  .sliderWrapper {
-    margin: 40px 0; /* Більші відступи */
-  }
-
-  .thumb {
-    width: 25px;
-    height: 25px; /* Збільшити розмір "пальця" слайдера на десктопах */
+  .percentBar {
+    font-size: 16px;
   }
 }
