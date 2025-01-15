@@ -53,7 +53,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
 
   useEffect(() => {
     if (savedData.avatar) {
-      setPreview(savedData.avatarPreview || DEFAULT_AVATAR_URL);
+      setPreview(savedData.avatar || DEFAULT_AVATAR_URL);
       setValue("avatar", savedData.avatar);
     }
     Object.entries(savedData).forEach(([key, value]) => setValue(key, value));
@@ -62,12 +62,25 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file && file instanceof File) {
-      const avatarPreview = URL.createObjectURL(file);
-      setPreview(avatarPreview);
-      setValue("avatar", file);
-      setValue("avatarPreview", avatarPreview);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Отримуємо Base64
+        const base64Image = reader.result;
+        setPreview(base64Image);
+        setValue("avatar", base64Image);
+
+        // Збереження Base64 в localStorage
+        const updatedData = { ...savedData, avatar: base64Image };
+        localStorage.setItem("userSettings", JSON.stringify(updatedData));
+      };
+      reader.onerror = () => {
+        console.error("Error reading file as Base64");
+      };
+      reader.readAsDataURL(file); // Перетворює файл у Base64
     } else {
       setPreview(DEFAULT_AVATAR_URL);
+      const updatedData = { ...savedData, avatar: DEFAULT_AVATAR_URL };
+      localStorage.setItem("userSettings", JSON.stringify(updatedData));
     }
   };
 
