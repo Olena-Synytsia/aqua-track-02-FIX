@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { register } from "../../redux/auth/operations";
+import { register, login } from "../../redux/auth/operations";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Logo from "../HomePage/WelcomeSection/Logo/Logo";
@@ -48,6 +48,7 @@ const SignUpForm = () => {
 
     try {
       await dispatch(register({ email, password })).unwrap();
+      await dispatch(login({ email, password })).unwrap();
       dispatch(setEmail(email));
       navigate("/tracker");
     } catch (error) {
