@@ -1,26 +1,35 @@
 import { useSelector } from "react-redux";
 import s from "./UserName.module.css";
 import { useEffect, useState } from "react";
+import { selectUserName } from "../../../../../redux/name/slice";
 
 const UserName = () => {
-  const emailFromState = useSelector((state) => state.user.userInfo?.email);
+  const userEmailFromRedux = useSelector((state) => state.user.userInfo?.email);
+  const userNameFromRedux = useSelector(selectUserName);
 
-  // Ініціалізація з localStorage
-  const [username, setUsername] = useState(() => {
+  const [userName, setUserName] = useState(() => {
+    // Ініціалізація з localStorage
+    const savedName = localStorage.getItem("userName");
+    if (savedName) return savedName;
     const savedEmail = localStorage.getItem("userEmail");
     return savedEmail ? savedEmail.split("@")[0] : "Guest";
   });
 
   useEffect(() => {
-    if (emailFromState) {
-      // Зберігаємо email у localStorage
-      localStorage.setItem("userEmail", emailFromState);
-      setUsername(emailFromState.split("@")[0]);
+    if (userNameFromRedux) {
+      // Якщо ім'я є в Redux, зберегти в localStorage та оновити стан
+      localStorage.setItem("userName", userNameFromRedux);
+      setUserName(userNameFromRedux);
+    } else if (userEmailFromRedux) {
+      // Якщо ім'я немає, але є email, використати частину до @
+      const derivedName = userEmailFromRedux.split("@")[0];
+      localStorage.setItem("userEmail", userEmailFromRedux);
+      setUserName(derivedName);
     }
-  }, [emailFromState]);
+  }, [userNameFromRedux, userEmailFromRedux]);
   return (
     <h1 className={s.titleUser}>
-      Hello, <span className={s.spanTitle}>{username}</span>
+      Hello, <span className={s.spanTitle}>{userName}</span>
     </h1>
   );
 };

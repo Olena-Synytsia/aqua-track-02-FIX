@@ -13,5 +13,5 @@ const userSlice = createSlice({
 });
 
 export const { setName } = userSlice.actions;
-export const selectUserName = (state) => state.user.name; // Селектор для отримання імені
+export const selectUserName = (state) => state.name.name; // Селектор для отримання імені
 export const nameReducer = userSlice.reducer;

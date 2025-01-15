@@ -1,22 +1,32 @@
 import { useSelector } from "react-redux";
 import UserBarBtn from "./UserBarBtn/UserBarBtn.jsx";
 import { useEffect, useState } from "react";
+import { selectUserName } from "../../../../../redux/name/slice.js";
 
 const UserBar = () => {
-  const userInfoFromState = useSelector((state) => state.user.userInfo?.email);
+  const userEmailFromRedux = useSelector((state) => state.user.userInfo?.email);
+  const userNameFromRedux = useSelector(selectUserName);
+
   const [userName, setUserName] = useState(() => {
     // Ініціалізація з localStorage
+    const savedName = localStorage.getItem("userName");
+    if (savedName) return savedName;
     const savedEmail = localStorage.getItem("userEmail");
     return savedEmail ? savedEmail.split("@")[0] : "Guest";
   });
 
   useEffect(() => {
-    if (userInfoFromState) {
-      // Оновлення localStorage при зміні стану
-      localStorage.setItem("userEmail", userInfoFromState);
-      setUserName(userInfoFromState.split("@")[0]);
+    if (userNameFromRedux) {
+      // Якщо ім'я є в Redux, зберегти в localStorage та оновити стан
+      localStorage.setItem("userName", userNameFromRedux);
+      setUserName(userNameFromRedux);
+    } else if (userEmailFromRedux) {
+      // Якщо ім'я немає, але є email, використати частину до @
+      const derivedName = userEmailFromRedux.split("@")[0];
+      localStorage.setItem("userEmail", userEmailFromRedux);
+      setUserName(derivedName);
     }
-  }, [userInfoFromState]);
+  }, [userNameFromRedux, userEmailFromRedux]);
 
   return (
     <div>
