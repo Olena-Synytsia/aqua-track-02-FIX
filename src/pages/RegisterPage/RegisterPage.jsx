@@ -6,7 +6,7 @@ const RegisterPage = () => {
   return (
     <div className="container">
       <div className={s.registerPage}>
-        <div className={s.ignUpForm}>
+        <div className={s.signUpForm}>
           <SignUpForm />
         </div>
         <div className={s.advantagesSection}>

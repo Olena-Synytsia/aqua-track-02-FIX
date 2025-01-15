@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 32px;
 }
 
 .advantagesSection {
@@ -10,10 +9,6 @@
 }
 
 @media screen and (min-width: 1440px) {
-  /* .section {
-    margin: 32px;
-  } */
-
   .registerPage {
     flex-direction: row;
     justify-content: center;
