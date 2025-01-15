@@ -21,7 +21,7 @@ const persistConfig = {
   key: "auth-aqua",
   version: 1,
   storage,
-  whitelist: ["accessToken", "isLoggedIn"],
+  whitelist: ["accessToken"],
   blacklist: ["_persist"],
 };
 
