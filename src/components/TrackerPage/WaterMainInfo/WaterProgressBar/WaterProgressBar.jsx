@@ -6,12 +6,13 @@ import {
   selectPercentDay,
 } from "../../../../redux/water/selectors.js";
 import ReactSlider from "react-slider";
-import ReactTooltip from "react-tooltip";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
   const selectedDate = useSelector(selectDate);
   const percentDay = useSelector(selectPercentDay);
+
   const dispatch = useDispatch();
   const [percent, setPercent] = useState(0);
 
@@ -58,7 +59,6 @@ const WaterProgressBar = () => {
       const month = dateObj
         .toLocaleString("en-US", { month: "long" })
         .toLowerCase();
-      return `${day}, ${month}`;
       return `${day}, ${months[month]}`;
     }
   };
@@ -78,16 +78,15 @@ const WaterProgressBar = () => {
             <div
               {...props}
               className={css.thumb}
-              data-tip={`${Math.min(percent, 100).toFixed(0)}%`}
+              data-tooltip-id="progress-tooltip"
+              data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
             />
           )}
-          renderTrack={(props, state) => (
-            <div {...props} className={css.track} />
-          )}
+          renderTrack={(props) => <div {...props} className={css.track} />}
         />
       </div>
 
-      <ReactTooltip />
+      <ReactTooltip id="progress-tooltip" place="top" />
 
       <div className={css.percentBar}>
         <span>0%</span>
@@ -99,5 +98,3 @@ const WaterProgressBar = () => {
 };
 
 export default WaterProgressBar;
-
-/******  a20b26ff-ead0-4449-924d-9d958cb3cadc  *******/
