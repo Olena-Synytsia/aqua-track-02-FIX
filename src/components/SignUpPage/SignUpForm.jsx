@@ -6,7 +6,7 @@ import { register, login } from "../../redux/auth/operations";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Logo from "../HomePage/WelcomeSection/Logo/Logo";
-import s from "./SingUpForm.module.css";
+import s from "./SignUpForm.module.css";
 import { setEmail } from "../../redux/auth/slice.js";
 
 const schema = yup.object({
