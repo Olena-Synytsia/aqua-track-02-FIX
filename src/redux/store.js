@@ -16,6 +16,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { nameReducer } from "./name/slice.js";
 
 const persistConfig = {
   key: "auth-aqua",
@@ -33,6 +34,7 @@ export const store = configureStore({
     water: waterDeleteModal,
     waterItem: waterItemReducer,
     image: avatarReducer,
+    name: nameReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

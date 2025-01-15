@@ -6,6 +6,7 @@ import style from "./UserSettingsForm.module.css";
 import { AiOutlineUpload } from "react-icons/ai";
 import { setImage } from "../../redux/avatar/slice";
 import { useDispatch } from "react-redux";
+import { setName } from "../../redux/name/slice";
 
 const DEFAULT_AVATAR_URL =
   "https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg";
@@ -69,7 +70,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
         setPreview(base64Image);
         setValue("avatar", base64Image);
 
-        // Збереження Base64 в localStorage
         const updatedData = { ...savedData, avatar: base64Image };
         localStorage.setItem("userSettings", JSON.stringify(updatedData));
       };
@@ -107,6 +107,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     };
     localStorage.setItem("userSettings", JSON.stringify(dataToSave));
     dispatch(setImage(preview));
+    dispatch(setName(data.name));
     onSubmit(dataToSave);
     onClose();
   };
