@@ -1,8 +1,8 @@
-// import AddWaterBtn from "../WaterMainInfo/AddWaterBtn/AddWaterBtn.jsx";
+import AddWaterB from "./AddWaterBtn/AddWaterB.jsx";
 import WaterDailyNorma from "./WaterDailyNorma/WaterDailyNorma.jsx";
 import WaterProgressBar from "./WaterProgressBar/WaterProgressBar.jsx";
 import bottleDescX1 from "../../../assets/img/bottle-desc-x1.jpg";
-// import bottleDescX2 from "../../../assets/img/bottle-desc-x2.jpg";
+import bottleDescX2 from "../../../assets/img/bottle-desc-x2.jpg";
 import Logo from "../../HomePage/WelcomeSection/Logo/Logo";
 import css from "./WaterMainInfo.module.css";
 
@@ -12,7 +12,7 @@ const WaterMainInfo = () => {
       <Logo className={css.logoTracker} />
       <WaterDailyNorma />
       <WaterProgressBar />
-      {/* <AddWaterBtn /> */}
+      <AddWaterB />
       <div className={css.imageContainer}>
         <img
           className={css.image}
