@@ -11,6 +11,7 @@ import {
 const initialState = {
   userInfo: "",
   accessToken: localStorage.getItem("accessToken") || "",
+  isLoggedIn: !!localStorage.getItem("accessToken"), // Логин считается успешным, если токен есть
   isLoggedIn: false,
   isRegistered: false,
   loading: false,
