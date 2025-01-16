@@ -1,12 +1,8 @@
-.section {
-  width: 343px;
-  margin: 16px;
-}
-
 .container {
   padding: 24px 16px 170px 16px;
   border-radius: 30px;
   background-color: #f0eff4;
+  width: 343px;
 }
 
 .logo {
