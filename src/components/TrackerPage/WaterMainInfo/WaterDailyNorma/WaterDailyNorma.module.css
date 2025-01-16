@@ -1,55 +1,39 @@
 .dailyNorma {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  width: 129px;
-  height: 78px;
-  top: 157px;
-  left: 64px;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 15px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6px;
   padding: 12px;
-  z-index: 2;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
 }
-
-.title {
-  pointer-events: none;
+.titleNorma {
+  color: #323f47;
   font-size: 14px;
-  font-weight: bold;
-  line-height: 1;
-  margin-bottom: 6px;
-  color: var(--dark-blue);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
 }
-
-.subtitle {
-  pointer-events: none;
+.subTitle {
+  color: rgba(47, 47, 47, 0.6);
   font-size: 10px;
-  line-height: 1;
-  opacity: 0.6;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
 }
-
 @media screen and (min-width: 768px) {
   .dailyNorma {
-    left: 32px;
-    top: 157px;
+    gap: 4px;
     padding: 14px 18px;
   }
-
-  .title {
+  .titleNorma {
     font-size: 15px;
-    line-height: 1.49;
-    margin-bottom: 4px;
+    line-height: 22.4px;
   }
-
-  .subtitle {
+  .subTitle {
     font-size: 12px;
-    line-height: 1.86;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .dailyNorma {
-    left: 64px;
-    top: 157px;
+    line-height: 22.4px;
   }
 }

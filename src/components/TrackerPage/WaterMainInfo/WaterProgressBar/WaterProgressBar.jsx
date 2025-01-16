@@ -8,24 +8,19 @@ import {
 import ReactSlider from "react-slider";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import css from "./WaterProgressBar.module.css";
-
 const WaterProgressBar = () => {
   const selectedDate = useSelector(selectDate);
   const percentDay = useSelector(selectPercentDay);
-
   const dispatch = useDispatch();
   const [percent, setPercent] = useState(0);
-
   useEffect(() => {
     dispatch(apiGetWaterDay(selectedDate));
   }, [selectedDate, dispatch]);
-
   useEffect(() => {
     if (percentDay !== undefined) {
       setPercent(percentDay);
     }
   }, [percentDay]);
-
   const isToday = (someDate) => {
     const today = new Date();
     return (
@@ -34,7 +29,6 @@ const WaterProgressBar = () => {
       someDate.getFullYear() === today.getFullYear()
     );
   };
-
   const months = {
     january: "ChooseDate.january",
     february: "ChooseDate.february",
@@ -49,7 +43,6 @@ const WaterProgressBar = () => {
     november: "ChooseDate.november",
     december: "ChooseDate.december",
   };
-
   const formatDate = (date) => {
     const dateObj = new Date(date);
     if (isToday(dateObj)) {
@@ -62,12 +55,10 @@ const WaterProgressBar = () => {
       return `${day}, ${months[month]}`;
     }
   };
-
   return (
     <div className={css.container}>
       <div className={css.containerBar} data-tour="step-3">
-        <div className={css.title}>{formatDate(selectedDate)}</div>
-
+        <div className={css.title}>{formatDate(selectedDate)}</div>{" "}
         <div className={css.sliderWrapper}>
           <ReactSlider
             value={percent}
@@ -88,10 +79,8 @@ const WaterProgressBar = () => {
               <div {...props} key={state.index} className={css.track} />
             )}
           />
-        </div>
-
-        <ReactTooltip id="progress-tooltip" place="top" />
-
+        </div>{" "}
+        <ReactTooltip id="progress-tooltip" place="top" />{" "}
         <div className={css.percentBar}>
           <span>0%</span>
           <span className={css.fifty}>50%</span>
@@ -101,5 +90,4 @@ const WaterProgressBar = () => {
     </div>
   );
 };
-
 export default WaterProgressBar;
