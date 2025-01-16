@@ -52,7 +52,24 @@ const SignUpForm = () => {
       dispatch(setEmail(email));
       navigate("/tracker");
     } catch (error) {
-      setNotification(error);
+      if (error.response) {
+        const statusCode = error.response.status;
+
+        if (statusCode === 400) {
+          setNotification("Bad Request. Please check your input.");
+        } else if (statusCode === 401) {
+          setNotification("Unauthorized. Please login first.");
+        } else if (statusCode === 409) {
+          setNotification("Conflict. This email is already registered.");
+          errors.email = { message: "This email is already registered." };
+        } else if (statusCode === 500) {
+          setNotification("Server Error. Please try again later.");
+        } else {
+          setNotification("An unexpected error occurred. Please try again.");
+        }
+      } else {
+        setNotification("An unknown error occurred. Please try again.");
+      }
       setTimeout(() => setNotification(null), 5000);
     }
   };
