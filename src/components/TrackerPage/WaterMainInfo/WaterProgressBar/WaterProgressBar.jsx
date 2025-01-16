@@ -8,11 +8,13 @@ import {
 import ReactSlider from "react-slider";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import css from "./WaterProgressBar.module.css";
+
 const WaterProgressBar = () => {
   const selectedDate = useSelector(selectDate);
   const percentDay = useSelector(selectPercentDay);
   const dispatch = useDispatch();
   const [percent, setPercent] = useState(0);
+
   useEffect(() => {
     dispatch(apiGetWaterDay(selectedDate));
   }, [selectedDate, dispatch]);
@@ -23,6 +25,7 @@ const WaterProgressBar = () => {
   }, [percentDay]);
   const isToday = (someDate) => {
     const today = new Date();
+
     return (
       someDate.getDate() === today.getDate() &&
       someDate.getMonth() === today.getMonth() &&
@@ -55,6 +58,7 @@ const WaterProgressBar = () => {
       return `${day}, ${months[month]}`;
     }
   };
+
   return (
     <div className={css.container}>
       <div className={css.containerBar} data-tour="step-3">
@@ -90,4 +94,5 @@ const WaterProgressBar = () => {
     </div>
   );
 };
+
 export default WaterProgressBar;
