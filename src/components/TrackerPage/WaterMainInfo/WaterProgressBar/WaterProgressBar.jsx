@@ -64,37 +64,39 @@ const WaterProgressBar = () => {
   };
 
   return (
-    <div className={css.container} data-tour="step-3">
-      <div className={css.title}>{formatDate(selectedDate)}</div>
+    <div className={css.container}>
+      <div className={css.containerBar} data-tour="step-3">
+        <div className={css.title}>{formatDate(selectedDate)}</div>
 
-      <div className={css.sliderWrapper}>
-        <ReactSlider
-          value={percent}
-          onChange={setPercent}
-          min={0}
-          max={100}
-          step={1}
-          renderThumb={(props, state) => (
-            <div
-              {...props}
-              key={state.index}
-              className={css.thumb}
-              data-tooltip-id="progress-tooltip"
-              data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
-            />
-          )}
-          renderTrack={(props, state) => (
-            <div {...props} key={state.index} className={css.track} />
-          )}
-        />
-      </div>
+        <div className={css.sliderWrapper}>
+          <ReactSlider
+            value={percent}
+            onChange={setPercent}
+            min={0}
+            max={100}
+            step={1}
+            renderThumb={(props, state) => (
+              <div
+                {...props}
+                key={state.index}
+                className={css.thumb}
+                data-tooltip-id="progress-tooltip"
+                data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
+              />
+            )}
+            renderTrack={(props, state) => (
+              <div {...props} key={state.index} className={css.track} />
+            )}
+          />
+        </div>
 
-      <ReactTooltip id="progress-tooltip" place="top" />
+        <ReactTooltip id="progress-tooltip" place="top" />
 
-      <div className={css.percentBar}>
-        <span>0%</span>
-        <span className={css.fifty}>50%</span>
-        <span>100%</span>
+        <div className={css.percentBar}>
+          <span>0%</span>
+          <span className={css.fifty}>50%</span>
+          <span>100%</span>
+        </div>
       </div>
     </div>
   );
