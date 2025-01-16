@@ -10,9 +10,9 @@ const WaterDailyNorma = () => {
   return (
     <div className={css.dailyNorma} data-tour="step-2">
       <div className={css.title}>
-        {dailyUserGoal} {"waterMainInfo.l"}
+        {dailyUserGoal} {"1.5 L"}
       </div>
-      <div className={css.subtitle}>{"waterMainInfo.norma"}</div>
+      <div className={css.subtitle}>{"My daily norma"}</div>
     </div>
   );
 };

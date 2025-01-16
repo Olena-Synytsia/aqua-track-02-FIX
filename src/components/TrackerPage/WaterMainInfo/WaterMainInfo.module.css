@@ -6,6 +6,7 @@
 }
 
 .container {
+  position: absolute;
   min-width: 288px;
   max-width: 343px;
   height: 415px;
