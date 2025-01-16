@@ -1,10 +1,8 @@
 .logoTracker {
-  width: 155px;
-  height: 24px;
-  top: 32px;
-  left: 32px;
-  gap: 0px;
-  opacity: 0px;
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  z-index: 1;
 }
 
 .container {
