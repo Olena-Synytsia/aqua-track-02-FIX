@@ -1,11 +1,10 @@
 .section {
-  width: 311px;
+  width: 343px;
   height: 411px;
   flex-shrink: 0;
   border-radius: 30px;
   background-color: #f0eff4;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding: 16px;
   padding-top: 24px;
   display: flex;
   flex-direction: column;
@@ -111,10 +110,9 @@
 }
 @media screen and (min-width: 768px) {
   .section {
-    width: 640px;
+    width: 704px;
     height: 498px;
-    padding-right: 32px;
-    padding-left: 32px;
+    padding: 32px;
     padding-top: 32px;
   }
   .appInfo {
@@ -160,8 +158,8 @@
 }
 @media screen and (min-width: 1440px) {
   .section {
-    width: 608px;
-    height: 704px;
+    width: 672px;
+    height: 736px;
   }
   .appInfo {
     margin-top: 132px;
