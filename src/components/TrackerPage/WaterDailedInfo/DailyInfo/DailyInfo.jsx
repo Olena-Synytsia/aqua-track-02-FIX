@@ -5,11 +5,11 @@ import s from "./DailyInfo.module.css";
 import WaterList from "./WaterList/WaterList.jsx";
 import { useEffect } from "react";
 import { fetchWaterItem } from "../../../../redux/dailyInfo/dailyInfoOps.js";
-import { useSelect } from "@chakra-ui/react";
-import { selectDate } from "../../../../redux/water/selectors.js";
+// import { useSelect } from "@chakra-ui/react";
+// import { selectDate } from "../../../../redux/water/selectors.js";
 
 const DailyInfo = () => {
-  const day = useSelect(selectDate);
+  // const day = useSelect(selectDate);
   const date = "2025-01-16";
   const dispatch = useDispatch();
   console.log(date);
