@@ -1,16 +1,17 @@
 .container {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  gap: 8px;
-  width: 200px;
-  height: auto;
+  gap: 52px;
+  width: 295px;
+  height: 106px;
+  top: 450px;
+  left: 188px;
   border-radius: 15px;
-  padding: 16px;
-  background-color: var(--white);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 2;
+  padding: 20px 0px 0px 0px;
+  opacity: 0px;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .title {
@@ -27,15 +28,16 @@
 }
 
 .thumb {
-  background-color: var(--color-darkblue);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--white);
+  background-color: rgb(255, 255, 255);
+  width: 12px;
+  height: 12px;
+  gap: 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
 }
 
 .track {
-  background-color: var(--accent);
+  background-color: rgba(155, 225, 160, 1);
   height: 6px;
   border-radius: 3px;
 }
