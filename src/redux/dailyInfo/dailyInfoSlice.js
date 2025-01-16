@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWaterItem } from "./dailyInfoOps.js";
+import {
+  addWaterItem,
+  fetchWaterItem,
+  updateWaterItem,
+} from "./dailyInfoOps.js";
 
 const initialState = {
   items: [],
@@ -12,24 +16,26 @@ const slice = createSlice({
   name: "waterItem",
   initialState,
   reducers: {
-    addItems: (state, action) => {
-      state.items.push(action.payload);
-    },
     setOperationType: (state, action) => {
       state.operationType = action.payload;
     },
-    updateItem: (state, action) => {
-      const { id, time, volume } = action.payload;
-      const itemIndex = state.items.findIndex((item) => item.id === id);
-      if (itemIndex !== -1) {
-        state.items[itemIndex] = { ...state.items[itemIndex], time, volume };
-      }
-    },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchWaterItem.fulfilled, (state, action) => {
-      state.items = action.payload;
-    });
+    builder
+      .addCase(fetchWaterItem.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(addWaterItem.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(updateWaterItem.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      });
   },
 });
 

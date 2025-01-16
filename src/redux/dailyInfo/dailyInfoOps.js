@@ -15,9 +15,21 @@ export const fetchWaterItem = createAsyncThunk(
 
 export const addWaterItem = createAsyncThunk(
   "addWaterItem",
-  async (body, thunkApi) => {
+  async (item, thunkApi) => {
     try {
-      const { data } = await authApi.post("/water", body);
+      const { data } = await authApi.post("/water", item);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateWaterItem = createAsyncThunk(
+  "updateWaterItem",
+  async (item, thunkApi) => {
+    try {
+      const { data } = await authApi.patch(`water/${item.id}`, item);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
