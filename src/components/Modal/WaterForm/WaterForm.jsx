@@ -4,21 +4,40 @@ import s from "./WaterForm.module.css";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  addItems,
   selectOperationType,
+  selectWaterItem,
   updateItem,
 } from "../../../redux/dailyInfo/dailyInfoSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  addWaterItem,
+  updateWaterItem,
+} from "../../../redux/dailyInfo/dailyInfoOps.js";
 
-const WaterForm = ({ initialData, onClose }) => {
+const WaterForm = ({ onClose }) => {
   const operationType = useSelector(selectOperationType);
+  const initialData = useSelector(selectWaterItem);
   const dispatch = useDispatch();
+
+  const extractTime = (date) => {
+    const parsedDate = new Date(date);
+    return parsedDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const combineDateTime = (date, time) => {
+    const datePart = date.toISOString().split("T")[0];
+    return `${datePart}T${time}`;
+  };
+
   const validationSchema = Yup.object().shape({
     volume: Yup.number()
       .required("Please enter the amount of water.")
       .min(1, "The minimum amount is 1ml.")
-      .max(5000, "The maximum amount is 5000ml."),
-    time: Yup.string()
+      .max(15000, "The maximum amount is 15000ml."),
+    date: Yup.string()
       .required("Please enter the time.")
       .matches(
         /^([0-1]?\d|2[0-3]):([0-5]?\d)$/,
@@ -29,14 +48,8 @@ const WaterForm = ({ initialData, onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      id: initialData?.id || 1,
-      volume: initialData?.volume || 50,
-      time:
-        initialData?.time ||
-        new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
+      volume: initialData.volume || 50,
+      date: extractTime(initialData.date || new Date()),
     },
   });
 
@@ -46,12 +59,30 @@ const WaterForm = ({ initialData, onClose }) => {
   const decrementWater = () => setValue("volume", Math.max(1, volume - 50));
 
   const onSubmit = (data) => {
-    if (operationType === "add") {
-      dispatch(addItems(data));
-    } else {
-      dispatch(updateItem(data));
+    const fullDate = combineDateTime(
+      initialData.date ? new Date(initialData.date) : new Date(),
+      data.date
+    );
+
+    let preparedData = {
+      volume: data.volume,
+      date: fullDate,
+    };
+
+    if (operationType === "edit") {
+      preparedData = {
+        ...preparedData,
+        id: initialData.id,
+      };
     }
-    console.log(data);
+
+    if (operationType === "add") {
+      dispatch(addWaterItem(preparedData));
+    } else {
+      dispatch(updateWaterItem(preparedData));
+    }
+
+    console.log(preparedData);
     onClose();
   };
 
@@ -81,7 +112,7 @@ const WaterForm = ({ initialData, onClose }) => {
       </div>
       <p className={s.formText}>Recording time:</p>
       <Controller
-        name="time"
+        name="date"
         control={control}
         render={({ field }) => (
           <input {...field} className={s.input} type="time" />
@@ -92,7 +123,7 @@ const WaterForm = ({ initialData, onClose }) => {
         className={s.input}
         type="number"
         min="1"
-        max="5000"
+        max="15000"
         value={volume === 0 ? "" : volume}
         onChange={(e) => setValue("volume", Number(e.target.value))}
       />

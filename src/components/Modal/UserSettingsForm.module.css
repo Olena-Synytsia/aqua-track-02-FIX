@@ -80,14 +80,14 @@ input[type="text"],
 input[type="email"],
 input[type="number"] {
   color: black;
-  background-color: #ffffff; /* Белый фон */
-  border: 1px solid #cccccc; /* Светло-серая рамка */
-  border-radius: 15px; /* Скругленные углы */
+  background-color: #ffffff; 
+  border: 1px solid #cccccc; 
+  border-radius: 15px; 
   font-size: 14px;
 
   width: 303px;
   height: 46px;
-  box-sizing: border-box; /* Учитывать padding в ширине */
+  box-sizing: border-box; 
   margin-top: 8px;
 }
 

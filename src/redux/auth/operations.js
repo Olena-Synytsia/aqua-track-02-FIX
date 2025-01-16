@@ -45,7 +45,7 @@ export const login = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
+export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
   const accessToken = thunkApi.getState().auth.accessToken;
 
   if (!accessToken) {

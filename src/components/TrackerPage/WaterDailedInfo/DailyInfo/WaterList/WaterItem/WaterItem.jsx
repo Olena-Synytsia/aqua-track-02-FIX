@@ -6,7 +6,7 @@ import WaterModal from "../../../../../Modal/WaterModal/WaterModal.jsx";
 import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../../../redux/dailyInfo/dailyInfoSlice.js";
 
-const WaterItem = ({ time, volume }) => {
+const WaterItem = ({ date, volume }) => {
   const dispatch = useDispatch();
   const formateVolume = (volume) => {
     if (volume < 1000) {
@@ -31,7 +31,7 @@ const WaterItem = ({ time, volume }) => {
         </svg>
         <div className={s.indicators}>
           <p className={s.value}>{formateVolume(volume)}</p>
-          <p className={s.time}>{time}</p>
+          <p className={s.time}>{date}</p>
         </div>
         <div className={s.buttons}>
           <button className={s.btn} onClick={handleEdit}>
