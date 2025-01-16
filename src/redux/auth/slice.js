@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   userInfo: "",
-  accessToken: "",
+  accessToken: localStorage.getItem("accessToken") || "",
   isLoggedIn: false,
   isRegistered: false,
   loading: false,
@@ -21,12 +21,16 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setToken: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      localStorage.setItem("accessToken", action.payload.accessToken); // Зберігаємо токен в localStorage
+    },
     clearError(state) {
       state.error = null;
     },
     clearUser(state) {
       state.userInfo = "";
-      state.tokens = "";
+      state.accessToken = null;
       state.isLoggedIn = false;
       state.isRegistered = false;
     },
@@ -46,6 +50,7 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
+        localStorage.setItem("accessToken", action.payload.accessToken);
         state.isRegistered = true;
         // state.isLoggedIn = true; // запис у local store
         state.loading = false;
@@ -58,6 +63,7 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
+        // localStorage.setItem("accessToken", action.payload.accessToken);
         state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
@@ -91,5 +97,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearError, clearUser, setEmail } = userSlice.actions;
+export const { clearError, clearUser, setEmail, setToken } = userSlice.actions;
 export const authReducer = userSlice.reducer;

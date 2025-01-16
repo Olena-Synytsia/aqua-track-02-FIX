@@ -33,7 +33,7 @@
 .label {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 1.28571;
   color: #2f2f2f;
   margin: 0;
@@ -44,11 +44,11 @@
   font-family: "Poppins", sans-serif;
   width: 100% !important;
   border: 1px solid rgba(47, 47, 47, 0.2);
-  height: 50px;
+  height: 50px !important;
   border-radius: 15px;
   padding: 0 16px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 1.28571;
   color: rgba(47, 47, 47, 0.6);
   box-sizing: border-box;
@@ -115,7 +115,7 @@
 .text {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 1.28571;
   color: #2f2f2f;
   text-align: center;
@@ -125,7 +125,7 @@
 .link {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 1.28571;
   color: #2f2f2f;
   text-decoration: underline;
@@ -179,12 +179,12 @@
 
   .label {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 1.5;
   }
 
   .input {
-    height: 56px;
+    height: 56px !important;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
@@ -216,12 +216,12 @@
 
   .text {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 1.5;
   }
 
   .link {
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 1.5;
   }
 

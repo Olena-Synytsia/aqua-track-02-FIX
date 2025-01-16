@@ -1,53 +1,30 @@
-// import Slider from "@mui/material/Slider";
-// import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-// import Box from "@mui/material/Box";
-import css from "./WaterProgressBar.module.css";
-// import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { apiGetWaterDay } from "../../../../redux/water/operations.js";
 import {
   selectDate,
   selectPercentDay,
 } from "../../../../redux/water/selectors.js";
+import ReactSlider from "react-slider";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import css from "./WaterProgressBar.module.css";
 
-// const CustomTooltip = styled(({ className, ...props }) => (
-//   <Tooltip {...props} classes={{ popper: className }} />
-// ))({
-//   [`& .${tooltipClasses.tooltip}`]: {
-//     backgroundColor: "#323f47",
-//     color: "#ffffff",
-//     fontSize: "12px",
-//     borderRadius: "8px",
-//   },
-//   [`& .${tooltipClasses.arrow}`]: {
-//     color: "#323f47",
-//   },
-// });
-// function ValueLabelComponent(props) {
-//   const { children, value, open } = props;
-//   return (
-// <CustomTooltip
-//   open={open}
-//   enterTouchDelay={0}
-//   placement="top"
-//   title={`${Math.min(value, 100).toFixed(0)}%`}
-//   arrow
-// >
-//   {children}
-// </CustomTooltip>
-//   );
-// }
 const WaterProgressBar = () => {
   const selectedDate = useSelector(selectDate);
-  // const percentDay = useSelector(selectPercentDay);
+  const percentDay = useSelector(selectPercentDay);
+
   const dispatch = useDispatch();
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     dispatch(apiGetWaterDay(selectedDate));
   }, [selectedDate, dispatch]);
 
-  // const percent = percentDay || 0;
+  useEffect(() => {
+    if (percentDay !== undefined) {
+      setPercent(percentDay);
+    }
+  }, [percentDay]);
 
   const isToday = (someDate) => {
     const today = new Date();
@@ -90,45 +67,37 @@ const WaterProgressBar = () => {
     <div className={css.container} data-tour="step-3">
       <div className={css.title}>{formatDate(selectedDate)}</div>
 
-      {/* <Box sx={{ width: "100%", m: 0, p: 0 }}>
-        <Slider
+      <div className={css.sliderWrapper}>
+        <ReactSlider
           value={percent}
-          valueLabelDisplay="auto"
-          components={{ ValueLabel: ValueLabelComponent }}
-          onChange={() => {}}
-          sx={{
-            m: 0,
-            p: 0,
-            color: "var(--accent)",
-            "@media (pointer: coarse)": {
-              p: "0 !important",
-            },
-            "& .MuiSlider-thumb": {
-              borderRadius: "16px",
-              width: "12px",
-              height: "12px",
-              color: "white",
-              border: "1px solid var(--accent)",
-            },
-            "& .MuiSlider-rail": {
-              color: "var(--light-gray)",
-              backgroundColor: "var(--light-gray)",
-            },
-            "& .MuiSlider-valueLabel": {
-              backgroundColor: "var(--accent)",
-              color: "white",
-              borderRadius: "8px",
-              padding: "4px 4px",
-            },
-          }}
-        /> */}
+          onChange={setPercent}
+          min={0}
+          max={100}
+          step={1}
+          renderThumb={(props, state) => (
+            <div
+              {...props}
+              key={state.index}
+              className={css.thumb}
+              data-tooltip-id="progress-tooltip"
+              data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
+            />
+          )}
+          renderTrack={(props, state) => (
+            <div {...props} key={state.index} className={css.track} />
+          )}
+        />
+      </div>
+
+      <ReactTooltip id="progress-tooltip" place="top" />
+
       <div className={css.percentBar}>
         <span>0%</span>
         <span className={css.fifty}>50%</span>
         <span>100%</span>
       </div>
-      {/* </Box> */}
     </div>
   );
 };
+
 export default WaterProgressBar;

@@ -1,0 +1,29 @@
+.addBtnb {
+  display: inline-flex;
+  padding: 18px 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  background: #323f47;
+  width: 178px;
+  height: 60px;
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+}
+
+.iconPlusb {
+  width: 24px;
+  height: 24px;
+}
+
+.iconPlusw {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}

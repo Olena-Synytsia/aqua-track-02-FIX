@@ -4,6 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import style from "./UserSettingsForm.module.css";
 import { AiOutlineUpload } from "react-icons/ai";
+import { setImage } from "../../redux/avatar/slice";
+import { useDispatch } from "react-redux";
+import { setName } from "../../redux/name/slice";
 
 const DEFAULT_AVATAR_URL =
   "https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg";
@@ -29,6 +32,7 @@ const schema = yup.object().shape({
 
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const [preview, setPreview] = useState(DEFAULT_AVATAR_URL);
+  const dispatch = useDispatch();
 
   const savedData = useMemo(() => {
     return JSON.parse(localStorage.getItem("userSettings")) || {};
@@ -50,7 +54,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
 
   useEffect(() => {
     if (savedData.avatar) {
-      setPreview(savedData.avatarPreview || DEFAULT_AVATAR_URL);
+      setPreview(savedData.avatar || DEFAULT_AVATAR_URL);
       setValue("avatar", savedData.avatar);
     }
     Object.entries(savedData).forEach(([key, value]) => setValue(key, value));
@@ -59,12 +63,24 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file && file instanceof File) {
-      const avatarPreview = URL.createObjectURL(file);
-      setPreview(avatarPreview);
-      setValue("avatar", file);
-      setValue("avatarPreview", avatarPreview);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Отримуємо Base64
+        const base64Image = reader.result;
+        setPreview(base64Image);
+        setValue("avatar", base64Image);
+
+        const updatedData = { ...savedData, avatar: base64Image };
+        localStorage.setItem("userSettings", JSON.stringify(updatedData));
+      };
+      reader.onerror = () => {
+        console.error("Error reading file as Base64");
+      };
+      reader.readAsDataURL(file); // Перетворює файл у Base64
     } else {
       setPreview(DEFAULT_AVATAR_URL);
+      const updatedData = { ...savedData, avatar: DEFAULT_AVATAR_URL };
+      localStorage.setItem("userSettings", JSON.stringify(updatedData));
     }
   };
 
@@ -90,8 +106,10 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       avatarPreview: preview,
     };
     localStorage.setItem("userSettings", JSON.stringify(dataToSave));
+    dispatch(setImage(preview));
+    dispatch(setName(data.name));
     onSubmit(dataToSave);
-    onClose(); 
+    onClose();
   };
 
   return (

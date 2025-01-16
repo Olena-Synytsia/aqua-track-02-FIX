@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setToken } from "./slice";
+// import { setToken } from "./slice";
 
 export const authApi = axios.create({
   baseURL: "https://aqua-api-fkf8.onrender.com",
@@ -14,7 +16,11 @@ export const register = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signup", credentials);
+      const accessToken = data.accessToken;
+      thunkApi.dispatch(setToken({ accessToken }));
+      localStorage.setItem("accessToken", accessToken);
       setAuthHeader(data.accessToken);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Registration failed");
@@ -27,7 +33,11 @@ export const login = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signin", credentials);
+      const accessToken = data.accessToken;
+      thunkApi.dispatch(setToken({ accessToken }));
+      localStorage.setItem("accessToken", accessToken);
       setAuthHeader(data.accessToken);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Login failed");

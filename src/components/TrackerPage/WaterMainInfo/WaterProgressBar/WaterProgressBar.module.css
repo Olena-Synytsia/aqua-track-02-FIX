@@ -3,36 +3,53 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  top: 225px;
-  gap: 4px;
-  width: 198px;
-  height: 70px;
+  gap: 52px;
+  width: 295px;
+  height: 106px;
+  top: 450px;
+  left: 188px;
   border-radius: 15px;
-  padding: 12px;
-  background-color: var(--white);
-  z-index: 2;
+  padding: 20px 0px 0px 0px;
+  opacity: 0px;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .title {
-  pointer-events: none;
   font-weight: bold;
   font-size: 14px;
-  line-height: 1;
+  line-height: 1.2;
   color: var(--color-darkblue);
+  text-align: center;
 }
 
-.slider {
+.sliderWrapper {
+  position: relative;
   width: 100%;
+}
+
+.thumb {
+  background-color: rgb(255, 255, 255);
+  width: 12px;
+  height: 12px;
+  gap: 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+}
+
+.track {
+  background-color: rgba(155, 225, 160, 1);
+  height: 6px;
+  border-radius: 3px;
 }
 
 .percentBar {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  font-size: 10px;
-  line-height: 1;
-  opacity: 0.6;
-  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-darkblue);
+  opacity: 0.8;
 }
 
 .valueLabel {
@@ -49,7 +66,7 @@
   display: none;
 }
 
-.slider:hover .valueLabel {
+.sliderWrapper:hover .valueLabel {
   display: block;
 }
 
@@ -57,17 +74,12 @@
   text-align: center;
 }
 
-.slider:global {
-  height: 6px !important;
-  pointer-events: none;
-  padding: 0 !important;
-}
-
 .customTooltip {
   background-color: #9be1a0 !important;
   color: #ffffff !important;
   font-size: 12px !important;
   border-radius: 8px !important;
+  padding: 4px 8px !important;
 }
 
 .customArrow::before {
@@ -76,33 +88,33 @@
 
 @media screen and (min-width: 768px) {
   .container {
-    left: 204px;
-    top: 322px;
-    gap: 6px;
-    width: 295px;
-    height: 106px;
-    padding: 15px;
+    gap: 10px;
+    width: 300px;
+    padding: 20px;
   }
 
   .title {
-    font-size: 15px;
-    line-height: 1.49;
-    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.4;
   }
 
   .percentBar {
-    font-size: 12px;
-    line-height: 1.86;
-  }
-
-  .slider:global {
-    height: 8px !important;
+    font-size: 14px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .container {
-    left: 188px;
-    top: 450px;
+    gap: 12px;
+    width: 350px;
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .percentBar {
+    font-size: 16px;
   }
 }
