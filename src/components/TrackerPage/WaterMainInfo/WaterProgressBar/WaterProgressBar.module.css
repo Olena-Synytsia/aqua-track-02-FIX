@@ -1,21 +1,22 @@
 .container {
-  /* background-image: url("../../../../assets/img/bottel@x1.webp"); */
-  background-position: -128.78px -0.097px;
-  background-size: 198.729% 103.203%;
-  background-repeat: no-repeat;
-  width: 262px;
-  height: 353px;
-  position: relative;
+  background-image: url("../../../../assets/img/bottle_for_water_1x.png");
+  width: 472px;
+  height: 604px;
+  top: 92px;
+  left: 100px;
+  gap: 0px;
 }
+
 @media screen and (-webkit-min-device-pixel-ratio: 2),
   (min-resolution: 2dppx),
   (min-resolution: 192dpi) {
   .wrapper {
-    /* background-image: url("../../../../assets/img/bottel@x2.webp"); */
-    background-color: lightgray;
-    background-position: -128.78px -0.097px;
-    background-size: 198.729% 103.203%;
-    background-repeat: no-repeat;
+    background-image: url("../../../../assets/img/bottle_for_water_2x.png");
+    width: 472px;
+    height: 604px;
+    top: 92px;
+    left: 100px;
+    gap: 0px;
   }
 }
 .containerBar {
@@ -59,11 +60,11 @@
 }
 
 .thumb {
-  background-color: rgb(255, 255, 255);
+  background-color: #9be1a0;
   width: 12px;
   height: 12px;
   gap: 0px;
-  border: 1px 0px 0px 0px;
+  border: 1px;
   opacity: 0px;
 } /* .track {
   background-color: rgba(155, 225, 160, 1);
