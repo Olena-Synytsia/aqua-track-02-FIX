@@ -2,6 +2,7 @@ import style from "./AdvantagesSection.module.css";
 import imgOne from "../../../assets/img/Male1-Memojis-tab-desc-x1.jpg";
 import imgTwo from "../../../assets/img/Male2-Memojis-tab-desc-x1.jpg";
 import imgThree from "../../../assets/img/Male3-Memojis-tab-desc-x1.jpg";
+import UsersCounter from "./UsersCounter.jsx";
 
 const AdvantagesSection = () => {
   return (
@@ -22,9 +23,9 @@ const AdvantagesSection = () => {
             </ul>
           </li>
           <li>
-            <p className={style.customerText}>
-              Our <span>happy</span> customers
-            </p>
+            <div className={style.customerText}>
+              <UsersCounter /> <span>happy</span> <p>customers</p>
+            </div>
           </li>
         </ul>
         <ul className={style.tagList}>
