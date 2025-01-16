@@ -18,7 +18,7 @@ const WaterForm = ({ initialData, onClose }) => {
       .required("Please enter the amount of water.")
       .min(1, "The minimum amount is 1ml.")
       .max(15000, "The maximum amount is 15000ml."),
-    time: Yup.string()
+    data: Yup.string()
       .required("Please enter the time.")
       .matches(
         /^([0-1]?\d|2[0-3]):([0-5]?\d)$/,
@@ -31,7 +31,7 @@ const WaterForm = ({ initialData, onClose }) => {
     defaultValues: {
       id: initialData?.id || 1,
       volume: initialData?.volume || 50,
-      time:
+      date:
         initialData?.time ||
         new Date().toLocaleTimeString([], {
           hour: "2-digit",
@@ -81,7 +81,7 @@ const WaterForm = ({ initialData, onClose }) => {
       </div>
       <p className={s.formText}>Recording time:</p>
       <Controller
-        name="time"
+        name="date"
         control={control}
         render={({ field }) => (
           <input {...field} className={s.input} type="time" />
