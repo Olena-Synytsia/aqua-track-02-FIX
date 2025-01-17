@@ -1,24 +1,46 @@
 .container {
   background-image: url("../../../../assets/img/bottle_for_water_1x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 472px;
   height: 604px;
   top: 92px;
   left: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 2dppx),
-  (min-resolution: 192dpi) {
-  .wrapper {
-    background-image: url("../../../../assets/img/bottle_for_water_2x.png");
+@media screen and (max-width: 767px) {
+  .container {
+    width: 300px;
+    height: 400px;
+    top: 50px;
+    left: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .container {
+    width: 374px;
+    height: 477px;
+    top: 70px;
+    left: 50px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
     width: 472px;
     height: 604px;
     top: 92px;
     left: 100px;
-    gap: 0px;
   }
 }
+
 .containerBar {
   position: absolute;
   display: flex;
@@ -34,7 +56,28 @@
   height: 70px;
   top: 175px;
   left: 32px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
+
+@media screen and (min-width: 768px) {
+  .containerBar {
+    gap: 6px;
+    padding: 20px;
+    top: 253px;
+    left: 39px;
+    width: 295px;
+    height: 106px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .containerBar {
+    top: 358px;
+    left: 88px;
+  }
+}
+
 .title {
   color: #323f47;
   font-size: 14px;
@@ -42,12 +85,52 @@
   font-weight: 700;
   line-height: 14px;
 }
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+}
+
 .sliderWrapper {
-  width: 174px;
+  width: 100%;
+  max-width: 174px;
   height: 6px;
   border-radius: 9px;
   background-color: #f0eff4;
+  position: relative;
+  margin-bottom: 10px;
 }
+
+@media screen and (min-width: 768px) {
+  .sliderWrapper {
+    max-width: 255px;
+    height: 8px;
+  }
+}
+
+.track {
+  width: 138px;
+  height: 8px;
+  gap: 0px;
+  border-radius: 9px 0px 0px 0px;
+  opacity: 0px;
+  background-color: rgb(246, 248, 246);
+  /* transition: width 0.3s ease; */
+}
+
+.thumb {
+  background-color: #9be1a0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
 .percentBar {
   display: flex;
   align-items: center;
@@ -59,19 +142,14 @@
   line-height: 10px;
 }
 
-.thumb {
-  background-color: #9be1a0;
-  width: 12px;
-  height: 12px;
-  gap: 0px;
-  border: 1px;
-  opacity: 0px;
-} /* .track {
-  background-color: rgba(155, 225, 160, 1);
-  width: 138px;
-  height: 8px;
-  border-radius: 9px;
-} */
+@media screen and (min-width: 768px) {
+  .percentBar {
+    gap: 78px;
+    font-size: 12px;
+    line-height: 22.4px;
+  }
+}
+
 .valueLabel {
   position: absolute;
   top: -30px;
@@ -85,11 +163,11 @@
   z-index: 1;
   display: none;
 }
+
 .sliderWrapper:hover .valueLabel {
   display: block;
-} /* .fifty {
-  text-align: center;
-} */
+}
+
 .customTooltip {
   background-color: #9be1a0 !important;
   color: #ffffff !important;
@@ -97,50 +175,7 @@
   border-radius: 8px !important;
   padding: 4px 8px !important;
 }
+
 .customArrow::before {
   background-color: #9be1a0 !important;
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    width: 374px;
-    height: 477px;
-  }
-  .containerBar {
-    gap: 6px;
-    padding: 20px;
-    top: 253px;
-    left: 39px;
-    width: 295px;
-    height: 106px;
-  }
-  .title {
-    font-size: 15px;
-    line-height: 22.4px;
-  }
-  .sliderWrapper {
-    width: 255px;
-    height: 8px;
-  }
-  .percentBar {
-    gap: 78px;
-    font-size: 12px;
-    line-height: 22.4px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container {
-    width: 472px;
-    height: 604px;
-  }
-  .containerBar {
-    top: 358px;
-    left: 88px;
-  }
-  .percentBar {
-    gap: 78px;
-    font-size: 12px;
-    line-height: 22.4px;
-  }
 }
