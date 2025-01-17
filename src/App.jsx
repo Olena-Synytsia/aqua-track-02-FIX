@@ -11,9 +11,29 @@ import TrackerPage from "./pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
+import { selectTokens } from "./redux/auth/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchCurrentUser } from "./redux/auth/operations";
+import { setToken } from "./redux/auth/slice";
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+  const token = useSelector(selectTokens);
+
+  useEffect(() => {
+    // Перевіряємо, чи є токен у localStorage
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      dispatch(setToken({ accessToken: token })); // Оновлюємо Redux-стан токеном
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchCurrentUser);
+    }
+  }, [dispatch, token]);
 
   return (
     <Routes>

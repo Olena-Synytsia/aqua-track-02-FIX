@@ -12,11 +12,11 @@ const initialState = {
   userInfo: "",
   accessToken: localStorage.getItem("accessToken") || "",
   isLoggedIn: !!localStorage.getItem("accessToken"), // Логин считается успешным, если токен есть
-  isLoggedIn: false,
   isRegistered: false,
   loading: false,
   error: null,
 };
+console.log("Initial state token:", initialState.accessToken);
 
 const userSlice = createSlice({
   name: "user",
@@ -25,6 +25,7 @@ const userSlice = createSlice({
     setToken: (state, action) => {
       state.accessToken = action.payload.accessToken;
       localStorage.setItem("accessToken", action.payload.accessToken); // Зберігаємо токен в localStorage
+      state.isLoggedIn = true;
     },
     clearError(state) {
       state.error = null;

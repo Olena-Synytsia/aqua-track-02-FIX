@@ -15,6 +15,10 @@
   }
 }
 
+.cloud {
+  stroke: black;
+}
+
 .avatar {
   width: 26px;
   height: 28px;
@@ -62,12 +66,19 @@
   font-size: 12px;
   color: #323f47;
   line-height: 14px;
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+
   width: 68px;
 }
 
 .customerText span {
   color: #9be1a0;
+}
+
+.counter {
+  color: #323f47;
+  margin-right: 5px;
 }
 
 .tagList {

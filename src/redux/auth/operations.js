@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setToken } from "./slice";
 // import { setToken } from "./slice";
 
 export const authApi = axios.create({
@@ -16,9 +15,9 @@ export const register = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signup", credentials);
-      const accessToken = data.accessToken;
-      thunkApi.dispatch(setToken({ accessToken }));
-      localStorage.setItem("accessToken", accessToken);
+      // const accessToken = data.accessToken;
+      // thunkApi.dispatch(setToken({ accessToken }));
+      // localStorage.setItem("accessToken", accessToken);
       setAuthHeader(data.accessToken);
 
       return data;
@@ -33,9 +32,21 @@ export const login = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signin", credentials);
-      const accessToken = data.accessToken;
-      thunkApi.dispatch(setToken({ accessToken }));
+
+      // Проконсолити структуру даних з відповіді
+      console.log("Login response:", { data });
+
+      // Перевірте, де знаходиться `accessToken`
+      const { accessToken } = data.data;
+
       localStorage.setItem("accessToken", accessToken);
+      console.log(
+        "Access token after login:",
+        localStorage.getItem("accessToken")
+      );
+
+      // const accessToken = data.accessToken;
+      // thunkApi.dispatch(setToken({ accessToken }));
       setAuthHeader(data.accessToken);
 
       return data;
