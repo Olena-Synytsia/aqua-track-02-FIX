@@ -3,6 +3,7 @@ import WaterModal from "../../../Modal/WaterModal/WaterModal.jsx";
 import css from "./AddWaterB.module.css";
 import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../redux/dailyInfo/dailyInfoSlice.js";
+
 const AddWaterB = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ const AddWaterB = () => {
     setIsOpen(true);
     dispatch(setOperationType("add"));
   };
+
   return (
     <>
       <button onClick={handleAdd} className={css.addButton}>
