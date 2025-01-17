@@ -17,7 +17,7 @@ const MonthInfo = () => {
         selectedDate={selectedDate}
         onDateChange={handleDateChange}
       />
-      <Calendar selectedDate={selectedDate} />
+      <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
     </div>
   );
 };

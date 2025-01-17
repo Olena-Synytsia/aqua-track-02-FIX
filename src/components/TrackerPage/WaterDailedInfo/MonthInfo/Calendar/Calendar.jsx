@@ -22,7 +22,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
       key={dayIndex + 1}
       day={dayIndex + 1}
       selectedDate={selectedDate}
-      onDateSelect={handleDateChange}
+      onDateSelect={setSelectedDate}
     />
   ));
 
