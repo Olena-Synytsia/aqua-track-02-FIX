@@ -30,7 +30,7 @@ const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
   const finalizeLogout = () => {
     // Очищаем состояние Redux и localStorage
     dispatch(clearUser());
-    localStorage.clear();
+    // localStorage.clear();
     navigate("/", { replace: true }); // Перенаправляем на главную страницу
     onLogOut(); // Дополнительная логика при logout
   };
@@ -72,5 +72,3 @@ const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
 };
 
 export default LogOutModal;
-
-
