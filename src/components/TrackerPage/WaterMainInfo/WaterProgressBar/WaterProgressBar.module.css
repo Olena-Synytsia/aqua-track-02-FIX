@@ -79,11 +79,12 @@
 }
 
 .title {
+  pointer-events: none;
   color: #323f47;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 14px;
+  line-height: 1;
 }
 
 @media screen and (min-width: 768px) {
@@ -111,13 +112,13 @@
 }
 
 .track {
-  width: 138px;
+  /* width: 138px; */
   height: 8px;
   gap: 0px;
   border-radius: 9px 0px 0px 0px;
   opacity: 0px;
-  background-color: rgb(246, 248, 246);
-  /* transition: width 0.3s ease; */
+  background-color: #f0eff4;
+  transition: width 0.3s ease;
 }
 
 .thumb {
