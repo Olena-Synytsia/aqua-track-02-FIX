@@ -53,7 +53,7 @@ const SignInForm = () => {
     const { email, password } = data;
     try {
       const response = await dispatch(login({ email, password }));
-      dispatch(setEmail(email)); // зберегти email
+      dispatch(setEmail(email)); 
       if (!response.userExists) {
         showMessage("User not found. Please register first.");
         return;
@@ -85,57 +85,61 @@ const SignInForm = () => {
     <div className={s.section}>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <h2 className={s.title}>Sign In</h2>
-        <div className={s.formElement}>
-          <label className={s.label} htmlFor="email">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            className={`${s.input} ${errors.email ? s.inputError : ""}`}
-            {...register("email", {
-              required: true,
-              onBlur: () => trigger("email"),
-            })}
-          />
-          {errors.email && (
-            <div className={s.error}>{errors.email.message}</div>
-          )}
-        </div>
-
-        <div className={s.formElement}>
-          <label className={s.label} htmlFor="password">
-            Password
-          </label>
-          <div className={s.passwordWrapper}>
-            <input
-              id="password"
-              type={passwordVisible ? "text" : "password"}
-              placeholder="Enter your password"
-              className={`${s.input} ${errors.password ? s.inputError : ""}`}
-              {...register("password", {
-                required: true,
-                onBlur: () => trigger("password"),
-              })}
-            />
-            <span
-              className={s.togglePassword}
-              onClick={() => setPasswordVisible((prev) => !prev)}
-            >
-              <svg className={s.eyeIcon}>
-                <use
-                  href={`/src/assets/sprite.svg#${
-                    passwordVisible ? "icon-eye" : "icon-eye-off"
-                  }`}
-                ></use>
-              </svg>
-            </span>
+          <div className={s.formElement}>
+            <label className={s.label} htmlFor="email">
+              Email
+            </label>
+            <div className={s.inputWrap}>
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className={`${s.input} ${errors.email ? s.inputError : ""}`}
+                {...register("email", {
+                  required: true,
+                  onBlur: () => trigger("email"),
+                })}
+              />
+            </div>
+            {errors.email && (
+              <div className={s.error}>{errors.email.message}</div>
+            )}
           </div>
-          {errors.password && (
-            <div className={s.error}>{errors.password.message}</div>
-          )}
-        </div>
+  
+          <div className={s.formElement}>
+            <label className={s.label} htmlFor="password">
+              Password
+            </label>
+            <div className={s.passwordWrapper}>
+              <div className={s.inputWrap}>
+                <input
+                  id="password"
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className={`${s.input} ${errors.password ? s.inputError : ""}`}
+                  {...register("password", {
+                    required: true,
+                    onBlur: () => trigger("password"),
+                  })}
+                />
+              </div>
+              <span
+                className={s.togglePassword}
+                onClick={() => setPasswordVisible((prev) => !prev)}
+              >
+                <svg className={s.eyeIcon}>
+                  <use
+                    href={`/src/assets/sprite.svg#${
+                      passwordVisible ? "icon-eye" : "icon-eye-off"
+                    }`}
+                  ></use>
+                </svg>
+              </span>
+            </div>
+            {errors.password && (
+              <div className={s.error}>{errors.password.message}</div>
+            )}
+          </div>
 
         <div className={s.box}>
           <button type="submit" className={s.button} disabled={loading}>
@@ -150,16 +154,16 @@ const SignInForm = () => {
         </div>
       </form>
       {notification && (
-        <div
-          className={`${s.notification} ${
-            notification.type === "error"
-              ? s.notificationError
-              : s.notificationSuccess
-          }`}
-        >
-          {/* {notification.text} */}
-        </div>
-      )}
+  <div
+    className={`${s.notification} ${
+      notification.type === "error"
+        ? s.notificationError
+        : s.notificationSuccess
+    }`}
+  >
+    {notification.text || notification}
+  </div>
+)}
     </div>
   );
 };

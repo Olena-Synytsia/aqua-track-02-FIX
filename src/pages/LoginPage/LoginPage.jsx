@@ -5,7 +5,7 @@ import s from "../LoginPage/LoginPage.module.css";
 const LoginPage = () => {
   return (
     <div className="container">
-      <div className={s.container}>
+      <div className={s.loginPage}>
         <div className={s.singInContainer}>
           <SignInPage />
         </div>
