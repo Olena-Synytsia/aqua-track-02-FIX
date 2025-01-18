@@ -4,6 +4,8 @@ export const selectMonth = (state) => state.water.selectMonth;
 export const selectMonthError = (state) => state.water.selectMonthError;
 export const selectToggleInfo = (state) => state.water.selectToggleInfo;
 export const selectDate = (state) => state.water.selectDate;
+export const selectSelectedDate = (state) => state.water.selectedDate;
+
 
 // logic for DailyInfo
 export const selectWaterDay = (state) => state.water.selectWaterDay;

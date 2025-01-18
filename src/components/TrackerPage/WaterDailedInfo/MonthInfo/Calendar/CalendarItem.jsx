@@ -38,22 +38,30 @@ const CalendarItem = ({ day, selectedDate, onDateSelect }) => {
     const date = new Date(selectedDate);
     date.setDate(day);
     const formattedDate = dayjs(date).format("YYYY-MM-DD");
-    onDateSelect(formattedDate);
+    onDateSelect(formattedDate); 
   };
+
+  const isSelected = dayjs(selectedDate).date() === day; 
 
   return (
     <div className={s.calendaritem}>
       <button
-        className={clsx({
+        className={clsx(s.btnstyle, {
+          [s.selected]: isSelected, 
           [s.calendaritemfull]: percentage >= 100,
           [s.calendaritemhalf]: percentage < 100,
-          [s.btnstyle]: true,
         })}
         onClick={handleClick}
       >
-        <div className={s.day}>{day}</div>
+        <div
+          className={clsx(s.day, {
+            [s.selectedDay]: isSelected, 
+          })}
+        >
+          {day}
+        </div>
         <div className={s.percentage}>
-          <div className={s["percentage-value"]}>{percentage.toFixed(1)}%</div>
+          <div className={s["percentage-value"]}>{percentage.toFixed(0)}%</div>
         </div>
       </button>
     </div>
@@ -61,3 +69,4 @@ const CalendarItem = ({ day, selectedDate, onDateSelect }) => {
 };
 
 export default CalendarItem;
+
