@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   selectOperationType,
   selectWaterItem,
-  updateItem,
 } from "../../../redux/dailyInfo/dailyInfoSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -72,7 +71,7 @@ const WaterForm = ({ onClose }) => {
     if (operationType === "edit") {
       preparedData = {
         ...preparedData,
-        id: initialData.id,
+        id: initialData._id,
       };
     }
 
