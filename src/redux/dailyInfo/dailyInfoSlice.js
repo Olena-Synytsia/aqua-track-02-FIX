@@ -27,7 +27,6 @@ const slice = createSlice({
       })
       .addCase(addWaterItem.fulfilled, (state, action) => {
         state.items.push(action.payload);
-        console.log(action.payload);
       })
       .addCase(updateWaterItem.fulfilled, (state, action) => {
         const index = state.items.findIndex(
