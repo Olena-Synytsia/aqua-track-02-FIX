@@ -7,11 +7,10 @@ import s from "./CalendarItem.module.css";
 import clsx from "clsx";
 import dayjs from "dayjs";
 
-
 const CalendarItem = ({ day, selectedDate, onDateSelect }) => {
   const dispatch = useDispatch();
-  const waterDataFromRedux = useSelector(selectWaterItem); 
-  const waterDay = useSelector(selectWaterDay); 
+  const waterDataFromRedux = useSelector(selectWaterItem);
+  const waterDay = useSelector(selectWaterDay);
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
@@ -19,27 +18,28 @@ const CalendarItem = ({ day, selectedDate, onDateSelect }) => {
     date.setDate(day);
     const formattedDate = dayjs(date).format("YYYY-MM-DD");
 
-   
     dispatch(fetchWaterItem(formattedDate));
   }, [day, selectedDate, dispatch]);
 
   useEffect(() => {
     if (waterDataFromRedux && waterDay) {
-      
-      const waterConsumed = waterDataFromRedux.reduce((acc, item) => acc + item.amount, 0);
-      const calculatedPercentage = waterDay ? (waterConsumed / waterDay) * 100 : 0;
+      const waterConsumed = waterDataFromRedux.reduce(
+        (acc, item) => acc + item.amount,
+        0
+      );
+      const calculatedPercentage = waterDay
+        ? (waterConsumed / waterDay) * 100
+        : 0;
       setPercentage(calculatedPercentage);
     }
   }, [waterDataFromRedux, waterDay]);
 
   const handleClick = () => {
-    
     const date = new Date(selectedDate);
     date.setDate(day);
     const formattedDate = dayjs(date).format("YYYY-MM-DD");
-    onDateSelect(formattedDate); 
+    onDateSelect(formattedDate);
   };
-
 
   return (
     <div className={s.calendaritem}>
@@ -53,9 +53,7 @@ const CalendarItem = ({ day, selectedDate, onDateSelect }) => {
       >
         <div className={s.day}>{day}</div>
         <div className={s.percentage}>
-          <div className={s["percentage-value"]}>
-            {percentage.toFixed(1)}%
-          </div>
+          <div className={s["percentage-value"]}>{percentage.toFixed(1)}%</div>
         </div>
       </button>
     </div>
