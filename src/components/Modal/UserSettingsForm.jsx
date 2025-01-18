@@ -6,7 +6,7 @@ import style from "./UserSettingsForm.module.css";
 import { AiOutlineUpload } from "react-icons/ai";
 import { setImage } from "../../redux/avatar/slice";
 import { useDispatch } from "react-redux";
-import { setName } from "../../redux/name/slice";
+import { setName } from "../../redux/auth/slice";
 
 const DEFAULT_AVATAR_URL =
   "https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg";
@@ -106,6 +106,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       avatarPreview: preview,
     };
     localStorage.setItem("userSettings", JSON.stringify(dataToSave));
+
     dispatch(setImage(preview));
     dispatch(setName(data.name));
     onSubmit(dataToSave);

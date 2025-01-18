@@ -10,8 +10,8 @@ import {
 
 const initialState = {
   userInfo: "",
-  accessToken: localStorage.getItem("accessToken") || "",
-  isLoggedIn: !!localStorage.getItem("accessToken"), // Логин считается успешным, если токен есть
+  accessToken: "",
+  isLoggedIn: false, // !!localStorage.getItem("accessToken"), // Логин считается успешным, если токен есть
   isRegistered: false,
   loading: false,
   error: null,
@@ -38,9 +38,16 @@ const userSlice = createSlice({
     },
     setEmail(state, action) {
       if (state.userInfo) {
-        state.userInfo.email = action.payload; // Оновлюємо email у userInfo
+        state.userInfo = { ...state.userInfo, name: action.payload };
       } else {
         state.userInfo = { email: action.payload };
+      }
+    },
+    setName(state, action) {
+      if (state.userInfo) {
+        state.userInfo.name = action.payload; // Оновлюємо ім'я
+      } else {
+        state.userInfo = { name: action.payload };
       }
     },
   },
@@ -99,5 +106,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearError, clearUser, setEmail, setToken } = userSlice.actions;
+export const { clearError, clearUser, setEmail, setToken, setName } =
+  userSlice.actions;
 export const authReducer = userSlice.reducer;
