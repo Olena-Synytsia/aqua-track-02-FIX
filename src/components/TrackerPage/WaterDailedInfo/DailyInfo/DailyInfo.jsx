@@ -10,7 +10,7 @@ import { fetchWaterItem } from "../../../../redux/dailyInfo/dailyInfoOps.js";
 
 const DailyInfo = () => {
   // const day = useSelect(selectDate);
-  const date = "2025-01-17";
+  const date = "2025-01-18";
   const dispatch = useDispatch();
 
   useEffect(() => {
