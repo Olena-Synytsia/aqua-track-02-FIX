@@ -6,7 +6,7 @@ export const fetchWaterItem = createAsyncThunk(
   async (date, thunkApi) => {
     try {
       const { data } = await authApi.get(`/water/day/${date}`);
-      return data;
+      return data.data.waterDayByHour;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

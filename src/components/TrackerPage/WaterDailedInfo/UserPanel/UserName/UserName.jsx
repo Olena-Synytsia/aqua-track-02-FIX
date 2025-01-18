@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import s from "./UserName.module.css";
 import { useEffect, useState } from "react";
-import { selectUserName } from "../../../../../redux/name/slice";
+// import { selectUserName } from "../../../../../redux/auth/selectors";
 
 const UserName = () => {
   const userEmailFromRedux = useSelector((state) => state.user.userInfo?.email);
-  const userNameFromRedux = useSelector(selectUserName);
+  const userNameFromRedux = useSelector((state) => state.user.userInfo?.name);
+  console.log("userEmailFromRedux: ", userEmailFromRedux);
+  console.log("userNameFromRedux: ", userNameFromRedux);
 
   const [userName, setUserName] = useState(() => {
     // Ініціалізація з localStorage

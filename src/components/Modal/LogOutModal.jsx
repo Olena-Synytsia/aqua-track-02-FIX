@@ -4,22 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./LogOutModal.module.css";
 import { clearUser } from "../../redux/auth/slice"; // Обновленный импорт
 import { logout } from "../../redux/auth/operations"; // Импорт logout
+import { selectTokens } from "../../redux/auth/selectors";
 
 const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.user.accessToken); // Получаем токен из Redux
+
+  // Безпечне отримання токена з Redux
+  const accessToken = useSelector(selectTokens);
 
   const handleLogOutClick = async () => {
     if (!accessToken) {
-      console.warn("No access token found. Proceeding with client logout.");
+      console.warn(
+        "No access token found. Proceeding with client-side logout."
+      );
       finalizeLogout();
       return;
     }
 
     try {
-      // Отправляем запрос logout
+      // Відправка запиту logout
       await dispatch(logout()).unwrap();
+      console.log("Successfully logged out on server.");
     } catch (error) {
       console.error("Error during logout request:", error);
     } finally {
@@ -28,11 +34,11 @@ const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
   };
 
   const finalizeLogout = () => {
-    // Очищаем состояние Redux и localStorage
+    // Очищення стану Redux і localStorage
     dispatch(clearUser());
-    // localStorage.clear();
-    navigate("/", { replace: true }); // Перенаправляем на главную страницу
-    onLogOut(); // Дополнительная логика при logout
+    localStorage.removeItem("accessToken"); // Видалення токена з localStorage
+    navigate("/", { replace: true }); // Перенаправлення на головну сторінку
+    onLogOut(); // Виконання додаткової логіки, якщо передано через props
   };
 
   return ReactDOM.createPortal(

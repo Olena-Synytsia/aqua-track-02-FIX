@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setToken } from "./slice";
 // import { setToken } from "./slice";
 
 export const authApi = axios.create({
@@ -11,7 +12,7 @@ export const setAuthHeader = (accessToken) => {
 };
 
 export const register = createAsyncThunk(
-  "register",
+  "/auth/signup",
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signup", credentials);
@@ -28,29 +29,35 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  "login",
+  "/auth/signin",
   async (credentials, thunkApi) => {
     try {
+      // Надсилання запиту на логін
       const { data } = await authApi.post("/auth/signin", credentials);
 
-      // Проконсолити структуру даних з відповіді
-      console.log("Login response:", { data });
+      // Перевірка структури даних
+      const accessToken = data?.data?.accessToken;
+      if (!accessToken) {
+        throw new Error("Access token not found in the response.");
+      }
 
-      // Перевірте, де знаходиться `accessToken`
-      const { accessToken } = data.data;
+      // // Збереження токена в localStorage
+      // localStorage.setItem("accessToken", accessToken);
 
-      localStorage.setItem("accessToken", accessToken);
-      console.log(
-        "Access token after login:",
-        localStorage.getItem("accessToken")
-      );
+      // console.log(
+      //   "Access token after login (localStorage):",
+      //   localStorage.getItem("accessToken")
+      // );
 
-      // const accessToken = data.accessToken;
-      // thunkApi.dispatch(setToken({ accessToken }));
-      setAuthHeader(data.accessToken);
+      // Збереження токена в Redux
+      thunkApi.dispatch(setToken({ accessToken }));
 
-      return data;
+      // Встановлення заголовку авторизації
+      setAuthHeader(accessToken);
+
+      return data.data; // Повернення даних
     } catch (error) {
+      console.error("Login error:", error.message);
       return thunkApi.rejectWithValue(error.message || "Login failed");
     }
   }
