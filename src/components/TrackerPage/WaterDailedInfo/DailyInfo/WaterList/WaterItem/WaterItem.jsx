@@ -17,6 +17,14 @@ const WaterItem = ({ date, volume }) => {
     }
   };
 
+  const extractTime = (date) => {
+    const parsedDate = new Date(date);
+    return parsedDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleEdit = () => {
@@ -31,7 +39,7 @@ const WaterItem = ({ date, volume }) => {
         </svg>
         <div className={s.indicators}>
           <p className={s.value}>{formateVolume(volume)}</p>
-          <p className={s.time}>{date}</p>
+          <p className={s.time}>{extractTime(date)}</p>
         </div>
         <div className={s.buttons}>
           <button className={s.btn} onClick={handleEdit}>
