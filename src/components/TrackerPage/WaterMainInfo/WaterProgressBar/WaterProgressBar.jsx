@@ -7,7 +7,10 @@ import {
   selectPercentDay,
   selectWaterDay,
 } from "../../../../redux/water/selectors.js";
-import { apiGetWaterDay } from "../../../../redux/water/operations.js";
+import {
+  apiGetWaterDay,
+  updateWaterDay,
+} from "../../../../redux/water/operations.js";
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
@@ -17,7 +20,7 @@ const WaterProgressBar = () => {
   const percentDay = useSelector(selectPercentDay);
   const consumedWater = useSelector(selectWaterDay);
 
-  const [percent, setPercent] = useState(0);
+  const [localPercent, setLocalPercent] = useState(0);
 
   useEffect(() => {
     if (selectedDate) {
@@ -27,25 +30,32 @@ const WaterProgressBar = () => {
 
   useEffect(() => {
     if (percentDay !== undefined) {
-      setPercent(percentDay);
+      setLocalPercent(percentDay);
     }
   }, [percentDay]);
+
+  const handleSliderChange = (newPercent) => {
+    setLocalPercent(newPercent);
+    if (selectedDate) {
+      dispatch(updateWaterDay({ date: selectedDate, amount: newPercent }));
+    }
+  };
 
   return (
     <div className={css.container}>
       <div className={css.containerBar}>
         <div className={css.title}>
-          Спожито: {consumedWater || 0} мл / {percent}% норми
+          Спожито: {consumedWater || 0} мл / {localPercent}% від добової норми
         </div>
 
         <div className={css.sliderWrapper}>
           <ReactSlider
-            value={percent}
-            onChange={setPercent}
+            value={localPercent}
+            onChange={handleSliderChange}
             min={0}
             max={100}
             step={1}
-            className={css.sliderWrapper}
+            className={css.slider}
             thumbClassName={css.thumb}
             trackClassName={css.track}
             renderThumb={(props) => (
@@ -53,7 +63,9 @@ const WaterProgressBar = () => {
                 {...props}
                 className={css.thumb}
                 data-tooltip-id="progress-tooltip"
-                data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
+                data-tooltip-content={`${Math.min(localPercent, 100).toFixed(
+                  0
+                )}%`}
               />
             )}
           />
