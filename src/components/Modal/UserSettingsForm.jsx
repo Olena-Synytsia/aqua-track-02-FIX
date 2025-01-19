@@ -11,8 +11,8 @@ const DEFAULT_AVATAR_URL =
 const schema = yup.object().shape({
   avatar: yup.mixed(),
   gender: yup.string().required("Please select a gender"),
-  name: yup.string().required("Name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  name: yup.string(),
+  email: yup.string().email("Invalid email"),
   weight: yup
     .number()
     .positive("Weight must be positive")
@@ -91,7 +91,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     };
     localStorage.setItem("userSettings", JSON.stringify(dataToSave));
     onSubmit(dataToSave);
-    onClose(); 
+    onClose();
   };
 
   return (
