@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import style from "./DeleteWaterModal.module.css";
 import { apiGetWaterDay } from "../../redux/water/operations";
-import { addItems, closeModal } from "../../redux/dailyInfo/dailyInfoSlice";
+import { addItems } from "../../redux/dailyInfo/dailyInfoSlice";
 
 const DeleteWaterModal = ({ onClose = () => {}, waterId, day }) => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const DeleteWaterModal = ({ onClose = () => {}, waterId, day }) => {
 
       await dispatch(apiGetWaterDay(day)).unwrap();
 
-      dispatch(closeModal());
+      // dispatch(closeModal());
       onClose();
     } catch (error) {
       setErrorMessage(error.message || "An error occurred while deleting.");
