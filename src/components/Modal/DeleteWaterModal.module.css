@@ -12,13 +12,12 @@
 }
 
 .modalContainer {
-  position: relative;
-  background-color: #fff;
-  border-radius: 8px;
-  width: 400px;
-  padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 40px 20px;
+  border-radius: 15px;
+  width: 344px;
   text-align: center;
+  position: relative;
 }
 
 .closeButton {
@@ -45,7 +44,7 @@
 }
 
 .message {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
   margin-bottom: 20px;
 }
@@ -58,19 +57,19 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .deleteButton {
-  background-color: #28a745;
-  color: #fff;
+  background-color: #9BE1A0;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
+  border-radius: 30px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  transition: background-color 0.3s;
+  font-size: 14px;
+  font-weight: bold;
+  color: #323F47;
 }
 
 .deleteButton:hover {
@@ -78,17 +77,68 @@
 }
 
 .cancelButton {
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: #F0EFF4;
+  color: #323F47;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  transition: background-color 0.3s;
 }
 
 .cancelButton:hover {
   background-color: #e2e6ea;
 }
+
+@media screen and (min-width: 768px) {
+
+  .modalContainer {
+ 
+    padding: 40px 20px;
+    border-radius: 15px;
+    width: 516px;
+    height: 244px;
+
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 32px;
+ 
+    margin-bottom: 24px;
+  }
+  .message {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+.deleteButton {
+  
+  width: 173px;
+  height: 60px;
+
+  font-size: 16px;
+
+}
+.cancelButton {
+
+  width: 173px;
+  height: 60px;
+
+  font-size: 16px;
+
+  
+}
+
+}
+
+
+

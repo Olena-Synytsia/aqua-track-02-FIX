@@ -13,21 +13,34 @@
 
 .modalContainer {
   background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 400px;
+  padding: 40px 20px;
+  border-radius: 15px;
+  width: 344px;
   text-align: center;
   position: relative;
 }
 
-.closeButton {
+.closeBtn{
+
+  width: 24px;
+  height: 24px;
+}
+
+.modalCloseBtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 26px;
+  right: 42px;
   background: none;
   border: none;
-  font-size: 20px;
+  width: 12px;
+  height: 12px;
+  color: #2F2F2F;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modalCloseBtn:hover {
+  color: #ff0000;
 }
 
 .title {
@@ -43,18 +56,19 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   gap: 10px;
 }
 
 .logOutButton {
-  background-color: #28a745;
-  color: white;
+  background-color: #9BE1A0;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 30px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #323F47;
 }
 
 .logOutButton:hover {
@@ -62,15 +76,71 @@
 }
 
 .cancelButton {
-  background-color: #f8f9fa;
-  color: #6c757d;
+  background-color: #F0EFF4;
+  color: #323F47;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 16px;
 }
 
 .cancelButton:hover {
   background-color: #e2e6ea;
 }
+
+
+@media screen and (min-width: 768px) {
+
+  .modalContainer {
+ 
+    padding: 40px 20px;
+    border-radius: 15px;
+    width: 516px;
+    height: 244px;
+
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 32px;
+ 
+    margin-bottom: 24px;
+  }
+  .message {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+.logOutButton {
+  
+  width: 173px;
+  height: 60px;
+
+  font-size: 16px;
+
+}
+.cancelButton {
+
+  width: 173px;
+  height: 60px;
+
+  font-size: 16px;
+
+  
+}
+
+}
+
+@media screen and (min-width: 1440px) {
+
+  }
+

@@ -92,30 +92,26 @@ display: flex;
 .formWrap {
 	padding-bottom: 14px;
 }
+.formInput{
 
-input[type="text"],
-input[type="email"],
-input[type="number"] {
-	color: black;
-	background-color: #ffffff;
-	border: 1px solid #cccccc;
-	border-radius: 15px;
-	font-size: 14px;
-	padding: 14px 16px;
-	width: 303px;
-	height: 46px;
-	box-sizing: border-box;
-	margin-top: 8px;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus {
-  outline: none;
+  width: 100%;
+  height: 46px;
+  border-radius: 15px;
   border: 1px solid #cccccc;
-  
+  padding: 14px 16px;
+  margin-top: 8px;
+  font-size: 14px;
+  background-color: white;
+  color: #2f2f2f;
 
 }
+
+.formInput:focus{
+  outline: none;
+  background-color: white;
+  border: 1px solid #cccccc;
+}
+
 .radioGroup {
   font-size: 14px;
 	display: flex;
@@ -135,6 +131,7 @@ input[type="radio"] {
 }
 
 .radioCustom {
+
 	width: 20px;
 	height: 20px;
 	border: 2px solid #9be1a0;
@@ -152,12 +149,12 @@ input[type="radio"]:checked + .radioCustom {
 }
 
 .radioCustom::after {
-	content: "";
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background-color: #ffffff;
-	display: none;
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: none;
 }
 
 input[type="radio"]:checked + .radioCustom::after {
@@ -177,7 +174,7 @@ input[type="radio"]:checked + .radioCustom::after {
 	font-size: 14px;
 	color: #333;
 	gap: 4px;
-  
+  margin-bottom: 24px;
 }
 
 .saveBtn {
@@ -209,4 +206,107 @@ input[type="radio"]:checked + .radioCustom::after {
 .descForm{
 
   font-size: 14px;
+}
+
+@media screen and (min-width: 768px) {
+ 
+
+  .formContainer {
+    font-size: 18px;
+
+  }
+
+
+
+  .dailyNormSection{
+    display: flex;
+    gap: 24px;
+    font-size: 16px;
+
+  
+  }
+
+  .dailyNormInfo {
+
+    max-width: 568px;
+    max-height: 128px;
+
+    font-size: 16px;
+
+  }
+
+  .dailyNormWrap {
+    font-size: 16px;
+  }
+
+  .infoMessage{
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .radioGroup{
+    font-size: 16px;
+  }
+.descForm {
+  font-size: 16px;
+  margin-bottom: 14px;
+  
+}
+.descWrap{
+
+  display: flex;
+  gap: 5px;
+}
+.waterNorma {
+  font-size: 18px;
+}
+
+.waterIntake {
+	/* font-size: 16px; */
+	font-weight: bold;
+	color: #6fcf97;
+	margin-bottom: 0px;
+	
+}
+
+.saveBtn{
+  width: 141px;
+  height: 56px;
+  font-size: 16px;
+
+}
+
+}
+
+@media screen and (min-width: 1440px) {
+
+  .dailyNormInfo{
+    width: 400px;
+    height: 152px;
+    }
+  
+    .setWrap{
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 40px;
+    }
+
+    .setWrapInfoMod{
+      margin-bottom:158px ;
+    }
+
+   .descWrap{
+    /* display: block; */
+    flex-direction: column;
+
+}
+    .waterIntake{
+      font-size: 15px;
+      margin-bottom: 0px;
+  }
+  .infoMessage{
+    
+    margin-bottom: 0px;
+}
 }
