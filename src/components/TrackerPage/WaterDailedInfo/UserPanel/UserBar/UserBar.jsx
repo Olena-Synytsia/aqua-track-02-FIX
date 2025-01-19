@@ -32,7 +32,7 @@ const UserBar = () => {
     <div>
       <UserBarBtn
         userName={userName}
-        avatarUrl="https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg"
+        avatarUrl="https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png"
       />
     </div>
   );

@@ -4,17 +4,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import style from "./UserSettingsForm.module.css";
 import { AiOutlineUpload } from "react-icons/ai";
-import { BsExclamationLg } from "react-icons/bs";
+// import { BsExclamationLg } from "react-icons/bs";
 
-import { setImage } from "../../redux/avatar/slice";
-import { useDispatch } from "react-redux";
-import { setName } from "../../redux/auth/slice";
+// import { setImage } from "../../redux/avatar/slice";
+// import { useDispatch } from "react-redux";
+// import { setName } from "../../redux/auth/slice";
 
 const DEFAULT_AVATAR_URL =
-	"https://static.ukrinform.com/photos/2022_12/thumb_files/630_360_1672356307-406.jpeg";
+  "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
 
 const schema = yup.object().shape({
-
   avatar: yup.mixed(),
   gender: yup.string().required("Please select a gender"),
   name: yup.string(),
@@ -231,7 +230,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       </button>
     </form>
   );
-
 };
 
 export default UserSettingsForm;

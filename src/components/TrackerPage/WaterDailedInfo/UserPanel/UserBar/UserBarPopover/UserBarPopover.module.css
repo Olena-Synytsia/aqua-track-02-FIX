@@ -27,8 +27,9 @@
   height: 36px;
   background-color: #ffffff;
 }
-.btnset {
+.btnssettlog .btnset {
   padding-left: 18px;
+  color: #323f47;
 }
 .btnout {
   color: #323f4766;
