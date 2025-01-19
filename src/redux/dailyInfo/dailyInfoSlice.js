@@ -24,13 +24,16 @@ const slice = createSlice({
     builder
       .addCase(fetchWaterItem.fulfilled, (state, action) => {
         state.items = action.payload;
+        console.log(action.payload);
       })
       .addCase(addWaterItem.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
       .addCase(updateWaterItem.fulfilled, (state, action) => {
+        console.log(action.payload._id);
+
         const index = state.items.findIndex(
-          (item) => item.id === action.payload.id
+          (item) => item._id === action.payload._id
         );
         if (index !== -1) {
           state.items[index] = action.payload;
