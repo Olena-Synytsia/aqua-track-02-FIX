@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "./auth/slice.js";
-import { waterDeleteModal } from "./water-delete/slice.js";
-import { waterItemReducer } from "./dailyInfo/dailyInfoSlice.js";
-import { avatarReducer } from "./avatar/slice.js";
+  import { configureStore } from "@reduxjs/toolkit";
+  import { authReducer } from "./auth/slice.js";
+  import { waterDeleteModal } from "./water-delete/slice.js";
+  import { waterItemReducer } from "./dailyInfo/dailyInfoSlice.js";
+  import { avatarReducer } from "./avatar/slice.js";
 
 import storage from "redux-persist/lib/storage";
 
@@ -45,3 +45,4 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
