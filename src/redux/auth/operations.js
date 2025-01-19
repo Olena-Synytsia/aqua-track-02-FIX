@@ -77,62 +77,36 @@ export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
   }
 });
 
-// Отримання інформаіі про поточного окристувача //
-export const fetchCurrentUser = createAsyncThunk(
-  "fetchCurrent",
-  async (_, thunkApi) => {
-    const accessToken = thunkApi.getState().auth.accessToken;
+export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
+  const accessToken = thunkApi.getState().auth.accessToken;
 
-    if (!accessToken) {
-      return thunkApi.rejectWithValue("No token found");
-    }
-    setAuthHeader(accessToken);
-    try {
-      //   setAuthHeader(token);
-      const { data } = await authApi.get("/users");
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(
-        error.message || "Failed to fetch user info"
-      );
-    }
+  if (!accessToken) {
+    return thunkApi.rejectWithValue("Unable to fetch user");
   }
-);
-
-// Оновлення даних користувача //
-export const updateUser = createAsyncThunk(
-  "users/update",
-  async (userData, thunkApi) => {
-    const accessToken = thunkApi.getState().auth.accessToken;
-
-    if (!accessToken) {
-      return thunkApi.rejectWithValue("No token found");
-    }
-    setAuthHeader(accessToken);
-    try {
-      const { data } = await authApi.put("/users/update", userData);
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message || "Update failed");
-    }
+  setAuthHeader(accessToken);
+  try {
+    const { data } = await authApi.post("/auth/refresh");
+    return data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
   }
-);
+});
 
-// Нові токени //
-export const refreshToken = createAsyncThunk(
-  "/auth/refresh",
-  async (_, thunkApi) => {
-    const refresh = thunkApi.getState().auth.accessToken;
+// // Нові токени //
+// export const refreshToken = createAsyncThunk(
+//   "/auth/refresh",
+//   async (_, thunkApi) => {
+//     const refresh = thunkApi.getState().auth.accessToken;
 
-    if (!refresh) return thunkApi.rejectWithValue("No refresh token provided");
+//     if (!refresh) return thunkApi.rejectWithValue("No refresh token provided");
 
-    try {
-      const { data } = await authApi.post("/auth/refresh", { refresh });
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(
-        error.message || "Failed to refresh token"
-      );
-    }
-  }
-);
+//     try {
+//       const { data } = await authApi.post("/auth/refresh", { refresh });
+//       return data;
+//     } catch (error) {
+//       return thunkApi.rejectWithValue(
+//         error.message || "Failed to refresh token"
+//       );
+//     }
+//   }
+// );
