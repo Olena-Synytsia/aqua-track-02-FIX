@@ -11,7 +11,7 @@ import TrackerPage from "./pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
-import { selectTokens } from "./redux/auth/selectors";
+import { selectIsRefreshing, selectTokens } from "./redux/auth/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCurrentUser } from "./redux/auth/operations";
@@ -35,7 +35,9 @@ function App() {
     }
   }, [dispatch, token]);
 
-  return (
+  return selectIsRefreshing ? (
+    <h2>Loading...</h2>
+  ) : (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<WelcomePage />} />

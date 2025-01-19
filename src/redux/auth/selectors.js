@@ -6,4 +6,5 @@ export const selectError = (state) => state.user.error;
 // export const selectEmail = (state) => state.user.email;
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
 export const selectIsRegistered = (state) => state.user.isRegistered;
+export const selectIsRefreshing = (state) => state.user.isRefreshing;
 // export const selectUserName = (state) => state.user.userInfo?.name; // Селектор для отримання імені
