@@ -8,6 +8,7 @@ import { getCurrentUser, updateUser } from "../../redux/users/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { setImage } from "../../redux/avatar/slice";
 import { setName } from "../../redux/users/slice";
+import { selectTokens } from "../../redux/auth/selectors";
 // import { BsExclamationLg } from "react-icons/bs";
 
 // import { setImage } from "../../redux/avatar/slice";
@@ -19,6 +20,7 @@ const DEFAULT_AVATAR_URL =
 
 const schema = yup.object().shape({
   // photo: yup.mixed(),
+
   gender: yup.string().required("Please select a gender"),
   name: yup.string(),
   email: yup.string().email("Invalid email"),
@@ -34,15 +36,17 @@ const schema = yup.object().shape({
     .number()
     .min(0, "Water must be at least 0")
     .required("This field is required"),
-  // waterToDrink: yup
-  //   .number()
-  //   .min(0, "Water to drink must be at least 0")
-  //   .required("This field is required"),
+  waterToDrink: yup.number().min(0, "Water to drink must be at least 0"),
+  // .required("This field is required"),
 });
 
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  // const userId = useSelector((state) => state.user.userId);
+  // console.log("User ID from Redux:", userId);
+  const accessToken = useSelector(selectTokens);
+  console.log("Access Token from Redux:", accessToken);
   const [preview, setPreview] = useState(user?.photo || DEFAULT_AVATAR_URL);
 
   const {
@@ -121,9 +125,15 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const waterNorma = calculateWaterNorma(weight, activeTime, gender);
 
   const handleFormSubmit = async (data) => {
+    console.log("Form is submitted, data:", data); // тут ок
     let photoURL = user?.photo || DEFAULT_AVATAR_URL;
-    if (data.photo instanceof File) {
-      photoURL = await uploadImage(data.photo);
+    if (data.photo && data.photo instanceof File) {
+      try {
+        photoURL = await uploadImage(data.photo);
+      } catch {
+        alert("Failed to upload image");
+        return;
+      }
     }
 
     const waterNorma = calculateWaterNorma(
@@ -133,17 +143,24 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     );
 
     const dataToSave = {
+      // userId: userId,
       ...data,
-      waterNorma, // Включаємо waterNorma
-      photo: photoURL, // Використовуємо URL для фото
+      waterNorma,
+      photo: photoURL,
     };
     const formData = new FormData();
     Object.keys(dataToSave).forEach((key) => {
       formData.append(key, dataToSave[key]);
     });
 
+    console.log("Token:", accessToken);
+
     try {
-      const response = await dispatch(updateUser(dataToSave));
+      console.log("Preparing to dispatch updateUser with data:", dataToSave);
+      const response = await dispatch(
+        updateUser({ data: dataToSave, accessToken })
+      );
+      console.log("Response from dispatch:", response); // тут помилка!!!
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -197,12 +214,12 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
         <label className={style.userDetails}>Your gender identity</label>
         <div className={style.radioGroup}>
           <label className={style.radioLabel}>
-            <input type="radio" value="Woman" {...register("gender")} />
+            <input type="radio" value="woman" {...register("gender")} />
             <span className={style.radioCustom}></span>
             Woman
           </label>
           <label className={style.radioLabel}>
-            <input type="radio" value="Man" {...register("gender")} />
+            <input type="radio" value="man" {...register("gender")} />
             <span className={style.radioCustom}></span>
             Man
           </label>

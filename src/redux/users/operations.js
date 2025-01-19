@@ -20,20 +20,23 @@ export const getCurrentUser = createAsyncThunk(
 // Оновлення даних користувача //
 export const updateUser = createAsyncThunk(
   "/users/current",
-  async (credentials, thunkApi) => {
-    try {
-      const token = localStorage.getItem("authToken");
-      if (token) {
-        setAuthHeader(token);
-      } else {
-        return thunkApi.rejectWithValue("Missing authentication token");
-      }
+  async ({ data, accessToken }, thunkApi) => {
+    console.log("Received token:", accessToken);
+    console.log("Data to update:", data);
+    // const accessToken = thunkApi.getState().auth.accessToken;
 
-      const { data } = await authApi.patch("/users/current", credentials, {
+    console.log(thunkApi.getState());
+    try {
+      if (!accessToken) {
+        return thunkApi.rejectWithValue("No token found");
+      }
+      setAuthHeader(accessToken);
+
+      const response = await authApi.patch("/users/current", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      return data.data;
+      return response.data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Error updating user");
     }
