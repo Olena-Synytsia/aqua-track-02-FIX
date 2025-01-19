@@ -150,7 +150,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
             type="file"
             id="photo"
             accept="image/*"
-            {...register("avatar")}
+            // {...register("photo")}
             onChange={handleAvatarChange}
             className={style.avatarInput}
           />

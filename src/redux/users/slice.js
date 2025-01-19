@@ -7,7 +7,7 @@ const initialState = {
     email: null,
     gender: null,
     weight: null,
-    timeActive: null,
+    activeTime: null,
     dailyNorma: null,
     photo: null,
   },
