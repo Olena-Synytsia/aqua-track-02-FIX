@@ -28,6 +28,9 @@ const slice = createSlice({
     builder
       .addCase(fetchWaterItem.fulfilled, (state, action) => {
         state.items = action.payload;
+
+        // console.log(action.payload);
+
       })
       .addCase(addWaterItem.fulfilled, (state, action) => {
         state.items.push(action.payload);
