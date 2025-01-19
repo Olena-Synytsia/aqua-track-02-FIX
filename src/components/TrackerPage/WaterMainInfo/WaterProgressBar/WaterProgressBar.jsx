@@ -12,6 +12,7 @@ import {
   updateWaterDay,
 } from "../../../../redux/water/operations.js";
 import css from "./WaterProgressBar.module.css";
+import dayjs from "dayjs";
 
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
@@ -41,12 +42,18 @@ const WaterProgressBar = () => {
     }
   };
 
+  const currentDate = dayjs().format("YYYY-MM-DD");
+  const selectedDateFormatted = dayjs(selectedDate).format("YYYY-MM-DD");
+
+  const formattedDate =
+    selectedDateFormatted === currentDate
+      ? "Today"
+      : dayjs(selectedDate).format("DD, MMMM");
+
   return (
     <div className={css.container}>
       <div className={css.containerBar}>
-        <div className={css.title}>
-          Спожито: {consumedWater || 0} мл / {localPercent}% від добової норми
-        </div>
+        <div className={css.title}>{formattedDate}</div>
 
         <div className={css.sliderWrapper}>
           <ReactSlider
