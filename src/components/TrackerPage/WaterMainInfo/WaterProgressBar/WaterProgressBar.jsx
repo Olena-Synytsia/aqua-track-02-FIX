@@ -41,12 +41,16 @@ const WaterProgressBar = () => {
     }
   };
 
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString("en-EN", {
+    day: "numeric",
+    month: "long",
+  });
+
   return (
     <div className={css.container}>
       <div className={css.containerBar}>
-        <div className={css.title}>
-          Спожито: {consumedWater || 0} мл / {localPercent}% від добової норми
-        </div>
+        <div className={css.title}>{formattedDate}</div>
 
         <div className={css.sliderWrapper}>
           <ReactSlider
