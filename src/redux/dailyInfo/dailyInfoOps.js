@@ -29,7 +29,8 @@ export const updateWaterItem = createAsyncThunk(
   "updateWaterItem",
   async (item, thunkApi) => {
     try {
-      const { data } = await authApi.patch(`water/${item.id}`, item);
+      const { _id, ...bodyWithoutId } = item;
+      const { data } = await authApi.patch(`water/${_id}`, bodyWithoutId);
       return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
