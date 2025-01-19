@@ -7,8 +7,7 @@ import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../../../redux/dailyInfo/dailyInfoSlice.js";
 import DeleteWaterModal from "../../../../../Modal/DeleteWaterModal";
 
-
-const WaterItem = ({ id, time, volume, day }) => {
+const WaterItem = ({ _id, date, volume, day }) => {
   const dispatch = useDispatch();
   const formateVolume = (volume) => {
     if (volume < 1000) {
@@ -63,7 +62,7 @@ const WaterItem = ({ id, time, volume, day }) => {
       {isDeleteModalOpen && (
         <DeleteWaterModal
           onClose={() => setIsDeleteModalOpen(false)}
-          waterId={id}
+          waterId={_id}
           day={day}
         />
       )}
