@@ -13,7 +13,7 @@ const initialState = {
 console.log("Initial state token:", initialState.accessToken);
 
 const userSlice = createSlice({
-  name: "user",
+  name: "auth",
   initialState,
   reducers: {
     setToken: (state, action) => {
@@ -98,8 +98,7 @@ const userSlice = createSlice({
         state.isRegistered = false;
       })
       .addCase(refresh.fulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        state.user.name = action.payload.name;
+        state.userInfo = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -112,5 +111,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearError, setToken } = userSlice.actions;
+export const { clearUser, clearError, setToken } = userSlice.actions;
 export const authReducer = userSlice.reducer;

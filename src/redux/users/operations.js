@@ -19,14 +19,20 @@ export const getCurrentUser = createAsyncThunk(
 // Оновлення даних користувача //
 export const updateUser = createAsyncThunk(
   "/users/current",
-  async (updateData, thunkApi) => {
+  async (credentials, thunkApi) => {
     try {
-      const formData = new FormData();
-      Object.keys(updateData).forEach((key) => {
-        formData.append(key, updateData[key]);
-      });
+      // const formData = new FormData();
+      // console.log("Оновлення користувача з даними:", updateData);
 
-      const { data } = await authApi.patch("/users/current", formData, {
+      // Object.keys(updateData).forEach((key) => {
+      //   if (updateData[key]) {
+      //     formData.append(key, updateData[key]);
+      //   } else {
+      //     console.warn(`Поле ${key} відсутнє в даних для оновлення.`);
+      //   }
+      // });
+
+      const { data } = await authApi.patch("/users/current", credentials, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

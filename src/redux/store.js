@@ -1,8 +1,8 @@
-  import { configureStore } from "@reduxjs/toolkit";
-  import { authReducer } from "./auth/slice.js";
-  import { waterDeleteModal } from "./water-delete/slice.js";
-  import { waterItemReducer } from "./dailyInfo/dailyInfoSlice.js";
-  import { avatarReducer } from "./avatar/slice.js";
+import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./auth/slice.js";
+import { waterDeleteModal } from "./water-delete/slice.js";
+import { waterItemReducer } from "./dailyInfo/dailyInfoSlice.js";
+import { avatarReducer } from "./avatar/slice.js";
 
 import storage from "redux-persist/lib/storage";
 
@@ -16,7 +16,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-
+import { userReducer } from "./users/slice.js";
 
 const persistConfig = {
   key: "auth-aqua",
@@ -30,10 +30,11 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistedReducer,
+    auth: persistedReducer,
     water: waterDeleteModal,
     waterItem: waterItemReducer,
     image: avatarReducer,
+    user: userReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -45,4 +46,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
