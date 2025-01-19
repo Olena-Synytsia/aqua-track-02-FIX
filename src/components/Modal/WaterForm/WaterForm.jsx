@@ -58,6 +58,7 @@ const WaterForm = ({ onClose }) => {
   const decrementWater = () => setValue("volume", Math.max(1, volume - 50));
 
   const onSubmit = (data) => {
+    console.log("initialData", initialData);
     const fullDate = combineDateTime(
       initialData.date ? new Date(initialData.date) : new Date(),
       data.date
@@ -79,9 +80,9 @@ const WaterForm = ({ onClose }) => {
       dispatch(addWaterItem(preparedData));
     } else {
       dispatch(updateWaterItem(preparedData));
+      console.log(preparedData);
     }
 
-    console.log(preparedData);
     onClose();
   };
 
