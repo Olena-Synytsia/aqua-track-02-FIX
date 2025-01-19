@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authApi } from "../auth/operations";
+import { setAuthHeader } from "../auth/operations";
 
 // Отримання інформаіі про поточного окристувача //
 export const getCurrentUser = createAsyncThunk(
@@ -21,16 +22,12 @@ export const updateUser = createAsyncThunk(
   "/users/current",
   async (credentials, thunkApi) => {
     try {
-      // const formData = new FormData();
-      // console.log("Оновлення користувача з даними:", updateData);
-
-      // Object.keys(updateData).forEach((key) => {
-      //   if (updateData[key]) {
-      //     formData.append(key, updateData[key]);
-      //   } else {
-      //     console.warn(`Поле ${key} відсутнє в даних для оновлення.`);
-      //   }
-      // });
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        setAuthHeader(token);
+      } else {
+        return thunkApi.rejectWithValue("Missing authentication token");
+      }
 
       const { data } = await authApi.patch("/users/current", credentials, {
         headers: { "Content-Type": "multipart/form-data" },

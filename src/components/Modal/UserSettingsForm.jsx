@@ -18,7 +18,7 @@ const DEFAULT_AVATAR_URL =
   "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
 
 const schema = yup.object().shape({
-  photo: yup.mixed(),
+  // photo: yup.mixed(),
   gender: yup.string().required("Please select a gender"),
   name: yup.string(),
   email: yup.string().email("Invalid email"),
@@ -34,10 +34,10 @@ const schema = yup.object().shape({
     .number()
     .min(0, "Water must be at least 0")
     .required("This field is required"),
-  waterToDrink: yup
-    .number()
-    .min(0, "Water to drink must be at least 0")
-    .required("This field is required"),
+  // waterToDrink: yup
+  //   .number()
+  //   .min(0, "Water to drink must be at least 0")
+  //   .required("This field is required"),
 });
 
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
@@ -80,18 +80,30 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   };
 
   const uploadImage = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "aqua-tracker-gr2");
-    const response = await fetch(
-      "https://api.cloudinary.com/v1_1/dwshxlkre/image/upload",
-      {
-        method: "POST",
-        body: formData,
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "aqua-tracker-gr2");
+
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dwshxlkre/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error.message || "Upload failed");
       }
-    );
-    const data = await response.json();
-    return data.secure_url;
+
+      const data = await response.json();
+      return data.secure_url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
   };
 
   const calculateWaterNorma = (weight, activeTime, gender) => {
@@ -125,14 +137,35 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       waterNorma, // Включаємо waterNorma
       photo: photoURL, // Використовуємо URL для фото
     };
+    const formData = new FormData();
+    Object.keys(dataToSave).forEach((key) => {
+      formData.append(key, dataToSave[key]);
+    });
 
-    console.log("Data to send:", dataToSave);
-    dispatch(updateUser(dataToSave));
-    dispatch(setImage(photoURL));
-    dispatch(setName(data.name));
-    onSubmit(dataToSave);
-    onClose();
+    try {
+      const response = await dispatch(updateUser(dataToSave));
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+      console.log("Data to send:", dataToSave);
+      dispatch(setImage(photoURL));
+      dispatch(setName(data.name));
+
+      onSubmit(dataToSave);
+      onClose();
+    } catch (error) {
+      alert(error.message); // Показуємо помилку
+    }
   };
+
+  //   console.log("Data to send:", dataToSave);
+  //   dispatch(updateUser(dataToSave));
+  //   dispatch(setImage(photoURL));
+  //   dispatch(setName(data.name));
+  //   onSubmit(dataToSave);
+  //   onClose();
+  // };
 
   return (
     <form
