@@ -12,6 +12,7 @@ import {
   updateWaterDay,
 } from "../../../../redux/water/operations.js";
 import css from "./WaterProgressBar.module.css";
+import dayjs from "dayjs";
 
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
@@ -41,11 +42,13 @@ const WaterProgressBar = () => {
     }
   };
 
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString("en-EN", {
-    day: "numeric",
-    month: "long",
-  });
+  const currentDate = dayjs().format("YYYY-MM-DD");
+  const selectedDateFormatted = dayjs(selectedDate).format("YYYY-MM-DD");
+
+  const formattedDate =
+    selectedDateFormatted === currentDate
+      ? "Today"
+      : dayjs(selectedDate).format("DD, MMMM");
 
   return (
     <div className={css.container}>
