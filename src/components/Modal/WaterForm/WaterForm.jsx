@@ -4,6 +4,7 @@ import s from "./WaterForm.module.css";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
+  selectItemId,
   selectOperationType,
   selectWaterItem,
 } from "../../../redux/dailyInfo/dailyInfoSlice.js";
@@ -16,6 +17,8 @@ import {
 const WaterForm = ({ onClose }) => {
   const operationType = useSelector(selectOperationType);
   const initialData = useSelector(selectWaterItem);
+  const itemId = useSelector(selectItemId);
+
   const dispatch = useDispatch();
 
   const extractTime = (date) => {
@@ -58,7 +61,6 @@ const WaterForm = ({ onClose }) => {
   const decrementWater = () => setValue("volume", Math.max(1, volume - 50));
 
   const onSubmit = (data) => {
-    console.log("initialData", initialData);
     const fullDate = combineDateTime(
       initialData.date ? new Date(initialData.date) : new Date(),
       data.date
@@ -72,7 +74,7 @@ const WaterForm = ({ onClose }) => {
     if (operationType === "edit") {
       preparedData = {
         ...preparedData,
-        id: initialData._id,
+        _id: itemId,
       };
     }
 
@@ -80,7 +82,6 @@ const WaterForm = ({ onClose }) => {
       dispatch(addWaterItem(preparedData));
     } else {
       dispatch(updateWaterItem(preparedData));
-      console.log(preparedData);
     }
 
     onClose();
