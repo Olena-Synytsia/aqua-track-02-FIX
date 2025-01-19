@@ -8,7 +8,7 @@ const WaterList = () => {
   return (
     <ul className={s.list}>
       {waterItems.map((item) => (
-        <WaterItem key={item.id} {...item} />
+        <WaterItem key={item._id} {...item} />
       ))}
     </ul>
   );

@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setToken } from "./slice";
+// import { setToken } from "./slice";
 
 export const authApi = axios.create({
   baseURL: "https://aqua-api-fkf8.onrender.com",
@@ -10,11 +12,15 @@ export const setAuthHeader = (accessToken) => {
 };
 
 export const register = createAsyncThunk(
-  "register",
+  "/auth/signup",
   async (credentials, thunkApi) => {
     try {
       const { data } = await authApi.post("/auth/signup", credentials);
+      // const accessToken = data.accessToken;
+      // thunkApi.dispatch(setToken({ accessToken }));
+      // localStorage.setItem("accessToken", accessToken);
       setAuthHeader(data.accessToken);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Registration failed");
@@ -23,19 +29,41 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  "login",
+  "/auth/signin",
   async (credentials, thunkApi) => {
     try {
+      // Надсилання запиту на логін
       const { data } = await authApi.post("/auth/signin", credentials);
-      setAuthHeader(data.accessToken);
-      return data;
+
+      // Перевірка структури даних
+      const accessToken = data?.data?.accessToken;
+      if (!accessToken) {
+        throw new Error("Access token not found in the response.");
+      }
+
+      // // Збереження токена в localStorage
+      // localStorage.setItem("accessToken", accessToken);
+
+      // console.log(
+      //   "Access token after login (localStorage):",
+      //   localStorage.getItem("accessToken")
+      // );
+
+      // Збереження токена в Redux
+      thunkApi.dispatch(setToken({ accessToken }));
+
+      // Встановлення заголовку авторизації
+      setAuthHeader(accessToken);
+
+      return data.data; // Повернення даних
     } catch (error) {
+      console.error("Login error:", error.message);
       return thunkApi.rejectWithValue(error.message || "Login failed");
     }
   }
 );
 
-export const logout = createAsyncThunk("logout", async (_, thunkApi) => {
+export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
   const accessToken = thunkApi.getState().auth.accessToken;
 
   if (!accessToken) {

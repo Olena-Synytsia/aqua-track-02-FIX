@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../../../redux/dailyInfo/dailyInfoSlice.js";
 import DeleteWaterModal from "../../../../../Modal/DeleteWaterModal";
 
+
 const WaterItem = ({ id, time, volume, day }) => {
   const dispatch = useDispatch();
   const formateVolume = (volume) => {
@@ -16,6 +17,14 @@ const WaterItem = ({ id, time, volume, day }) => {
       let result = (volume / 1000).toFixed(3);
       return result.replace(/\.?0+$/, "") + " L";
     }
+  };
+
+  const extractTime = (date) => {
+    const parsedDate = new Date(date);
+    return parsedDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +47,7 @@ const WaterItem = ({ id, time, volume, day }) => {
         </svg>
         <div className={s.indicators}>
           <p className={s.value}>{formateVolume(volume)}</p>
-          <p className={s.time}>{time}</p>
+          <p className={s.time}>{extractTime(date)}</p>
         </div>
         <div className={s.buttons}>
           <button className={s.btn} onClick={handleEdit}>

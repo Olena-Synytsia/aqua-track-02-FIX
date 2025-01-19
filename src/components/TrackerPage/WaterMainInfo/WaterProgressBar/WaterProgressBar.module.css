@@ -1,38 +1,154 @@
 .container {
+  background-image: url("../../../../assets/img/bottle_for_water_1x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 472px;
+  height: 604px;
+  top: 92px;
+  left: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 300px;
+    height: 400px;
+    top: 50px;
+    left: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .container {
+    width: 374px;
+    height: 477px;
+    top: 70px;
+    left: 50px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 472px;
+    height: 604px;
+    top: 92px;
+    left: 100px;
+  }
+}
+
+.containerBar {
   position: absolute;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  top: 225px;
-  gap: 4px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
   width: 198px;
   height: 70px;
-  border-radius: 15px;
-  padding: 12px;
-  background-color: var(--white);
-  z-index: 2;
+  top: 175px;
+  left: 32px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+@media screen and (min-width: 768px) {
+  .containerBar {
+    gap: 6px;
+    padding: 20px;
+    top: 253px;
+    left: 39px;
+    width: 295px;
+    height: 106px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .containerBar {
+    top: 358px;
+    left: 88px;
+  }
 }
 
 .title {
   pointer-events: none;
-  font-weight: bold;
+  color: #323f47;
   font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
   line-height: 1;
-  color: var(--color-darkblue);
 }
 
-.slider {
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+}
+
+.sliderWrapper {
   width: 100%;
+  max-width: 174px;
+  height: 6px;
+  border-radius: 9px;
+  background-color: #f0eff4;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .sliderWrapper {
+    max-width: 255px;
+    height: 8px;
+  }
+}
+
+.track {
+  /* width: 138px; */
+  height: 8px;
+  gap: 0px;
+  border-radius: 9px 0px 0px 0px;
+  opacity: 0px;
+  background-color: #f0eff4;
+  transition: width 0.3s ease;
+}
+
+.thumb {
+  background-color: #9be1a0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 .percentBar {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  align-items: center;
+  gap: 49px;
+  color: rgba(47, 47, 47, 0.6);
   font-size: 10px;
-  line-height: 1;
-  opacity: 0.6;
-  margin-top: 4px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .percentBar {
+    gap: 78px;
+    font-size: 12px;
+    line-height: 22.4px;
+  }
 }
 
 .valueLabel {
@@ -49,18 +165,8 @@
   display: none;
 }
 
-.slider:hover .valueLabel {
+.sliderWrapper:hover .valueLabel {
   display: block;
-}
-
-.fifty {
-  text-align: center;
-}
-
-.slider:global {
-  height: 6px !important;
-  pointer-events: none;
-  padding: 0 !important;
 }
 
 .customTooltip {
@@ -68,41 +174,9 @@
   color: #ffffff !important;
   font-size: 12px !important;
   border-radius: 8px !important;
+  padding: 4px 8px !important;
 }
 
 .customArrow::before {
   background-color: #9be1a0 !important;
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    left: 204px;
-    top: 322px;
-    gap: 6px;
-    width: 295px;
-    height: 106px;
-    padding: 15px;
-  }
-
-  .title {
-    font-size: 15px;
-    line-height: 1.49;
-    font-weight: 700;
-  }
-
-  .percentBar {
-    font-size: 12px;
-    line-height: 1.86;
-  }
-
-  .slider:global {
-    height: 8px !important;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container {
-    left: 188px;
-    top: 450px;
-  }
 }

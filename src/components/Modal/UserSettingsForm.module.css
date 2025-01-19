@@ -1,173 +1,212 @@
-/* Секция для загрузки аватара */
 .avatarSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 40px;
 }
 
 .avatarPreview {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.avatarUploadBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  color: #2F2F2F;
-  font-size: 16px;
-  cursor: pointer;
-  gap: 8px;
-  position: relative;
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	object-fit: cover;
+	padding-bottom: 8px;
 }
 
 .uploadIcon {
-  /* font-size: 20px; */
-  width: 18px;
-  height: 18px;
+	width: 20px;
+	height: 20px;
 }
 
 .avatarInput {
-  display: none;
+	display: none;
 }
 
 .errorText {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-/* Общий стиль для групп полей формы */
-.formGroup {
-  margin-bottom: 24px;
-  gap: 14px;
+	color: red;
+	font-size: 12px;
+	margin-top: 4px;
 }
 
 .userDetails {
-  line-height: 20px;
-  letter-spacing: -1%;
-  color: 323F47;
-  font-size: 16px;
-  font-weight: bold; 
-  
+	line-height: 20px;
+	letter-spacing: -1%;
+	color: #323f47;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 8px;
 }
 
-
-.saveBtn {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.dailyNormWrap {
+	padding-bottom: 12px;
+  font-size: 14px;
 }
 
-.saveBtn:hover {
-  background-color: #218838;
+.dailyNormEquations {
+	color: #6fcf97;
+	line-height: 1.5;
+	font-weight: bold;
 }
 
-/* +++++++++++++++++++ */
+.dailyNormInfo {
+	font-size: 14px;
+	color: #828282;
+	line-height: 18px;
+	padding: 12px;
+	border: 1px solid #e8e8e8;
+	border-radius: 8px;
+	margin-top: 14px;
+	margin-bottom: 14px;
+	max-width: 303px;
+	max-height: 140px;
+}
 
-/* Общий стиль для текстовых полей, полей ввода email и чисел */
+.dailyNormGender {
+	color: #2f2f2f;
+}
+
+.waterIntake {
+	/* font-size: 16px; */
+	font-weight: bold;
+	color: #6fcf97;
+	margin-bottom: 16px;
+	display: block;
+}
+
+.avatarUploadBtn {
+display: flex;
+	font-size: 16px;
+	cursor: pointer;
+	gap: 8px;
+	position: relative;
+}
+
+.icon {
+	color: #6fcf97;
+}
+
+.formGroup {
+	margin-bottom: 24px;
+}
+
+.formWrap {
+	padding-bottom: 14px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="number"] {
-  color: black;
-  background-color: #ffffff; /* Белый фон */
-  border: 1px solid #cccccc; /* Светло-серая рамка */
-  border-radius: 15px; /* Скругленные углы */
-  font-size: 14px;
-
-  width: 303px;
-  height: 46px;
-  box-sizing: border-box; /* Учитывать padding в ширине */
-  margin-top: 8px;
+	color: black;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 15px;
+	font-size: 14px;
+	padding: 14px 16px;
+	width: 303px;
+	height: 46px;
+	box-sizing: border-box;
+	margin-top: 8px;
 }
 
-/* Стили для полей при фокусе */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="number"]:focus {
   outline: none;
-  border-color: #28a745; /* Зеленый цвет рамки при фокусе */
-  box-shadow: 0 0 4px rgba(40, 167, 69, 0.5); /* Тень при фокусе */
-}
+  border: 1px solid #cccccc;
+  
 
-/* Стили для обертки радио-кнопок */
+}
 .radioGroup {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+  font-size: 14px;
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }
 
-/* Скрываем стандартные радио-кнопки */
 input[type="radio"] {
-  display: none;
+	display: none;
 }
 
-/* Стили для кастомных радио-кнопок */
 .radioLabel {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
 }
 
 .radioCustom {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #cccccc;
-  border-radius: 50%;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: border-color 0.3s, background-color 0.3s;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #9be1a0;
+	border-radius: 50%;
+	background-color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: border-color 0.3s, background-color 0.3s;
 }
 
 input[type="radio"]:checked + .radioCustom {
-  border-color: #28a745;
-  background-color: #28a745;
+	border-color: #9be1a0;
+	background-color: #9be1a0;
 }
 
 .radioCustom::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  display: none;
+	content: "";
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #ffffff;
+	display: none;
 }
 
 input[type="radio"]:checked + .radioCustom::after {
-  display: block;
+	display: block;
 }
 
-/* Стиль для текста ошибок */
-.errorText {
-  color: red;
-  font-size: 12px;
-  margin-top: 4px;
+.iconAttention {
+
+  color: #6fcf97;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .infoMessage {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #333;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: #333;
+	gap: 4px;
+  
 }
 
-.icon {
-  color: #6FCF97;
-  font-size: 20px;
-  font-weight: bold;
-  margin-right: 8px;
+.saveBtn {
+  display: flex;
+      padding: 14px 40px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 30px;
+      background: #9be1a0;
+      box-shadow: none;
+      color: #323f47;
+      text-align: center;
+      font-family: Poppins;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: -0.14px;
+      border: none;
+      margin-top: 40px;
+  }
+
+
+.saveBtn:hover {
+	background-color: #218838;
+}
+
+.descForm{
+
+  font-size: 14px;
 }

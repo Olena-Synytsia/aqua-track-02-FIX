@@ -1,22 +1,23 @@
 import SignInPage from "../../components/SignInPage/SignInPage";
 import AdvantagesSection from "../../components/HomePage/AdvantagesSection/AdvantagesSection";
-import s from "../LoginPage/LoginPage.module.css"
+import s from "../LoginPage/LoginPage.module.css";
 
-const LoginPage = () => { 
+const LoginPage = () => {
   return (
-    <div className={s.container}>
-      <div className={s.singInContainer}>
-        <SignInPage />
+    <div className="container">
+      <div className={s.loginPage}>
+        <div className={s.singInContainer}>
+          <SignInPage />
+        </div>
+        <div className={s.advantagesSection}>
+          <AdvantagesSection />
+        </div>
       </div>
-      <div className={s.advantagesSection}><AdvantagesSection /></div>
     </div>
   );
 };
 
 export default LoginPage;
-
-
-
 
 // const LoginPage = () => {
 //   return (

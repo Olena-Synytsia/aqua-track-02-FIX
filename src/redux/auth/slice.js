@@ -11,30 +11,43 @@ import {
 const initialState = {
   userInfo: "",
   accessToken: "",
-  isLoggedIn: false,
+  isLoggedIn: false, // !!localStorage.getItem("accessToken"), // Логин считается успешным, если токен есть
   isRegistered: false,
   loading: false,
   error: null,
 };
+console.log("Initial state token:", initialState.accessToken);
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setToken: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      localStorage.setItem("accessToken", action.payload.accessToken); // Зберігаємо токен в localStorage
+      state.isLoggedIn = true;
+    },
     clearError(state) {
       state.error = null;
     },
     clearUser(state) {
       state.userInfo = "";
-      state.tokens = "";
+      state.accessToken = null;
       state.isLoggedIn = false;
       state.isRegistered = false;
     },
     setEmail(state, action) {
       if (state.userInfo) {
-        state.userInfo.email = action.payload; // Оновлюємо email у userInfo
+        state.userInfo = { ...state.userInfo, name: action.payload };
       } else {
         state.userInfo = { email: action.payload };
+      }
+    },
+    setName(state, action) {
+      if (state.userInfo) {
+        state.userInfo.name = action.payload; // Оновлюємо ім'я
+      } else {
+        state.userInfo = { name: action.payload };
       }
     },
   },
@@ -46,6 +59,7 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
+        localStorage.setItem("accessToken", action.payload.accessToken);
         state.isRegistered = true;
         // state.isLoggedIn = true; // запис у local store
         state.loading = false;
@@ -58,6 +72,7 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.userInfo = action.payload.user;
         state.accessToken = action.payload.accessToken;
+        // localStorage.setItem("accessToken", action.payload.accessToken);
         state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
@@ -91,5 +106,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearError, clearUser, setEmail } = userSlice.actions;
+export const { clearError, clearUser, setEmail, setToken, setName } =
+  userSlice.actions;
 export const authReducer = userSlice.reducer;

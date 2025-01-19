@@ -1,3 +1,4 @@
+
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from "./LogOutModal.module.css";
@@ -28,7 +29,7 @@ const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
     <div className={style.modalOverlay} onClick={onClose}>
       <div
         className={style.modalContainer}
-        onClick={(event) => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()} // Предотвращение всплытия события
       >
         <button className={style.closeButton} onClick={onClose}>
           &times;
@@ -39,15 +40,13 @@ const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
           <button
             type="button"
             className={style.logOutButton}
-            onClick={handleLogOutClick}
-          >
+            onClick={handleLogOutClick}>
             Log out
           </button>
           <button
             type="button"
             className={style.cancelButton}
-            onClick={onClose}
-          >
+            onClick={onClose}>
             Cancel
           </button>
         </div>

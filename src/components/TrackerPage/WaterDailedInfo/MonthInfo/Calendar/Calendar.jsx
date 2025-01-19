@@ -11,25 +11,25 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
   };
 
   const daysInMonth = dayjs(selectedDate).daysInMonth();
-  const startOfMonth = dayjs(selectedDate).startOf("month").day();
+  // const startOfMonth = dayjs(selectedDate).startOf("month").day();
 
-  const emptyDays = [...Array(startOfMonth)].map((_, index) => (
-    <div className={s.emptyday} key={`empty-${index}`} />
-  ));
+  // const emptyDays = [...Array(daysInMonth)].map((_, index) => (
+  //   <div className={s.emptyday} key={`empty-${index}`} />
+  // ));
 
   const days = [...Array(daysInMonth)].map((_, dayIndex) => (
     <CalendarItem
       key={dayIndex + 1}
       day={dayIndex + 1}
       selectedDate={selectedDate}
-      onDateSelect={handleDateChange}
+      onDateSelect={setSelectedDate}
     />
   ));
 
   return (
     <div>
       <div className={s.calendargrid}>
-        {emptyDays}
+        {/* {emptyDays} */}
         {days}
       </div>
     </div>

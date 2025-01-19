@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UserBarPopover from "../UserBarPopover/UserBarPopover.jsx";
 import s from "./UserBarBtn.module.css";
 import { useSelector } from "react-redux";
@@ -8,9 +8,23 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
   const buttonRef = useRef(null);
   const selectedImage = useSelector((state) => state.image.selectedImage);
 
+  const [storedAvatar, setStoredAvatar] = useState(() => {
+    // Отримання картинки з localStorage або використання avatarUrl за замовчуванням
+    const savedAvatar = localStorage.getItem("userAvatar");
+    return savedAvatar ? savedAvatar : avatarUrl;
+  });
+
   const handleButtonClick = () => {
     setIsPopoverOpen((prev) => !prev); // Перемикає стан поповеру
   };
+
+  useEffect(() => {
+    if (selectedImage) {
+      // Збереження вибраної картинки в localStorage
+      localStorage.setItem("userAvatar", selectedImage);
+      setStoredAvatar(selectedImage); // Оновлення локального стану
+    }
+  }, [selectedImage]);
 
   return (
     <div
@@ -28,7 +42,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
         >
           <span className={s.name}>{userName}</span>
           <img
-            src={selectedImage || avatarUrl}
+            src={storedAvatar} // Завжди використовує збережений аватар або початковий
             alt="User Avatar"
             style={{
               width: "38px",
