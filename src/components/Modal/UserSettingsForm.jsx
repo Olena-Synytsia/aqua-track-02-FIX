@@ -27,10 +27,7 @@ const schema = yup.object().shape({
     .number()
     .min(0, "Active time must be 0 or more")
     .required("Active time is required"),
-  waterNorma: yup
-    .number()
-    .min(0, "Water must be at least 0")
-    .required("This field is required"),
+  waterNorma: yup.number().min(0, "Water must be at least 0"),
   waterToDrink: yup.number().min(0, "Water to drink must be at least 0"),
 });
 
