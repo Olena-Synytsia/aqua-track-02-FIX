@@ -10,8 +10,8 @@ const initialState = {
     weight: null,
     activeTime: null,
     photo: null,
-    waterNorma: null,
-    waterToDrink: null,
+    // waterNorma: null,
+    // waterToDrink: null,
   },
   loading: false,
   error: null,
@@ -30,8 +30,8 @@ const userSlice = createSlice({
         weight: null,
         activeTime: null,
         photo: null,
-        waterNorma: null,
-        waterToDrink: null,
+        // waterNorma: null,
+        // waterToDrink: null,
       };
       state.loading = false;
       state.error = null;
