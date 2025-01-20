@@ -62,7 +62,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
               transition: "transform 0.3s ease",
             }}
           >
-            <use href="src/assets/sprite.svg#icon-chevron-down-1"></use>
+            <use href="../../../../../../assets/sprite.svg#icon-chevron-down-1"></use>
           </svg>
         </button>
       </div>
