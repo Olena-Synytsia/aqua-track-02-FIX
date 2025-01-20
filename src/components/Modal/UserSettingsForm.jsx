@@ -9,11 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setImage, setName } from "../../redux/users/slice";
 import { selectTokens } from "../../redux/auth/selectors";
-// import { BsExclamationLg } from "react-icons/bs";
+import { BsExclamationLg } from "react-icons/bs";
 
-// import { setImage } from "../../redux/avatar/slice";
-// import { useDispatch } from "react-redux";
-// import { setName } from "../../redux/auth/slice";
+
 
 const DEFAULT_AVATAR_URL =
   "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
@@ -210,17 +208,20 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
           <p className={style.errorText}>{errors.photo.message}</p>
         )}
       </div>
-
+      <div className={style.setWrap}>
+      <div className={style.setWrapInfo}>
       <div className={style.formGroup}>
-        <label className={style.userDetails}>Your gender identity</label>
+        <div className={style.formWrap}>
+          <h4>Your gender identity</h4>
+        </div>
         <div className={style.radioGroup}>
           <label className={style.radioLabel}>
-            <input type="radio" value="woman" {...register("gender")} />
+            <input type='radio' value='Woman' {...register("gender")} />
             <span className={style.radioCustom}></span>
             Woman
           </label>
           <label className={style.radioLabel}>
-            <input type="radio" value="man" {...register("gender")} />
+            <input type='radio' value='Man' {...register("gender")} />
             <span className={style.radioCustom}></span>
             Man
           </label>
@@ -232,88 +233,108 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
 
       <div className={style.formGroup}>
         <div>
-          <label className={style.userDetails}>Your name</label>
-          <input type="text" {...register("name")} />
-          {errors.name && (
-            <p className={style.errorText}>{errors.name.message}</p>
-          )}
+          <div className={style.formWrap}>
+            <h4>Your name</h4>
+            <input className={style.formInput} type='text' {...register("name")} />
+            {errors.name && (
+              <p className={style.errorText}>{errors.name.message}</p>
+            )}
+          </div>
         </div>
         <div>
-          <label className={style.userDetails}>Email</label>
-          <input type="email" {...register("email")} />
+          <h4>Email</h4>
+          <input className={style.formInput} type='email' {...register("email")} />
           {errors.email && (
             <p className={style.errorText}>{errors.email.message}</p>
           )}
         </div>
       </div>
 
-      <div className={style.formGroup}>
-        <div className={style.dailyNormSection}>
-          <h4>My daily norma</h4>
-          <div className={style.dailyNormEquations}>
-            <p>
-              <strong>For woman:</strong> V=(M*0.03) + (T*0.4)
-            </p>
-            <p>
-              <strong>For man:</strong> V=(M*0.04) + (T*0.6)
-            </p>
+          <div className={style.formWrap}>
+            <h4>My daily norma</h4>
           </div>
+          <div className={style.dailyNormSection}>
+            <p className={style.dailyNormWrap}>
+              For woman:
+              <br />
+              <span className={style.dailyNormEquations}>
+                V = (M*0.03) + (T*0.4)
+              </span>
+            </p>
+            <p>
+              For man:
+              <br />
+              <span className={style.dailyNormEquations}>
+                V = (M*0.04) + (T*0.6)
+              </span>
+            </p>
+            </div>
           <div className={style.dailyNormInfo}>
             <p>
-              <strong>* V</strong> is the volume of the water norm in liters per
-              day, <strong>M</strong> is your body weight, <strong>T</strong> is
-              the time of active sports, or another type of activity
-              commensurate in terms of loads (in the absence of these, you must
-              set 0).
+              <span className={style.icon}>*</span> V is the volume of the water
+              norm in liters per day, M is your body weight, T is the time of
+              active sports, or another type of activity commensurate in terms
+              of loads (in the absence of these, you must set 0).
             </p>
           </div>
-        </div>
+        
 
         <div className={style.infoMessage}>
-          <span className={style.icon}>!</span>
-          <span>Active time in hours</span>
-        </div>
-      </div>
 
-      <div className={style.formGroup}>
+            <span className={style.iconAttention}><BsExclamationLg/></span>
+
+          <p>Active time in hours</p>
+        </div>
+        </div>
+        <div className={style.setWrapInfoMod}>
+    <div>
+          <div className={style.formWrap}>
+            <label className={style.descForm}>Your weight in kilograms:</label>
+            <input className={style.formInput}
+              type='number'
+              {...register("weight")}
+              onBlur={() => calculateWaterIntake(weight, activeTime, gender)}
+            />
+            {errors.weight && (
+              <p className={style.errorText}>{errors.weight.message}</p>
+            )}
+          </div>
+        </div>
         <div>
-          <label>Your weight in kilograms:</label>
-          <input
-            type="number"
-            {...register("weight")}
-            onBlur={() => calculateWaterNorma(weight, activeTime, gender)}
-          />
-          {errors.weight && (
-            <p className={style.errorText}>{errors.weight.message}</p>
-          )}
+          <div className={style.formWrap}>
+            <label className={style.descForm}>
+              The time of active participation in sports:
+            </label>
+            <input className={style.formInput}
+              type='number'
+              {...register("activeTime")}
+              onBlur={() => calculateWaterIntake(weight, activeTime, gender)}
+            />
+            {errors.activeTime && (
+              <p className={style.errorText}>{errors.activeTime.message}</p>
+            )}
+          </div>
         </div>
-
-        <div>
-          <label>The time of active participation in sports:</label>
-          <input
-            type="number"
-            {...register("activeTime")}
-            onBlur={() => calculateWaterNorma(weight, activeTime, gender)}
-          />
-          {errors.activeTime && (
-            <p className={style.errorText}>{errors.activeTime.message}</p>
-          )}
-        </div>
-      </div>
-      <label>The required amount of water in liters per day: </label>
-      <span className={style.waterIntake}>
-        {waterNorma ? `${waterNorma} L` : " 0.0 L"}
-      </span>
-
-      <label>Write down how much water you will drink:</label>
-      <input type="number" {...register("waterToDrink")} />
+        <div className={style.descWrap}><label className={style.descForm}>
+          The required amount of water in liters per day:{" "}
+        </label>
+        <span className={style.waterIntake}>
+          {waterNorma ? `${waterNorma} L` : " 0.0 L"}
+        </span></div>
+      <h4 className={style.waterNorma}>Write down how much water you will drink:</h4>
+      <input className={style.formInput}
+        type='number'
+        {...register("waterToDrink")}
+      />
       {errors.waterToDrink && (
         <p className={style.errorText}>{errors.waterToDrink.message}</p>
       )}
-
-      <button type="submit" className={style.saveBtn}>
+      </div>
+      </div>
+      <button type='submit' className={style.saveBtn}>
         Save
       </button>
+     
     </form>
   );
 };
