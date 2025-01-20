@@ -83,14 +83,21 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
   if (!accessToken) {
     return thunkApi.rejectWithValue("Unable to fetch user");
   }
-  setAuthHeader(accessToken);
+
+  setAuthHeader(accessToken); // Передаємо токен у заголовках запиту
   try {
     const { data } = await authApi.post("/auth/refresh");
     thunkApi.dispatch(setToken({ accessToken: data.accessToken }));
     setAuthHeader(data.accessToken);
-    // localStorage.setItem("accessToken", data.accessToken);
+    // Зберігаємо новий токен в localStorage
+    localStorage.setItem("accessToken", data.accessToken);
     return data;
   } catch (error) {
+    if (error.response?.status === 401) {
+      // Якщо сервер відповів 401, токен вичерпано
+      localStorage.removeItem("accessToken"); // Видалити старий токен
+      return thunkApi.rejectWithValue("Token expired");
+    }
     return thunkApi.rejectWithValue(error.message);
   }
 });
