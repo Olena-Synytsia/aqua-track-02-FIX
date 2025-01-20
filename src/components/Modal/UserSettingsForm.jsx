@@ -333,7 +333,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
           <input
             className={style.formInput}
             type="number"
-            {...register("waterToDrink")}
+            {...register("waterNorma")}
           />
           {errors.waterToDrink && (
             <p className={style.errorText}>{errors.waterToDrink.message}</p>
