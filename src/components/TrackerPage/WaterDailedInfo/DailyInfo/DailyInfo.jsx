@@ -6,10 +6,15 @@ import WaterList from "./WaterList/WaterList.jsx";
 import { useEffect } from "react";
 import { fetchWaterItem } from "../../../../redux/dailyInfo/dailyInfoOps.js";
 import { selectWaterDay } from "../../../../redux/dailyInfo/dailyInfoSlice.js";
+import dayjs from "dayjs";
 
 const DailyInfo = () => {
-  const waterDay = useSelector(selectWaterDay);
   const dispatch = useDispatch();
+  let waterDay = useSelector(selectWaterDay);
+
+  waterDay = waterDay ? waterDay : dayjs().format("YYYY-MM-DD");
+
+  const isToday = dayjs(waterDay).isSame(dayjs(), "day");
 
   useEffect(() => {
     dispatch(fetchWaterItem(waterDay));
@@ -18,7 +23,7 @@ const DailyInfo = () => {
     <div className={s.dailyInfo}>
       <div className={s.textAndBtn}>
         <ChooseDate />
-        <AddWaterBtn />
+        {isToday ? <AddWaterBtn /> : null}
       </div>
       <WaterList />
     </div>

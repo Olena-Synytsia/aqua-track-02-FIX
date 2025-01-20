@@ -15,11 +15,12 @@ import {
 } from "../../../redux/dailyInfo/dailyInfoOps.js";
 
 const WaterForm = ({ onClose }) => {
+  const dispatch = useDispatch();
   const operationType = useSelector(selectOperationType);
   const initialData = useSelector(selectWaterItem);
   const itemId = useSelector(selectItemId);
 
-  const dispatch = useDispatch();
+  const currentItem = initialData.find((item) => item._id === itemId);
 
   const extractTime = (date) => {
     const parsedDate = new Date(date);
@@ -37,8 +38,8 @@ const WaterForm = ({ onClose }) => {
   const validationSchema = Yup.object().shape({
     volume: Yup.number()
       .required("Please enter the amount of water.")
-      .min(1, "The minimum amount is 1ml.")
-      .max(15000, "The maximum amount is 15000ml."),
+      .min(50, "The minimum amount is 1ml.")
+      .max(5000, "The maximum amount is 5000ml."),
     date: Yup.string()
       .required("Please enter the time.")
       .matches(
@@ -50,8 +51,11 @@ const WaterForm = ({ onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      volume: initialData.volume || 50,
-      date: extractTime(initialData.date || new Date()),
+      volume: operationType === "add" ? 50 : currentItem.volume,
+      date:
+        operationType === "add"
+          ? extractTime(new Date())
+          : extractTime(currentItem.date),
     },
   });
 
@@ -62,7 +66,7 @@ const WaterForm = ({ onClose }) => {
 
   const onSubmit = (data) => {
     const fullDate = combineDateTime(
-      initialData.date ? new Date(initialData.date) : new Date(),
+      currentItem ? new Date(currentItem.date) : new Date(),
       data.date
     );
 
@@ -74,7 +78,7 @@ const WaterForm = ({ onClose }) => {
     if (operationType === "edit") {
       preparedData = {
         ...preparedData,
-        _id: itemId,
+        _id: currentItem._id,
       };
     }
 
@@ -123,8 +127,8 @@ const WaterForm = ({ onClose }) => {
       <input
         className={s.input}
         type="number"
-        min="1"
-        max="15000"
+        min="50"
+        max="5000"
         value={volume === 0 ? "" : volume}
         onChange={(e) => setValue("volume", Number(e.target.value))}
       />
