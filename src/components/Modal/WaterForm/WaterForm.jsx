@@ -20,7 +20,7 @@ const WaterForm = ({ onClose }) => {
   const initialData = useSelector(selectWaterItem);
   const itemId = useSelector(selectItemId);
 
-  const currentItem = initialData.find((item) => item.id === itemId);
+  const currentItem = initialData.find((item) => item._id === itemId);
 
   const extractTime = (date) => {
     const parsedDate = new Date(date);
@@ -51,10 +51,11 @@ const WaterForm = ({ onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      volume: currentItem ? currentItem.volume : 50,
-      date: currentItem
-        ? extractTime(currentItem.date)
-        : extractTime(new Date()),
+      volume: operationType === "add" ? 50 : currentItem.volume,
+      date:
+        operationType === "add"
+          ? extractTime(new Date())
+          : extractTime(currentItem.date),
     },
   });
 
@@ -65,7 +66,7 @@ const WaterForm = ({ onClose }) => {
 
   const onSubmit = (data) => {
     const fullDate = combineDateTime(
-      currentItem.date ? new Date(currentItem.date) : new Date(),
+      currentItem ? new Date(currentItem.date) : new Date(),
       data.date
     );
 
@@ -77,7 +78,7 @@ const WaterForm = ({ onClose }) => {
     if (operationType === "edit") {
       preparedData = {
         ...preparedData,
-        _id: itemId,
+        _id: currentItem._id,
       };
     }
 
