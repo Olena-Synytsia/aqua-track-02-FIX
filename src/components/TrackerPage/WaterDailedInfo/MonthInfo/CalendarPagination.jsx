@@ -17,9 +17,16 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
       <h1 className= {s.month}>Month</h1>
       </div>
      <div className={s.pagination}>
-      <button className={s.btnpagination} onClick={handlePreviousMonth}>{"<"}</button>
+       
+        <svg className={s.btnpagination} onClick={handlePreviousMonth}>
+        <use href="src/assets/sprite.svg#icon-chevron-left"></use>
+      </svg>      
+      
       <span className= {s.spanmonth}>{dayjs(selectedDate).format("MMMM, YYYY")}</span>
-      <button className={s.btnpagination} onClick={handleNextMonth}>{">"}</button>
+        <svg className={s.btnpagination} onClick={handleNextMonth}>
+        <use href="src/assets/sprite.svg#icon-chevron-right"></use>
+      </svg>
+      
       <svg className={s.iconpie}>
         <use href="src/assets/sprite.svg#icon-pie-chart"></use>
       </svg>
@@ -27,5 +34,6 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
     </div>
   );
 };
+// {"<"}
 
 export default CalendarPagination;

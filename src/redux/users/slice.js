@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUser, updateUser } from "./operations";
+import { getCurrentUser, updateUser } from "./operations.js";
 
 const initialState = {
   user: {
@@ -11,7 +11,7 @@ const initialState = {
     activeTime: null,
     photo: null,
     waterNorma: null,
-    // waterToDrink: null,
+    waterToDrink: null,
   },
   loading: false,
   error: null,
@@ -31,7 +31,7 @@ const userSlice = createSlice({
         activeTime: null,
         photo: null,
         waterNorma: null,
-        // waterToDrink: null,
+        waterToDrink: null,
       };
       state.loading = false;
       state.error = null;
@@ -47,11 +47,7 @@ const userSlice = createSlice({
     //   }
     // },
     setName(state, action) {
-      if (state.user) {
-        state.user.name = action.payload;
-      } else {
-        state.user = { name: action.payload };
-      }
+      state.user.name = action.payload;
     },
     setImage: (state, action) => {
       state.user.photo = action.payload;

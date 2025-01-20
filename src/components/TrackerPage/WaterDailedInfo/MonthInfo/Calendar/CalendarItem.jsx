@@ -1,15 +1,27 @@
 import s from "./CalendarItem.module.css";
 import clsx from "clsx";
 import dayjs from "dayjs";
+import { useDispatch } from "react-redux"
+import { setWaterDay } from "../../../../../redux/dailyInfo/dailyInfoSlice"
 
-const getFormattedDate = (selectedDate, day) => {
-  const date = new Date(selectedDate);
-  date.setDate(day);
-  return dayjs(date).format("YYYY-MM");
-};
+
+// const getFormattedDate = (selectedDate, day) => {
+//   const date = new Date(selectedDate);
+//   date.setDate(day);
+//   return dayjs(date).format("YYYY-MM-DD");
+// };
 
 const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
-  const handleClick = () => {
+  const dispatch = useDispatch();
+  const getFormattedDate = (selectedDate, day) => {
+    const date = new Date(selectedDate);
+    date.setDate(day);
+    const waterDay = date.toISOString().split("T")[0];
+    dispatch(setWaterDay(waterDay));
+    return dayjs(date).format("YYYY-MM-DD");
+   };
+
+   const handleClick = () => {
     const formattedDate = getFormattedDate(selectedDate, day);
     onDateSelect(formattedDate);
   };

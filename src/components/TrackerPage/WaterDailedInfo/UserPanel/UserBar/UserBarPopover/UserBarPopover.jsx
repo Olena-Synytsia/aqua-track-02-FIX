@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UserSettingsModal from "../../../../../Modal/UserSettingsModal";
 import LogOutModal from "../../../../../Modal/LogOutModal";
 import s from "./UserBarPopover.module.css";
@@ -20,6 +20,20 @@ export const UserBarPopover = () => {
     setLogOutModalOpen((prev) => !prev);
     if (isSettingsModalOpen) setSettingsModalOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userBarRef.current && !userBarRef.current.contains(event.target)) {
+        setSettingsModalOpen(false);
+        setLogOutModalOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div ref={userBarRef}>
