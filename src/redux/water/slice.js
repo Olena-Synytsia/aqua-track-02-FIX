@@ -1,5 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiGetWaterDay, updateWaterDay } from "./operations.js";
+
+export const fetchWaterDay = createAsyncThunk(
+  "water/fetchWaterDay",
+  async (date) => {
+    const response = await apiGetWaterDay(date);
+    return response.data;
+  }
+);
+
+export const addWater = createAsyncThunk(
+  "water/addWater",
+  async ({ date, amount }, thunkAPI) => {
+    const response = await updateWaterDay({ date, amount });
+    thunkAPI.dispatch(fetchWaterDay(date));
+    return response.data;
+  }
+);
 
 const initialState = {
   dailyWater: 0,
@@ -28,39 +45,47 @@ const waterSlice = createSlice({
     setDate: (state, action) => {
       state.date = action.payload;
     },
+    resetWaterProgress: (state) => {
+      state.percentDay = 0;
+      state.consumedWater = 0;
+    },
   },
-
   extraReducers: (builder) => {
     builder
-      .addCase(apiGetWaterDay.pending, (state) => {
+      .addCase(fetchWaterDay.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(apiGetWaterDay.fulfilled, (state, action) => {
+      .addCase(fetchWaterDay.fulfilled, (state, action) => {
         state.isLoading = false;
         state.percentDay = action.payload.percent;
         state.consumedWater = action.payload.consumed;
       })
-      .addCase(apiGetWaterDay.rejected, (state, action) => {
+      .addCase(fetchWaterDay.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(updateWaterDay.pending, (state) => {
+      .addCase(addWater.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(updateWaterDay.fulfilled, (state, action) => {
+      .addCase(addWater.fulfilled, (state, action) => {
         state.isLoading = false;
         state.percentDay = action.payload.percent;
         state.consumedWater = action.payload.consumed;
       })
-      .addCase(updateWaterDay.rejected, (state, action) => {
+      .addCase(addWater.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
 
-export const { setDate, setDailyWater, updateWaterList, setSelectedDate } =
-  waterSlice.actions;
+export const {
+  setDate,
+  setDailyWater,
+  updateWaterList,
+  setSelectedDate,
+  resetWaterProgress,
+} = waterSlice.actions;
 export default waterSlice.reducer;
