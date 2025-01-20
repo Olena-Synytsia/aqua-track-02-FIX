@@ -11,8 +11,6 @@ import { setImage, setName } from "../../redux/users/slice";
 import { selectTokens } from "../../redux/auth/selectors";
 import { BsExclamationLg } from "react-icons/bs";
 
-
-
 const DEFAULT_AVATAR_URL =
   "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
 
@@ -199,7 +197,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
             type="file"
             id="photo"
             accept="image/*"
-            // {...register("photo")}
+            {...register("photo")}
             onChange={handleAvatarChange}
             className={style.avatarInput}
           />
@@ -209,46 +207,54 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
         )}
       </div>
       <div className={style.setWrap}>
-      <div className={style.setWrapInfo}>
-      <div className={style.formGroup}>
-        <div className={style.formWrap}>
-          <h4>Your gender identity</h4>
-        </div>
-        <div className={style.radioGroup}>
-          <label className={style.radioLabel}>
-            <input type='radio' value='Woman' {...register("gender")} />
-            <span className={style.radioCustom}></span>
-            Woman
-          </label>
-          <label className={style.radioLabel}>
-            <input type='radio' value='Man' {...register("gender")} />
-            <span className={style.radioCustom}></span>
-            Man
-          </label>
-        </div>
-        {errors.gender && (
-          <p className={style.errorText}>{errors.gender.message}</p>
-        )}
-      </div>
-
-      <div className={style.formGroup}>
-        <div>
-          <div className={style.formWrap}>
-            <h4>Your name</h4>
-            <input className={style.formInput} type='text' {...register("name")} />
-            {errors.name && (
-              <p className={style.errorText}>{errors.name.message}</p>
+        <div className={style.setWrapInfo}>
+          <div className={style.formGroup}>
+            <div className={style.formWrap}>
+              <h4>Your gender identity</h4>
+            </div>
+            <div className={style.radioGroup}>
+              <label className={style.radioLabel}>
+                <input type="radio" value="Woman" {...register("gender")} />
+                <span className={style.radioCustom}></span>
+                Woman
+              </label>
+              <label className={style.radioLabel}>
+                <input type="radio" value="Man" {...register("gender")} />
+                <span className={style.radioCustom}></span>
+                Man
+              </label>
+            </div>
+            {errors.gender && (
+              <p className={style.errorText}>{errors.gender.message}</p>
             )}
           </div>
-        </div>
-        <div>
-          <h4>Email</h4>
-          <input className={style.formInput} type='email' {...register("email")} />
-          {errors.email && (
-            <p className={style.errorText}>{errors.email.message}</p>
-          )}
-        </div>
-      </div>
+
+          <div className={style.formGroup}>
+            <div>
+              <div className={style.formWrap}>
+                <h4>Your name</h4>
+                <input
+                  className={style.formInput}
+                  type="text"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className={style.errorText}>{errors.name.message}</p>
+                )}
+              </div>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <input
+                className={style.formInput}
+                type="email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className={style.errorText}>{errors.email.message}</p>
+              )}
+            </div>
+          </div>
 
           <div className={style.formWrap}>
             <h4>My daily norma</h4>
@@ -268,7 +274,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
                 V = (M*0.04) + (T*0.6)
               </span>
             </p>
-            </div>
+          </div>
           <div className={style.dailyNormInfo}>
             <p>
               <span className={style.icon}>*</span> V is the volume of the water
@@ -277,64 +283,72 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
               of loads (in the absence of these, you must set 0).
             </p>
           </div>
-        
 
-        <div className={style.infoMessage}>
+          <div className={style.infoMessage}>
+            <span className={style.iconAttention}>
+              <BsExclamationLg />
+            </span>
 
-            <span className={style.iconAttention}><BsExclamationLg/></span>
-
-          <p>Active time in hours</p>
-        </div>
+            <p>Active time in hours</p>
+          </div>
         </div>
         <div className={style.setWrapInfoMod}>
-    <div>
-          <div className={style.formWrap}>
-            <label className={style.descForm}>Your weight in kilograms:</label>
-            <input className={style.formInput}
-              type='number'
-              {...register("weight")}
-              onBlur={() => calculateWaterIntake(weight, activeTime, gender)}
-            />
-            {errors.weight && (
-              <p className={style.errorText}>{errors.weight.message}</p>
-            )}
+          <div>
+            <div className={style.formWrap}>
+              <label className={style.descForm}>
+                Your weight in kilograms:
+              </label>
+              <input
+                className={style.formInput}
+                type="number"
+                {...register("weight")}
+                onBlur={() => calculateWaterNorma(weight, activeTime, gender)}
+              />
+              {errors.weight && (
+                <p className={style.errorText}>{errors.weight.message}</p>
+              )}
+            </div>
           </div>
-        </div>
-        <div>
-          <div className={style.formWrap}>
+          <div>
+            <div className={style.formWrap}>
+              <label className={style.descForm}>
+                The time of active participation in sports:
+              </label>
+              <input
+                className={style.formInput}
+                type="number"
+                {...register("activeTime")}
+                onBlur={() => calculateWaterNorma(weight, activeTime, gender)}
+              />
+              {errors.activeTime && (
+                <p className={style.errorText}>{errors.activeTime.message}</p>
+              )}
+            </div>
+          </div>
+          <div className={style.descWrap}>
             <label className={style.descForm}>
-              The time of active participation in sports:
+              The required amount of water in liters per day:{" "}
             </label>
-            <input className={style.formInput}
-              type='number'
-              {...register("activeTime")}
-              onBlur={() => calculateWaterIntake(weight, activeTime, gender)}
-            />
-            {errors.activeTime && (
-              <p className={style.errorText}>{errors.activeTime.message}</p>
-            )}
+            <span className={style.waterIntake}>
+              {waterNorma ? `${waterNorma} L` : " 0.0 L"}
+            </span>
           </div>
+          <h4 className={style.waterNorma}>
+            Write down how much water you will drink:
+          </h4>
+          <input
+            className={style.formInput}
+            type="number"
+            {...register("waterToDrink")}
+          />
+          {errors.waterToDrink && (
+            <p className={style.errorText}>{errors.waterToDrink.message}</p>
+          )}
         </div>
-        <div className={style.descWrap}><label className={style.descForm}>
-          The required amount of water in liters per day:{" "}
-        </label>
-        <span className={style.waterIntake}>
-          {waterNorma ? `${waterNorma} L` : " 0.0 L"}
-        </span></div>
-      <h4 className={style.waterNorma}>Write down how much water you will drink:</h4>
-      <input className={style.formInput}
-        type='number'
-        {...register("waterToDrink")}
-      />
-      {errors.waterToDrink && (
-        <p className={style.errorText}>{errors.waterToDrink.message}</p>
-      )}
       </div>
-      </div>
-      <button type='submit' className={style.saveBtn}>
+      <button type="submit" className={style.saveBtn}>
         Save
       </button>
-     
     </form>
   );
 };
