@@ -21,20 +21,6 @@ export const UserBarPopover = () => {
     if (isSettingsModalOpen) setSettingsModalOpen(false);
   };
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (userBarRef.current && !userBarRef.current.contains(event.target)) {
-  //       setSettingsModalOpen(false);
-  //       setLogOutModalOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleClickOutside);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
-
   return (
     <div ref={userBarRef}>
       <div className={s.btnssettlog}>
