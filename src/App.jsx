@@ -11,29 +11,36 @@ import TrackerPage from "./pages/TrackerPage/TrackerPage";
 import SharedLayout from "./components/SharedLayout";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
-import { selectTokens } from "./redux/auth/selectors";
+import { selectIsRefreshing, selectTokens } from "./redux/auth/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCurrentUser } from "./redux/auth/operations";
 import { setToken } from "./redux/auth/slice";
+import { refresh } from "./redux/auth/operations";
 
 function App() {
   const dispatch = useDispatch();
-  const token = useSelector(selectTokens);
+  const token = useSelector(selectTokens); // Дістаємо токен із Redux
+  const isRefreshing = useSelector(selectIsRefreshing); // Стан оновлення користувача
 
   useEffect(() => {
-    // Перевіряємо, чи є токен у localStorage
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      dispatch(setToken({ accessToken: token })); // Оновлюємо Redux-стан токеном
+    // Перевіряємо токен у localStorage
+    const localToken = localStorage.getItem("accessToken");
+    if (localToken) {
+      dispatch(setToken({ accessToken: localToken })); // Зберігаємо токен у Redux
     }
   }, [dispatch]);
 
   useEffect(() => {
     if (token) {
-      dispatch(fetchCurrentUser);
+      // Якщо токен є, оновлюємо користувача
+      dispatch(refresh());
     }
   }, [dispatch, token]);
+
+  if (isRefreshing) {
+    // Відображаємо завантаження, якщо refresh() ще працює
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <Routes>

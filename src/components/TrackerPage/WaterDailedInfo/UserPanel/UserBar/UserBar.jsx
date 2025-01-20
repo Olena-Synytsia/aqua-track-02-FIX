@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 // import { selectUserName } from "../../../../../redux/auth/selectors.js";
 
 const UserBar = () => {
-  const userEmailFromRedux = useSelector((state) => state.user.userInfo?.email);
-  const userNameFromRedux = useSelector((state) => state.user.userInfo?.name);
+  const userEmailFromRedux = useSelector((state) => state.auth.userInfo?.email);
+  const userNameFromRedux = useSelector((state) => state.user.user?.name);
 
   const [userName, setUserName] = useState(() => {
     // Ініціалізація з localStorage
