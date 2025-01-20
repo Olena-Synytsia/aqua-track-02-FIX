@@ -3,7 +3,7 @@ import { getCurrentUser, updateUser } from "./operations.js";
 
 const initialState = {
   user: {
-    // userId: "",
+    userId: "",
     gender: null,
     name: null,
     email: null,
