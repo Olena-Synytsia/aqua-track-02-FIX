@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
 const ChooseDate = () => {
   const waterDay = useSelector(selectWaterDay);
   const isToday = dayjs(waterDay).isSame(dayjs(), "day");
-  const displayDate = isToday ? "Today" : dayjs(waterDay).format("D, MMMM");
+  const displayDate = waterDay
+    ? isToday
+      ? "Today"
+      : dayjs(waterDay).format("D, MMMM")
+    : "Today";
 
   return <div className={s.chooseDate}>{displayDate}</div>;
 };
