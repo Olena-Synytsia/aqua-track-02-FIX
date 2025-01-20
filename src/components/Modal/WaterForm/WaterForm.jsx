@@ -15,11 +15,12 @@ import {
 } from "../../../redux/dailyInfo/dailyInfoOps.js";
 
 const WaterForm = ({ onClose }) => {
+  const dispatch = useDispatch();
   const operationType = useSelector(selectOperationType);
   const initialData = useSelector(selectWaterItem);
   const itemId = useSelector(selectItemId);
 
-  const dispatch = useDispatch();
+  const currentItem = initialData.find((item) => item.id === itemId);
 
   const extractTime = (date) => {
     const parsedDate = new Date(date);
@@ -50,8 +51,10 @@ const WaterForm = ({ onClose }) => {
   const { watch, setValue, control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      volume: initialData.volume || 50,
-      date: extractTime(initialData.date || new Date()),
+      volume: currentItem ? currentItem.volume : 50,
+      date: currentItem
+        ? extractTime(currentItem.date)
+        : extractTime(new Date()),
     },
   });
 
@@ -62,7 +65,7 @@ const WaterForm = ({ onClose }) => {
 
   const onSubmit = (data) => {
     const fullDate = combineDateTime(
-      initialData.date ? new Date(initialData.date) : new Date(),
+      currentItem.date ? new Date(currentItem.date) : new Date(),
       data.date
     );
 
