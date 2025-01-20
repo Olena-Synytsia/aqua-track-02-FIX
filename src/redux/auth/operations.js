@@ -77,45 +77,45 @@ export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
   }
 });
 
-export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
-  const accessToken = thunkApi.getState().auth.accessToken;
-
-  if (!accessToken) {
-    return thunkApi.rejectWithValue("Unable to fetch user");
-  }
-
-  setAuthHeader(accessToken); // Передаємо токен у заголовках запиту
-  try {
-    const { data } = await authApi.post("/auth/refresh");
-    thunkApi.dispatch(setToken({ accessToken: data.accessToken }));
-    setAuthHeader(data.accessToken);
-    // Зберігаємо новий токен в localStorage
-    localStorage.setItem("accessToken", data.accessToken);
-    return data;
-  } catch (error) {
-    if (error.response?.status === 401) {
-      // Якщо сервер відповів 401, токен вичерпано
-      localStorage.removeItem("accessToken"); // Видалити старий токен
-      return thunkApi.rejectWithValue("Token expired");
-    }
-    return thunkApi.rejectWithValue(error.message);
-  }
-});
-
 // export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
 //   const accessToken = thunkApi.getState().auth.accessToken;
 
 //   if (!accessToken) {
 //     return thunkApi.rejectWithValue("Unable to fetch user");
 //   }
-//   setAuthHeader(accessToken);
+
+//   setAuthHeader(accessToken); // Передаємо токен у заголовках запиту
 //   try {
 //     const { data } = await authApi.post("/auth/refresh");
+//     thunkApi.dispatch(setToken({ accessToken: data.accessToken }));
+//     setAuthHeader(data.accessToken);
+//     // Зберігаємо новий токен в localStorage
+//     localStorage.setItem("accessToken", data.accessToken);
 //     return data;
 //   } catch (error) {
+//     if (error.response?.status === 401) {
+//       // Якщо сервер відповів 401, токен вичерпано
+//       localStorage.removeItem("accessToken"); // Видалити старий токен
+//       return thunkApi.rejectWithValue("Token expired");
+//     }
 //     return thunkApi.rejectWithValue(error.message);
 //   }
 // });
+
+export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
+  const accessToken = thunkApi.getState().auth.accessToken;
+
+  if (!accessToken) {
+    return thunkApi.rejectWithValue("Unable to fetch user");
+  }
+  setAuthHeader(accessToken);
+  try {
+    const { data } = await authApi.post("/auth/refresh");
+    return data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
 
 // // Нові токени //
 // export const refreshToken = createAsyncThunk(

@@ -3,7 +3,7 @@
 // import viteLogo from '/vite.svg'
 import "./App.css";
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,63 +14,32 @@ import { setToken } from "./redux/auth/slice";
 import { Suspense, lazy } from "react";
 import Loader from "./components/HomePage/WelcomeSection/Loader/Loader.jsx";
 import "./App.css";
-
 const SharedLayout = lazy(() => import("./components/SharedLayout.jsx"));
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage.jsx"));
 const RegisterPage = lazy(() =>
   import("./pages/RegisterPage/RegisterPage.jsx")
 );
-
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage.jsx"));
 const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage.jsx"));
-
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectTokens); // Дістаємо токен із Redux
   const isRefreshing = useSelector(selectIsRefreshing); // Стан оновлення користувача
-  const navigate = useNavigate();
-
   useEffect(() => {
+    // Перевіряємо токен у localStorage
     const localToken = localStorage.getItem("accessToken");
     if (localToken) {
       dispatch(setToken({ accessToken: localToken })); // Зберігаємо токен у Redux
     }
   }, [dispatch]);
-
-  // Оновлення токена тільки якщо він є в Redux
   useEffect(() => {
-    const refreshToken = async () => {
-      if (!token) return; // Якщо токен відсутній, нічого не робимо
-
-      try {
-        const response = await dispatch(refresh()); // Виконуємо запит на оновлення токена
-        if (response?.status === 401) {
-          // Якщо отримали статус 401, скидаємо токен і перенаправляємо на сторінку входу
-          localStorage.removeItem("accessToken"); // Видаляємо старий токен з localStorage
-          dispatch(setToken({ accessToken: null })); // Скидаємо токен у Redux
-          navigate("/signin"); // Перенаправляємо користувача на сторінку входу
-        }
-      } catch (error) {
-        if (error.response?.status === 401) {
-          // Якщо помилка 401, скидаємо токен і перенаправляємо на сторінку входу
-          localStorage.removeItem("accessToken"); // Видаляємо старий токен з localStorage
-          dispatch(setToken({ accessToken: null })); // Скидаємо токен у Redux
-          navigate("/signin"); // Перенаправляємо на сторінку входу
-        }
-      }
-    };
-
-    // Якщо токен існує, викликаємо оновлення
     if (token) {
-      refreshToken();
+      // Якщо токен є, оновлюємо користувача
+      dispatch(refresh());
     }
-  }, [dispatch, token, navigate]);
+  }, [dispatch, token]);
   // Відображаємо завантаження, якщо refresh() ще працює
-  return isRefreshing ? (
-    <h2>
-      <Loader />
-    </h2>
-  ) : (
+  return isRefreshing ? null : (
     <Suspense
       fallback={
         <h2>
