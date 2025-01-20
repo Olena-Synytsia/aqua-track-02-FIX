@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import UserSettingsForm from "./UserSettingsForm";
 import style from "./UserSettingsModal.module.css";
@@ -8,8 +8,7 @@ const UserSettingsModal = ({ onClose = () => {}, onSubmit = () => {} }) => {
   console.log("onSubmit in UserSettingsModal:", onSubmit);
 
   useEffect(() => {
-
-    const scrollY = window.scrollY; 
+    const scrollY = window.scrollY;
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = "100%";
@@ -29,7 +28,7 @@ const UserSettingsModal = ({ onClose = () => {}, onSubmit = () => {} }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <button className={style.modalCloseBtn} onClick={onClose}>
-        <IoCloseOutline className={style.closeBtn} />
+          <IoCloseOutline className={style.closeBtn} />
         </button>
         <h3 className={style.modalTitle}>Setting</h3>
         <UserSettingsForm onSubmit={onSubmit} onClose={onClose} />
@@ -40,6 +39,3 @@ const UserSettingsModal = ({ onClose = () => {}, onSubmit = () => {} }) => {
 };
 
 export default UserSettingsModal;
-
-
-

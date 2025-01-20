@@ -15,7 +15,7 @@ const DEFAULT_AVATAR_URL =
   "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
 
 const schema = yup.object().shape({
-  // photo: yup.mixed(),
+  photo: yup.mixed(),
 
   gender: yup.string().required("Please select a gender"),
   name: yup.string(),
@@ -32,8 +32,7 @@ const schema = yup.object().shape({
     .number()
     .min(0, "Water must be at least 0")
     .required("This field is required"),
-  // waterToDrink: yup.number().min(0, "Water to drink must be at least 0"),
-  // .required("This field is required"),
+  waterToDrink: yup.number().min(0, "Water to drink must be at least 0"),
 });
 
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
@@ -108,12 +107,12 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   };
 
   const calculateWaterNorma = (weight, activeTime, gender) => {
-    if (!weight || !activeTime || !gender) return 1500;
+    if (!weight || !activeTime || !gender) return 1.5;
     const waterNorma =
       gender.toLowerCase() === "woman"
         ? weight * 0.03 + activeTime * 0.4
         : weight * 0.04 + activeTime * 0.6;
-    return Number(waterNorma.toFixed(1));
+    return Math.max(0, Number(waterNorma.toFixed(1)));
   };
 
   const weight = watch("weight");

@@ -7,12 +7,21 @@ export const getCurrentUser = createAsyncThunk(
   "getCurrent",
   async (_, thunkApi) => {
     try {
-      const { data } = await authApi.get("/users/current");
-      return data.data;
+      const response = await authApi.get("/users/current");
+
+      // Перевірка на те, чи правильний формат відповіді
+      if (response && response.data && response.data.data) {
+        return response.data.data; // Повертаємо дані користувача
+      } else {
+        return thunkApi.rejectWithValue("Invalid response structure");
+      }
     } catch (error) {
-      return thunkApi.rejectWithValue(
-        error.message || "Failed to fetch user info"
-      );
+      // Якщо помилка має структуру з властивістю message, то її можна використовувати
+      const errorMessage =
+        error?.response?.data?.message ||
+        error.message ||
+        "Failed to fetch user info";
+      return thunkApi.rejectWithValue(errorMessage);
     }
   }
 );
