@@ -1,13 +1,16 @@
 .welcomeContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   gap: 16px;
 }
 
 @media screen and (min-width: 1440px) {
   .welcomeContainer {
-    display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 32px;
   }
 }
