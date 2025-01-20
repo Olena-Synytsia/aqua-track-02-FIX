@@ -11,7 +11,7 @@ import {
   selectIsLoggedIn,
 } from "../../../redux/auth/selectors";
 import s from "./SignInForm.module.css";
-import { setEmail } from "../../../redux/users/slice";
+import { setEmail } from "../../../redux/auth/slice";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),

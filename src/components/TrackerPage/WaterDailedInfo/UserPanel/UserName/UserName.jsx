@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 // import { selectUserName } from "../../../../../redux/auth/selectors";
 
 const UserName = () => {
-  const userEmailFromRedux = useSelector((state) => state.user.userInfo?.email);
-  const userNameFromRedux = useSelector((state) => state.user.userInfo?.name);
+  const userEmailFromRedux = useSelector((state) => state.auth.userInfo?.email);
+  const userNameFromRedux = useSelector((state) => state.user.user?.name);
   console.log("userEmailFromRedux: ", userEmailFromRedux);
   console.log("userNameFromRedux: ", userNameFromRedux);
 

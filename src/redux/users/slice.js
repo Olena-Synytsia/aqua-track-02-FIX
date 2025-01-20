@@ -3,7 +3,7 @@ import { getCurrentUser, updateUser } from "./operations";
 
 const initialState = {
   user: {
-    userId: "",
+    // userId: "",
     gender: null,
     name: null,
     email: null,
@@ -37,13 +37,13 @@ const userSlice = createSlice({
     // setUserId(state, action) {
     //   state.user.userId = action.payload; // Оновлюємо userId
     // },
-    setEmail(state, action) {
-      if (state.user) {
-        state.user = { ...state.user, name: action.payload };
-      } else {
-        state.user = { email: action.payload };
-      }
-    },
+    // setEmail(state, action) {
+    //   if (state.user) {
+    //     state.user = { ...state.user, name: action.payload };
+    //   } else {
+    //     state.user = { email: action.payload };
+    //   }
+    // },
     setName(state, action) {
       if (state.user) {
         state.user.name = action.payload; // Оновлюємо ім'я
@@ -84,6 +84,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearUserState, setEmail, setName } = userSlice.actions;
+export const { clearUserState, setName } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

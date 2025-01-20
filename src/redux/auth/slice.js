@@ -30,13 +30,13 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.isRegistered = false;
     },
-    // setEmail(state, action) {
-    //   if (state.userInfo) {
-    //     state.userInfo = { ...state.userInfo, name: action.payload };
-    //   } else {
-    //     state.userInfo = { email: action.payload };
-    //   }
-    // },
+    setEmail(state, action) {
+      if (state.userInfo) {
+        state.userInfo = { ...state.userInfo, name: action.payload };
+      } else {
+        state.userInfo = { email: action.payload };
+      }
+    },
     // setName(state, action) {
     //   if (state.userInfo) {
     //     state.userInfo.name = action.payload; // Оновлюємо ім'я
@@ -111,5 +111,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearUser, clearError, setToken } = userSlice.actions;
+export const { clearUser, clearError, setToken, setEmail } = userSlice.actions;
 export const authReducer = userSlice.reducer;
