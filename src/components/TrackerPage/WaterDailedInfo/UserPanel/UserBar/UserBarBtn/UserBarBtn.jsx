@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const UserBarBtn = ({ userName, avatarUrl }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const buttonRef = useRef(null);
-  const selectedImage = useSelector((state) => state.image.selectedImage);
+  const selectedImage = useSelector((state) => state.user.user?.photo);
 
   const [storedAvatar, setStoredAvatar] = useState(() => {
     // Отримання картинки з localStorage або використання avatarUrl за замовчуванням

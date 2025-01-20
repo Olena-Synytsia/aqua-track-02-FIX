@@ -6,8 +6,8 @@ import style from "./UserSettingsForm.module.css";
 import { AiOutlineUpload } from "react-icons/ai";
 import { getCurrentUser, updateUser } from "../../redux/users/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { setImage } from "../../redux/avatar/slice";
-import { setName } from "../../redux/users/slice";
+
+import { setImage, setName } from "../../redux/users/slice";
 import { selectTokens } from "../../redux/auth/selectors";
 // import { BsExclamationLg } from "react-icons/bs";
 
@@ -36,7 +36,7 @@ const schema = yup.object().shape({
     .number()
     .min(0, "Water must be at least 0")
     .required("This field is required"),
-  waterToDrink: yup.number().min(0, "Water to drink must be at least 0"),
+  // waterToDrink: yup.number().min(0, "Water to drink must be at least 0"),
   // .required("This field is required"),
 });
 
@@ -59,6 +59,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     resolver: yupResolver(schema),
     defaultValues: {
       ...user,
+      gender: user?.gender || "woman",
       waterNorma: user?.waterNorma || 1500,
     },
   });

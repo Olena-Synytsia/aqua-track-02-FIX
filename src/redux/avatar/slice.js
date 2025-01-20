@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import { createSlice } from "@reduxjs/toolkit";
 
-const imageSlice = createSlice({
-  name: "image",
-  initialState: {
-    selectedImage: null,
-  },
-  reducers: {
-    setImage: (state, action) => {
-      state.selectedImage = action.payload;
-    },
-    clearImage: (state) => {
-      state.selectedImage = null;
-    },
-  },
-});
+// const imageSlice = createSlice({
+//   name: "image",
+//   initialState: {
+//     selectedImage: null,
+//   },
+//   reducers: {
+//     setImage: (state, action) => {
+//       state.selectedImage = action.payload;
+//     },
+//     clearImage: (state) => {
+//       state.selectedImage = null;
+//     },
+//   },
+// });
 
-export const { setImage, clearImage } = imageSlice.actions;
-export const avatarReducer = imageSlice.reducer;
+// export const { setImage, clearImage } = imageSlice.actions;
+// export const avatarReducer = imageSlice.reducer;

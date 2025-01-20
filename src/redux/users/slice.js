@@ -10,7 +10,7 @@ const initialState = {
     weight: null,
     activeTime: null,
     photo: null,
-    // waterNorma: null,
+    waterNorma: null,
     // waterToDrink: null,
   },
   loading: false,
@@ -30,6 +30,8 @@ const userSlice = createSlice({
         weight: null,
         activeTime: null,
         photo: null,
+        waterNorma: null,
+        // waterToDrink: null,
       };
       state.loading = false;
       state.error = null;
@@ -46,10 +48,13 @@ const userSlice = createSlice({
     // },
     setName(state, action) {
       if (state.user) {
-        state.user.name = action.payload; // Оновлюємо ім'я
+        state.user.name = action.payload;
       } else {
         state.user = { name: action.payload };
       }
+    },
+    setImage: (state, action) => {
+      state.user.photo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -84,6 +89,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearUserState, setName } = userSlice.actions;
+export const { clearUserState, setName, setImage } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
