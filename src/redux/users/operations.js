@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authApi } from "../auth/operations";
+import { setAuthHeader } from "../auth/operations";
 
 // Отримання інформаіі про поточного окристувача //
 export const getCurrentUser = createAsyncThunk(
@@ -19,24 +20,23 @@ export const getCurrentUser = createAsyncThunk(
 // Оновлення даних користувача //
 export const updateUser = createAsyncThunk(
   "/users/current",
-  async (credentials, thunkApi) => {
+  async ({ data, accessToken }, thunkApi) => {
+    console.log("Received token:", accessToken);
+    console.log("Data to update:", data);
+    // const accessToken = thunkApi.getState().auth.accessToken;
+
+    console.log(thunkApi.getState());
     try {
-      // const formData = new FormData();
-      // console.log("Оновлення користувача з даними:", updateData);
+      if (!accessToken) {
+        return thunkApi.rejectWithValue("No token found");
+      }
+      setAuthHeader(accessToken);
 
-      // Object.keys(updateData).forEach((key) => {
-      //   if (updateData[key]) {
-      //     formData.append(key, updateData[key]);
-      //   } else {
-      //     console.warn(`Поле ${key} відсутнє в даних для оновлення.`);
-      //   }
-      // });
-
-      const { data } = await authApi.patch("/users/current", credentials, {
+      const response = await authApi.patch("/users/current", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      return data.data;
+      return response.data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Error updating user");
     }

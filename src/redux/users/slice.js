@@ -3,13 +3,15 @@ import { getCurrentUser, updateUser } from "./operations";
 
 const initialState = {
   user: {
+    userId: "",
+    gender: null,
     name: null,
     email: null,
-    gender: null,
     weight: null,
     activeTime: null,
-    dailyNorma: null,
     photo: null,
+    // waterNorma: null,
+    // waterToDrink: null,
   },
   loading: false,
   error: null,
@@ -20,10 +22,21 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     clearUserState(state) {
-      state.user = null;
+      state.user = {
+        // userId: "",
+        gender: null,
+        name: null,
+        email: null,
+        weight: null,
+        activeTime: null,
+        photo: null,
+      };
       state.loading = false;
       state.error = null;
     },
+    // setUserId(state, action) {
+    //   state.user.userId = action.payload; // Оновлюємо userId
+    // },
     setEmail(state, action) {
       if (state.user) {
         state.user = { ...state.user, name: action.payload };
