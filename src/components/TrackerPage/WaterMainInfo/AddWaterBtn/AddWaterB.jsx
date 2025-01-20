@@ -3,7 +3,7 @@ import WaterModal from "../../../Modal/WaterModal/WaterModal.jsx";
 import css from "./AddWaterB.module.css";
 import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../redux/dailyInfo/dailyInfoSlice.js";
-import icon from "../../../../../assets/sprite.svg";
+import icon from "/sprite.svg";
 
 const AddWaterB = () => {
   const dispatch = useDispatch();
