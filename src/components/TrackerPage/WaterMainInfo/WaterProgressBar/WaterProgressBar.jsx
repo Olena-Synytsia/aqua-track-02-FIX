@@ -4,57 +4,50 @@ import ReactSlider from "react-slider";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import {
   selectDate,
-  selectPercentDay,
   selectWaterDay,
 } from "../../../../redux/water/selectors.js";
+import { selectUserInfo } from "../../../../redux/auth/selectors.js";
 import {
   apiGetWaterDay,
   updateWaterDay,
 } from "../../../../redux/water/operations.js";
 import css from "./WaterProgressBar.module.css";
 import dayjs from "dayjs";
-
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
-
   const selectedDate = useSelector(selectDate);
-  const percentDay = useSelector(selectPercentDay);
   const consumedWater = useSelector(selectWaterDay);
-
+  const user = useSelector(selectUserInfo);
+  const dailyWaterNorm = user?.dailyWaterNorm || 1500;
   const [localPercent, setLocalPercent] = useState(0);
-
   useEffect(() => {
     if (selectedDate) {
       dispatch(apiGetWaterDay(selectedDate));
     }
   }, [selectedDate, dispatch]);
-
   useEffect(() => {
-    if (percentDay !== undefined) {
-      setLocalPercent(percentDay);
+    if (consumedWater !== undefined && dailyWaterNorm > 0) {
+      const percent = Math.min((consumedWater / dailyWaterNorm) * 100, 100);
+      setLocalPercent(percent);
     }
-  }, [percentDay]);
-
+  }, [consumedWater, dailyWaterNorm]);
   const handleSliderChange = (newPercent) => {
+    const newWaterAmount = Math.round((newPercent / 100) * dailyWaterNorm);
     setLocalPercent(newPercent);
     if (selectedDate) {
-      dispatch(updateWaterDay({ date: selectedDate, amount: newPercent }));
+      dispatch(updateWaterDay({ date: selectedDate, amount: newWaterAmount }));
     }
   };
-
   const currentDate = dayjs().format("YYYY-MM-DD");
   const selectedDateFormatted = dayjs(selectedDate).format("YYYY-MM-DD");
-
   const formattedDate =
     selectedDateFormatted === currentDate
       ? "Today"
-      : dayjs(selectedDate).format("DD, MMMM");
-
+      : dayjs(selectedDate).format("DD MMMM");
   return (
     <div className={css.container}>
       <div className={css.containerBar}>
-        <div className={css.title}>{formattedDate}</div>
-
+        <div className={css.title}>{formattedDate}</div>{" "}
         <div className={css.sliderWrapper}>
           <ReactSlider
             value={localPercent}
@@ -72,20 +65,18 @@ const WaterProgressBar = () => {
                 data-tooltip-id="progress-tooltip"
                 data-tooltip-content={`${Math.min(localPercent, 100).toFixed(
                   0
-                )}%`}
+                )}% (${consumedWater} ml / ${dailyWaterNorm} ml)`}
               />
             )}
           />
-        </div>
-
+        </div>{" "}
         <ReactTooltip
           id="progress-tooltip"
           className={css.customTooltip}
           place="top"
           effect="solid"
           arrowClassName={css.customArrow}
-        />
-
+        />{" "}
         <div className={css.percentBar}>
           <span>0%</span>
           <span>50%</span>
@@ -95,5 +86,4 @@ const WaterProgressBar = () => {
     </div>
   );
 };
-
 export default WaterProgressBar;
