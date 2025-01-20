@@ -38,8 +38,8 @@ const WaterForm = ({ onClose }) => {
   const validationSchema = Yup.object().shape({
     volume: Yup.number()
       .required("Please enter the amount of water.")
-      .min(1, "The minimum amount is 1ml.")
-      .max(15000, "The maximum amount is 15000ml."),
+      .min(50, "The minimum amount is 1ml.")
+      .max(5000, "The maximum amount is 5000ml."),
     date: Yup.string()
       .required("Please enter the time.")
       .matches(
@@ -127,8 +127,8 @@ const WaterForm = ({ onClose }) => {
       <input
         className={s.input}
         type="number"
-        min="1"
-        max="15000"
+        min="50"
+        max="5000"
         value={volume === 0 ? "" : volume}
         onChange={(e) => setValue("volume", Number(e.target.value))}
       />
