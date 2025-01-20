@@ -47,7 +47,7 @@ const WaterItem = ({ _id, date, volume }) => {
     <>
       <li className={s.item}>
         <svg className={s.icon}>
-          <use href="src/assets/sprite.svg#icon-mage_water-glass-fill"></use>
+          <use href="sprite.svg#icon-mage_water-glass-fill"></use>
         </svg>
         <div className={s.indicators}>
           <p className={s.value}>{formateVolume(volume)}</p>

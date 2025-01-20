@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const UserBarBtn = ({ userName, avatarUrl }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const buttonRef = useRef(null);
+  const popoverRef = useRef(null);
   const selectedImage = useSelector((state) => state.user.user?.photo);
 
   const [storedAvatar, setStoredAvatar] = useState(() => {
@@ -18,9 +19,31 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
     setIsPopoverOpen((prev) => !prev); // Перемикає стан поповеру
   };
 
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       popoverRef.current &&
+  //       !popoverRef.current.contains(event.target) &&
+  //       buttonRef.current &&
+  //       !buttonRef.current.contains(event.target)
+  //     ) {
+  //       setIsPopoverOpen(false);
+  //     }
+  //   };
+
+  //   if (isPopoverOpen) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isPopoverOpen]);
+
   useEffect(() => {
     if (selectedImage) {
-      // Збереження вибраної картинки в localStorage
       localStorage.setItem("userAvatar", selectedImage);
       setStoredAvatar(selectedImage); // Оновлення локального стану
     }
@@ -55,6 +78,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
           <svg
             width="16"
             height="16"
+            viewBox="0 0 16 16"
             style={{
               marginLeft: "8px",
               cursor: "pointer",
@@ -62,12 +86,12 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
               transition: "transform 0.3s ease",
             }}
           >
-            <use href="src/assets/sprite.svg#icon-chevron-down-1"></use>
+            <use href="sprite.svg#icon-chevron-down-1" />
           </svg>
         </button>
       </div>
       {isPopoverOpen && (
-        <div>
+        <div ref={popoverRef}>
           <UserBarPopover onClose={() => setIsPopoverOpen(false)} />
         </div>
       )}

@@ -17,7 +17,7 @@ const AddWaterBtn = () => {
     <>
       <button onClick={handleAdd} className={s.addBtn}>
         <svg className={s.iconPlus}>
-          <use href="../../../assets/sprite.svg#icon-plus"></use>
+          <use href="sprite.svg#icon-plus"></use>
         </svg>
         Add water
       </button>
