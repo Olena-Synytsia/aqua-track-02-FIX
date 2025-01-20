@@ -75,6 +75,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
+        console.log("Payload in fulfilled:", action.payload);
         state.loading = false;
         state.user = { ...state.user, ...action.payload };
       })
