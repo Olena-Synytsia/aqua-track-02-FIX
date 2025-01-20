@@ -86,11 +86,29 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
   setAuthHeader(accessToken);
   try {
     const { data } = await authApi.post("/auth/refresh");
+    thunkApi.dispatch(setToken({ accessToken: data.accessToken }));
+    setAuthHeader(data.accessToken);
+    // localStorage.setItem("accessToken", data.accessToken);
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
   }
 });
+
+// export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
+//   const accessToken = thunkApi.getState().auth.accessToken;
+
+//   if (!accessToken) {
+//     return thunkApi.rejectWithValue("Unable to fetch user");
+//   }
+//   setAuthHeader(accessToken);
+//   try {
+//     const { data } = await authApi.post("/auth/refresh");
+//     return data;
+//   } catch (error) {
+//     return thunkApi.rejectWithValue(error.message);
+//   }
+// });
 
 // // Нові токени //
 // export const refreshToken = createAsyncThunk(
