@@ -78,8 +78,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
           <svg
             width="16"
             height="16"
-            // fill=" #ffffff"
-            // stroke=" #ffffff"
+            viewBox="0 0 16 16"
             style={{
               marginLeft: "8px",
               cursor: "pointer",
