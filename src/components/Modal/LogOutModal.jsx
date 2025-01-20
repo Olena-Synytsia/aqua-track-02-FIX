@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./LogOutModal.module.css";
 import { logout } from "../../redux/auth/operations";
 import { clearUser } from "../../redux/auth/slice";
+import { IoCloseOutline } from "react-icons/io5";
 
 const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
   const dispatch = useDispatch();
@@ -31,8 +32,8 @@ const LogOutModal = ({ onClose = () => {}, onLogOut = () => {} }) => {
         className={style.modalContainer}
         onClick={(event) => event.stopPropagation()} // Предотвращение всплытия события
       >
-        <button className={style.closeButton} onClick={onClose}>
-          &times;
+        <button className={style.modalCloseBtn} onClick={onClose}>
+        <IoCloseOutline className={style.closeBtn} />
         </button>
         <h2 className={style.title}>Log out</h2>
         <p className={style.message}>Do you really want to leave?</p>
