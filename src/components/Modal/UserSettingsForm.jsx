@@ -16,7 +16,6 @@ const DEFAULT_AVATAR_URL =
 
 const schema = yup.object().shape({
   photo: yup.mixed(),
-
   gender: yup.string().required("Please select a gender"),
   name: yup.string(),
   email: yup.string().email("Invalid email"),
@@ -54,8 +53,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     resolver: yupResolver(schema),
     defaultValues: {
       ...user,
-      gender: user?.gender || "woman",
-      waterNorma: user?.waterNorma || 1500,
+      waterNorma: user?.waterNorma || 1.5,
     },
   });
 
@@ -213,12 +211,12 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
             </div>
             <div className={style.radioGroup}>
               <label className={style.radioLabel}>
-                <input type="radio" value="Woman" {...register("gender")} />
+                <input type="radio" value="woman" {...register("gender")} />
                 <span className={style.radioCustom}></span>
                 Woman
               </label>
               <label className={style.radioLabel}>
-                <input type="radio" value="Man" {...register("gender")} />
+                <input type="radio" value="man" {...register("gender")} />
                 <span className={style.radioCustom}></span>
                 Man
               </label>
