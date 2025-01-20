@@ -9,6 +9,7 @@ const initialState = {
   items: [],
   operationType: "add",
   itemId: "",
+  waterDay: "",
   isError: false,
   isLoading: false,
 };
@@ -23,14 +24,14 @@ const slice = createSlice({
     setItemId: (state, action) => {
       state.itemId = action.payload;
     },
+    setWaterDay: (state, action) => {
+      state.waterDay = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchWaterItem.fulfilled, (state, action) => {
         state.items = action.payload;
-
-        // console.log(action.payload);
-
       })
       .addCase(addWaterItem.fulfilled, (state, action) => {
         state.items.push(action.payload);
@@ -46,12 +47,13 @@ const slice = createSlice({
   },
 });
 
+export const waterItemReducer = slice.reducer;
+export const { addItems, setOperationType, setItemId, setWaterDay } =
+  slice.actions;
+
 export const selectWaterItem = (state) => state.waterItem.items;
 export const selectOperationType = (state) => state.waterItem.operationType;
 export const selectIsError = (state) => state.waterItem.isError;
 export const selectIsLoading = (state) => state.waterItem.isLoading;
 export const selectItemId = (state) => state.waterItem.itemId;
-
-export const waterItemReducer = slice.reducer;
-export const { addItems, setOperationType, updateItem, setItemId } =
-  slice.actions;
+export const selectWaterDay = (state) => state.waterItem.waterDay;

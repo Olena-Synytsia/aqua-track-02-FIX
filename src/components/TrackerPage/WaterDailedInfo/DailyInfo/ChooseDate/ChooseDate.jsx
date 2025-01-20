@@ -1,9 +1,13 @@
-// import { useSelect } from "@chakra-ui/react";
+import dayjs from "dayjs";
+import { selectWaterDay } from "../../../../../redux/dailyInfo/dailyInfoSlice.js";
 import s from "./ChooseDate.module.css";
-// import { selectDate } from "../../../../../redux/water/selectors.js";
+import { useSelector } from "react-redux";
 
-const ChooseDate = ({ monthDay = "Today" }) => {
-  // const day = useSelect(selectDate);
-  return <div className={s.chooseDate}>{monthDay}</div>;
+const ChooseDate = () => {
+  const waterDay = useSelector(selectWaterDay);
+  const isToday = dayjs(waterDay).isSame(dayjs(), "day");
+  const displayDate = isToday ? "Today" : dayjs(waterDay).format("D, MMMM");
+
+  return <div className={s.chooseDate}>{displayDate}</div>;
 };
 export default ChooseDate;
