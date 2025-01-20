@@ -85,7 +85,7 @@ export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
   }
   setAuthHeader(accessToken);
   try {
-    const { data } = await authApi.post("/auth/refresh");
+    const { data } = await authApi.get("/auth/refresh");
     thunkApi.dispatch(setToken({ accessToken: data.accessToken }));
     setAuthHeader(data.accessToken);
     // localStorage.setItem("accessToken", data.accessToken);
