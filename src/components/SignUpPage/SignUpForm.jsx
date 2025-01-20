@@ -125,7 +125,7 @@ const SignUpForm = () => {
                       viewBox="0 0 32 32"
                     >
                       <use
-                        href={`../../../assets/sprite.svg#${
+                        href={`/sprite.svg#${
                           passwordVisible ? "icon-eye" : "icon-eye-off"
                         }`}
                       ></use>
@@ -164,7 +164,7 @@ const SignUpForm = () => {
                       viewBox="0 0 32 32"
                     >
                       <use
-                        href={`../../../assets/sprite.svg#${
+                        href={`/sprite.svg#${
                           repeatPasswordVisible ? "icon-eye" : "icon-eye-off"
                         }`}
                       ></use>
