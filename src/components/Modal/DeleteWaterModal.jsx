@@ -1,36 +1,61 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./DeleteWaterModal.module.css";
-import { apiGetWaterDay } from "../../redux/water/operations";
-import { addItems } from "../../redux/dailyInfo/dailyInfoSlice";
+import { deleteWaterRecord } from "../../redux/water-delete/operations";
 
-const DeleteWaterModal = ({ onClose = () => {}, waterId, day }) => {
+const DeleteWaterModal = ({ idWaterRecord, onClose = () => {} }) => {
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleDeleteClick = async () => {
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  const handleDelete = async () => {
     try {
-      dispatch(addItems({ id: waterId, remove: true }));
+      if (!idWaterRecord || typeof idWaterRecord !== "string") {
+        throw new Error("Water record ID is missing or invalid.");
+      }
 
-      await dispatch(apiGetWaterDay(day)).unwrap();
+      console.log("Attempting to delete record with ID:", idWaterRecord);
 
-      // dispatch(closeModal());
+      await dispatch(deleteWaterRecord(idWaterRecord)).unwrap();
+      console.log("Record successfully deleted:", idWaterRecord);
+
       onClose();
     } catch (error) {
-      setErrorMessage(error.message || "An error occurred while deleting.");
+      console.error("Error during deletion:", error);
+      setErrorMessage(
+        error.message || "An error occurred while deleting. Please try again."
+      );
     }
   };
 
   return (
-    <div className={style.modalOverlay} onClick={onClose}>
+    <div onClick={handleBackdropClick} className={style.modalOverlay}>
       <div
         className={style.modalContainer}
-        onClick={(event) => event.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <button className={style.closeButton} onClick={onClose}>
           &times;
         </button>
-        <h2 className={style.title}>Delete Water Entry</h2>
+        <h2 className={style.title}>Delete Entry</h2>
         <p className={style.message}>
           Are you sure you want to delete this entry?
         </p>
@@ -39,7 +64,8 @@ const DeleteWaterModal = ({ onClose = () => {}, waterId, day }) => {
           <button
             type="button"
             className={style.deleteButton}
-            onClick={handleDeleteClick}
+            onClick={handleDelete}
+            disabled={!idWaterRecord}
           >
             Delete
           </button>
@@ -57,3 +83,6 @@ const DeleteWaterModal = ({ onClose = () => {}, waterId, day }) => {
 };
 
 export default DeleteWaterModal;
+
+
+
