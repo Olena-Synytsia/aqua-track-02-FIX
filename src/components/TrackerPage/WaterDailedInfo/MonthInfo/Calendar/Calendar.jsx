@@ -39,17 +39,17 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
         key={day}
         day={day}
         selectedDate={selectedDate}
-        onDateSelect={setSelectedDate}
+        onDateSelect={(date) => setSelectedDate(new Date(date))}
         percent={percent}
       />
     );
   });
-  if (isLoading) {
-    return <div>Загрузка...</div>;
-  }
-  if (isError) {
-    return <div>Ошибка при загрузке данных.</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Загрузка...</div>;
+  // }
+  // if (isError) {
+  //   return <div>Ошибка при загрузке данных.</div>;
+  // }
   return (
     <div>
      <div className={s.calendargrid}> {days} </div> {" "}

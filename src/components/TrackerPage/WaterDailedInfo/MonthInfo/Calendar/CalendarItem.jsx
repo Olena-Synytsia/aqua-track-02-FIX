@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 const getFormattedDate = (selectedDate, day) => {
   const date = new Date(selectedDate);
   date.setDate(day);
-  return dayjs(date).format("YYYY-MM");
+  return dayjs(date).format("YYYY-MM-DD");
 };
 
 const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
