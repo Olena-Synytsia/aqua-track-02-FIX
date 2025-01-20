@@ -3,7 +3,7 @@
 // import viteLogo from '/vite.svg'
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +28,7 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectTokens); // Дістаємо токен із Redux
   const isRefreshing = useSelector(selectIsRefreshing); // Стан оновлення користувача
+  const navigate = useNavigate();
 
   useEffect(() => {
     const localToken = localStorage.getItem("accessToken");
@@ -44,13 +45,17 @@ function App() {
       try {
         const response = await dispatch(refresh()); // Виконуємо запит на оновлення токена
         if (response?.status === 401) {
-          // Якщо отримали статус 401, можна спробувати отримати новий токен
-          // Ваш механізм для оновлення токена, наприклад, з refresh token
+          // Якщо отримали статус 401, скидаємо токен і перенаправляємо на сторінку входу
+          localStorage.removeItem("accessToken"); // Видаляємо старий токен з localStorage
+          dispatch(setToken({ accessToken: null })); // Скидаємо токен у Redux
+          navigate("/signin"); // Перенаправляємо користувача на сторінку входу
         }
       } catch (error) {
         if (error.response?.status === 401) {
-          // Якщо помилка 401, спробуємо оновити токен
-          dispatch(refresh()); // Запит на оновлення
+          // Якщо помилка 401, скидаємо токен і перенаправляємо на сторінку входу
+          localStorage.removeItem("accessToken"); // Видаляємо старий токен з localStorage
+          dispatch(setToken({ accessToken: null })); // Скидаємо токен у Redux
+          navigate("/signin"); // Перенаправляємо на сторінку входу
         }
       }
     };
@@ -59,7 +64,7 @@ function App() {
     if (token) {
       refreshToken();
     }
-  }, [dispatch, token]);
+  }, [dispatch, token, navigate]);
   // Відображаємо завантаження, якщо refresh() ще працює
   return isRefreshing ? (
     <h2>
