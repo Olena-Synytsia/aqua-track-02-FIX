@@ -29,40 +29,39 @@ function App() {
   const token = useSelector(selectTokens); // Дістаємо токен із Redux
   const isRefreshing = useSelector(selectIsRefreshing); // Стан оновлення користувача
 
-  useEffect(() => {
-    // Перевіряємо токен у localStorage
-    const localToken = localStorage.getItem("accessToken");
-    if (localToken) {
-      dispatch(setToken({ accessToken: localToken })); // Зберігаємо токен у Redux
-    }
-  }, [dispatch]);
+   useEffect(() => {
+     const localToken = localStorage.getItem("accessToken");
+     if (localToken) {
+       dispatch(setToken({ accessToken: localToken })); // Зберігаємо токен у Redux
+     }
+   }, [dispatch]);
 
-  useEffect(() => {
-    const refreshToken = async () => {
-      try {
-        if (token) {
-          // Виконуємо запит на оновлення токена, якщо є токен
-          const response = await dispatch(refresh());
+   // Оновлення токена тільки якщо він є в Redux
+   useEffect(() => {
+     const refreshToken = async () => {
+       if (!token) return; // Якщо токен відсутній, нічого не робимо
 
-          if (response?.status === 401) {
-            // Якщо отримали 401, то можна спробувати оновити токен
-            // Ваш механізм для отримання нового токена
-          }
-        }
-      } catch (error) {
-        if (error.response?.status === 401) {
-          // Якщо сервер відповідає статусом 401, пробуємо оновити токен
-          dispatch(refresh()); // Запит на оновлення
-        }
-      }
-    };
+       try {
+         const response = await dispatch(refresh()); // Виконуємо запит на оновлення токена
+         if (response?.status === 401) {
+           // Якщо отримали статус 401, можна спробувати отримати новий токен
+           // Ваш механізм для оновлення токена, наприклад, з refresh token
+         }
+       } catch (error) {
+         if (error.response?.status === 401) {
+           // Якщо помилка 401, спробуємо оновити токен
+           dispatch(refresh()); // Запит на оновлення
+         }
+       }
+     };
 
-    if (token) {
-      refreshToken();
-    }
-  }, [dispatch, token]);
+     // Якщо токен існує, викликаємо оновлення
+     if (token) {
+       refreshToken();
+     }
+   }, [dispatch, token]); 
   // Відображаємо завантаження, якщо refresh() ще працює
-  return isRefreshing ? null : (
+  return isRefreshing ? (
     <Suspense
       fallback={
         <h2>
