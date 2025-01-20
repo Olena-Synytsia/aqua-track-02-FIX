@@ -103,14 +103,9 @@ export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
 // });
 
 export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
-  const accessToken = thunkApi.getState().auth.accessToken;
-
-  if (!accessToken) {
-    return thunkApi.rejectWithValue("Unable to fetch user");
-  }
-  setAuthHeader(accessToken);
+  // refreshToken вже має бути в cookies
   try {
-    const { data } = await authApi.post("/auth/refresh");
+    const { data } = await authApi.post("/auth/refresh"); // Без необхідності передавати accessToken в заголовку
     return data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
