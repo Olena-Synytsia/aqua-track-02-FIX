@@ -1,6 +1,7 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addWaterItem,
+  deleteWaterItem,
   fetchWaterItem,
   updateWaterItem,
 } from "./dailyInfoOps.js";
@@ -44,6 +45,7 @@ const slice = createSlice({
           state.items[index] = action.payload;
         }
       })
+
       .addMatcher(
         isAnyOf(
           fetchWaterItem.pending,
@@ -76,6 +78,15 @@ const slice = createSlice({
           state.isError = true;
         }
       );
+
+      .addCase(deleteWaterItem.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item._id !== action.payload);
+      })
+      .addCase(deleteWaterItem.rejected, (state, action) => {
+        state.isError = true;
+        console.error("Failed to delete water item:", action.payload);
+      });
+
   },
 });
 

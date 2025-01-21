@@ -42,6 +42,12 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
   //   };
   // }, [isPopoverOpen]);
 
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setIsPopoverOpen(false);
+    }
+  };
+
   useEffect(() => {
     if (selectedImage) {
       localStorage.setItem("userAvatar", selectedImage);
@@ -91,7 +97,7 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
         </button>
       </div>
       {isPopoverOpen && (
-        <div ref={popoverRef}>
+        <div ref={popoverRef} onClick={handleBackdropClick}>
           <UserBarPopover onClose={() => setIsPopoverOpen(false)} />
         </div>
       )}
