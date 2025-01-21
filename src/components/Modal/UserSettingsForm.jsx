@@ -27,6 +27,7 @@ const schema = yup.object().shape({
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const userEmailFromRedux = useSelector((state) => state.auth.userInfo?.email);
   // const userId = useSelector((state) => state.user.userId);
   // console.log("User ID from Redux:", userId);
   const accessToken = useSelector(selectTokens);
@@ -262,6 +263,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
               <input
                 className={style.formInput}
                 type="email"
+                defaultValue={userEmailFromRedux}
                 {...register("email")}
               />
               {errors.email && (

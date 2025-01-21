@@ -19,29 +19,6 @@ const UserBarBtn = ({ userName, avatarUrl }) => {
     setIsPopoverOpen((prev) => !prev); // Перемикає стан поповеру
   };
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (
-  //       popoverRef.current &&
-  //       !popoverRef.current.contains(event.target) &&
-  //       buttonRef.current &&
-  //       !buttonRef.current.contains(event.target)
-  //     ) {
-  //       setIsPopoverOpen(false);
-  //     }
-  //   };
-
-  //   if (isPopoverOpen) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   }
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isPopoverOpen]);
-
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       setIsPopoverOpen(false);
