@@ -5,6 +5,15 @@ import { selectWaterItem } from "../../../../../redux/dailyInfo/dailyInfoSlice.j
 
 const WaterList = () => {
   const waterItems = useSelector(selectWaterItem);
+
+  if (!waterItems || waterItems.length === 0) {
+    return (
+      <div className={s.content}>
+        <p className={s.text}>No information is available</p>
+      </div>
+    );
+  }
+
   return (
     <ul className={s.list}>
       {waterItems.map((item) => (

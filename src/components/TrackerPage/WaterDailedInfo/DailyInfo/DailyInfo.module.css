@@ -13,8 +13,25 @@
   align-items: center;
 }
 
+.content {
+  height: 98px;
+}
+
+.errorText {
+  .errorText {
+    color: rgb(177, 80, 80);
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
 @media (min-width: 768px) {
   .dailyInfo {
     width: 100%;
+  }
+
+  .content {
+    height: 118px;
   }
 }

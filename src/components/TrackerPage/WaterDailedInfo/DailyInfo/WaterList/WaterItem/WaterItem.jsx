@@ -3,15 +3,19 @@ import { FiEdit2 } from "react-icons/fi";
 import s from "./WaterItem.module.css";
 import { useState } from "react";
 import WaterModal from "../../../../../Modal/WaterModal/WaterModal.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  selectWaterDay,
   setItemId,
   setOperationType,
 } from "../../../../../../redux/dailyInfo/dailyInfoSlice.js";
 import DeleteWaterModal from "../../../../../Modal/DeleteWaterModal";
+import dayjs from "dayjs";
 
 const WaterItem = ({ _id, date, volume }) => {
   const dispatch = useDispatch();
+  const waterDay = useSelector(selectWaterDay);
+  const isToday = dayjs(waterDay).isSame(dayjs(), "day");
 
   const formateVolume = (volume) => {
     if (volume < 1000) {
@@ -53,15 +57,26 @@ const WaterItem = ({ _id, date, volume }) => {
           <p className={s.value}>{formateVolume(volume)}</p>
           <p className={s.time}>{extractTime(date)}</p>
         </div>
-        <div className={s.buttons}>
-          <button className={s.btn} onClick={handleEdit}>
-            <FiEdit2 />
-          </button>
+        {isToday ? (
+          <div className={s.buttons}>
+            <button className={s.btn} onClick={handleEdit}>
+              <FiEdit2 />
+            </button>
 
-          <button className={s.btn} onClick={handleDelete}>
-            <AiOutlineDelete />
-          </button>
-        </div>
+            <button className={s.btn} onClick={handleDelete}>
+              <AiOutlineDelete />
+            </button>
+          </div>
+        ) : (
+          <div className={`${s.buttons} ${s.disabledButtons}`}>
+            <button className={`${s.btn} ${s.disabled}`} disabled>
+              <FiEdit2 />
+            </button>
+            <button className={`${s.btn} ${s.disabled}`} disabled>
+              <AiOutlineDelete />
+            </button>
+          </div>
+        )}
       </li>
       {isOpen && <WaterModal onClose={() => setIsOpen(false)} />}
       {isDeleteModalOpen && (
