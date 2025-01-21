@@ -6,7 +6,7 @@ export const fetchWaterPercentData = createAsyncThunk(
   async (date, thunkApi) => {
     try {
       const data = await fetchWaterPer(date);
-      console.log("Data from fetchWaterPer:", data);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -32,7 +32,6 @@ const waterPerSlice = createSlice({
       .addCase(fetchWaterPer.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterData = action.payload;
-        console.log("State Water Data:", state.waterData);
       })
       .addCase(fetchWaterPer.rejected, (state, action) => {
         state.isLoading = false;

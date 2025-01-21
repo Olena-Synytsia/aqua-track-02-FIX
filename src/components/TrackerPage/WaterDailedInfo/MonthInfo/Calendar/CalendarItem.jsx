@@ -4,13 +4,6 @@ import dayjs from "dayjs";
 import { useDispatch } from "react-redux"
 import { setWaterDay } from "../../../../../redux/dailyInfo/dailyInfoSlice"
 
-
-// const getFormattedDate = (selectedDate, day) => {
-//   const date = new Date(selectedDate);
-//   date.setDate(day);
-//   return dayjs(date).format("YYYY-MM-DD");
-// };
-
 const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
   const dispatch = useDispatch();
   const getFormattedDate = (selectedDate, day) => {
