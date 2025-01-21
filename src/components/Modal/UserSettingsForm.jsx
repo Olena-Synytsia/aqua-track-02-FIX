@@ -264,7 +264,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
                 className={style.formInput}
                 type="email"
                 defaultValue={userEmailFromRedux}
-                {...register("email")}
+                {...register("userEmailFromRedux")}
               />
               {errors.email && (
                 <p className={style.errorText}>{errors.email.message}</p>
@@ -355,6 +355,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
           <input
             className={style.formInput}
             type="number"
+            step="0.1"
             defaultValue={waterNorma}
             {...register("waterNorma")}
           />
