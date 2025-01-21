@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactSlider from "react-slider";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import { Slider, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDate, selectWaterDay } from "../../../../redux/water/selectors";
 import { selectUserInfo } from "../../../../redux/auth/selectors";
@@ -8,8 +7,8 @@ import {
   apiGetWaterDay,
   updateWaterDay,
 } from "../../../../redux/water/operations";
-import s from "./WaterProgressBar.module.css";
 import dayjs from "dayjs";
+import s from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
@@ -19,15 +18,8 @@ const WaterProgressBar = () => {
   const dailyWaterNorm = user?.dailyWaterNorm || 1500;
   const [localPercent, setLocalPercent] = useState(0);
 
-  console.log("WaterProgressBar rendered");
-  console.log("Selected Date:", selectedDate);
-  console.log("Consumed Water:", consumedWater);
-  console.log("Daily Water Norm:", dailyWaterNorm);
-  console.log("Local Percent:", localPercent);
-
   useEffect(() => {
     if (selectedDate) {
-      console.log("apiGetWaterDay dispatched");
       dispatch(apiGetWaterDay(selectedDate));
     }
   }, [selectedDate, dispatch]);
@@ -35,18 +27,15 @@ const WaterProgressBar = () => {
   useEffect(() => {
     if (consumedWater !== undefined && dailyWaterNorm > 0) {
       const percent = Math.min((consumedWater / dailyWaterNorm) * 100, 100);
-      console.log("Percent:", percent);
       setLocalPercent(percent);
     }
   }, [consumedWater, dailyWaterNorm]);
 
-  const handleSliderChange = (newPercent) => {
-    console.log("New Percent:", newPercent);
-    const newWaterAmount = Math.round((newPercent / 100) * dailyWaterNorm);
-    console.log("New Water Amount:", newWaterAmount);
-    setLocalPercent(newPercent);
+  const handleSliderChange = (event, newValue) => {
+    const newWaterAmount = Math.round((newValue / 100) * dailyWaterNorm);
+
+    setLocalPercent(newValue);
     if (selectedDate) {
-      console.log("updateWaterDay dispatched");
       dispatch(updateWaterDay({ date: selectedDate, amount: newWaterAmount }));
     }
   };
@@ -63,39 +52,47 @@ const WaterProgressBar = () => {
       <div className={s.containerBar}>
         <div className={s.title}>{formattedDate}</div>
         <div className={s.sliderWrapper}>
-          <ReactSlider
+          <Slider
             value={localPercent}
             onChange={handleSliderChange}
             min={0}
             max={100}
             step={1}
-            className={s.slider}
-            thumbClassName={s.thumb}
-            trackClassName={s.track}
-            renderThumb={({ value, ...props }) => (
-              <div
-                {...props}
-                className={s.thumb}
-                data-tooltip-id="progress-tooltip"
-                data-tooltip-content={`${Math.min(localPercent, 100).toFixed(
-                  0
-                )}% (${consumedWater} ml / ${dailyWaterNorm} ml)`}
-              />
-            )}
+            aria-label="Water consumption progress"
+            valueLabelDisplay="auto"
+            sx={{
+              color: "#9be1a0",
+              height: 8,
+              "& .MuiSlider-track": {
+                backgroundColor: "#9be1a0",
+              },
+              "& .MuiSlider-rail": {
+                opacity: 0.5,
+                backgroundColor: "#f0eff4",
+              },
+              "& .MuiSlider-thumb": {
+                width: 12,
+                height: 12,
+                backgroundColor: "#9be1a0",
+              },
+            }}
           />
         </div>
-        <ReactTooltip
-          id="progress-tooltip"
-          className={s.customTooltip}
-          place="top"
-          effect="solid"
-          arrowClassName={s.customArrow}
-        />
         <div className={s.percentBar}>
           <span>0%</span>
           <span>50%</span>
           <span>100%</span>
         </div>
+        <Tooltip
+          title={`${localPercent.toFixed(
+            0
+          )}% (${consumedWater} ml / ${dailyWaterNorm} ml)`}
+          placement="top"
+          arrow
+          classes={{ tooltip: s.customTooltip, arrow: s.customArrow }}
+        >
+          <div className={s.sliderTooltip} />
+        </Tooltip>
       </div>
     </div>
   );
