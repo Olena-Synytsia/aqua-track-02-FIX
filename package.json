@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^3.3.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^3.10.0",
+    "@mui/material": "^6.4.0",
     "@reduxjs/toolkit": "^2.5.0",
     "@vitejs/plugin-react": "^4.3.4",
     "aos": "^2.3.4",
