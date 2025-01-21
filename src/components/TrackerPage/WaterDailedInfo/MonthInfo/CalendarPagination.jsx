@@ -1,4 +1,3 @@
-// import React from "react";
 import dayjs from "dayjs";
 import s from "./CalendarPagination.module.css";
 
@@ -35,6 +34,5 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
     </div>
   );
 };
-// {"<"}
 
 export default CalendarPagination;

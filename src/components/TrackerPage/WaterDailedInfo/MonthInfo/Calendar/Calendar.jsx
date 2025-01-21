@@ -4,11 +4,7 @@ import s from "./Calendar.module.css";
 import dayjs from "dayjs";
 import { fetchWaterPer } from "../../../../../redux/monthInfo/getWaterPercent.js";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  // selectIsError,
-  // selectIsLoading,
-  selectWaterData,
-} from "../../../../../redux/monthInfo/waterSlice.js";
+import { selectWaterData } from "../../../../../redux/monthInfo/waterSlice.js";
 
 const getFormattedDate = (selectedDate) => {
   return dayjs(selectedDate).format("YYYY-MM");
@@ -17,8 +13,7 @@ const getFormattedDate = (selectedDate) => {
 const Calendar = ({ selectedDate, setSelectedDate }) => {
   const dispatch = useDispatch();
   const waterData = useSelector(selectWaterData);
-  // const isLoading = useSelector(selectIsLoading);
-  // const isError = useSelector(selectIsError);
+
 
   useEffect(() => {
     const formattedDate = getFormattedDate(selectedDate);
@@ -33,7 +28,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
     const date = dayjs(selectedDate).date(day).format("YYYY-MM-DD");
     const dayData = waterData.find((d) => d.day === date);
     const percent = dayData ? dayData.percent : undefined;
-    console.log(`Day: ${day}, Percent: ${percent}`);
+   
     return (
       <CalendarItem
         key={day}
@@ -44,12 +39,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
       />
     );
   });
-  // if (isLoading) {
-  //   return <div>Загрузка...</div>;
-  // }
-  // if (isError) {
-  //   return <div>Ошибка при загрузке данных.</div>;
-  // }
+
   return (
     <div>
       <div className={s.calendargrid}> {days} </div>{" "}
