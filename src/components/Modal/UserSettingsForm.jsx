@@ -103,17 +103,17 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
 
   const calculateWaterNorma = (weight, activeTime, gender) => {
     if (!weight || !activeTime || !gender) return 1.5;
-    const waterNorma =
+    const waterNormaF =
       gender.toLowerCase() === "woman"
         ? weight * 0.03 + activeTime * 0.4
         : weight * 0.04 + activeTime * 0.6;
-    return Math.max(0, Number(waterNorma.toFixed(1)));
+    return Math.max(0, Number(waterNormaF.toFixed(1)));
   };
 
   const weight = watch("weight");
   const activeTime = watch("activeTime");
   const gender = watch("gender");
-  const waterNorma = calculateWaterNorma(weight, activeTime, gender);
+  const waterNormaF = calculateWaterNorma(weight, activeTime, gender);
 
   const handleFormSubmit = async (data) => {
     console.log("Form is submitted, data:", data); // тут ок
@@ -141,7 +141,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
 
-    const waterNorma = calculateWaterNorma(
+    const waterNormaF = calculateWaterNorma(
       filteredData.weight,
       filteredData.activeTime,
       filteredData.gender
@@ -150,7 +150,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     const dataToSave = {
       // userId: userId,
       ...filteredData,
-      waterNorma,
       photo: photoURL,
     };
 
@@ -346,7 +345,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
               The required amount of water in liters per day:{" "}
             </label>
             <span className={style.waterIntake}>
-              {waterNorma ? `${waterNorma} L` : " 0.0 L"}
+              {waterNormaF ? `${waterNormaF} L` : " 0.0 L"}
             </span>
           </div>
           <h4 className={style.waterNorma}>
@@ -356,7 +355,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
             className={style.formInput}
             type="number"
             step="0.1"
-            defaultValue={waterNorma}
+            defaultValue={calculateWaterNorma}
             {...register("waterNorma")}
           />
           {/* {errors.waterToDrink && (
