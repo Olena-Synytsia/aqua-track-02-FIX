@@ -14,22 +14,15 @@ import { BsExclamationLg } from "react-icons/bs";
 const DEFAULT_AVATAR_URL =
   "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
 
-  const schema = yup.object().shape({
-    photo: yup.mixed().nullable(),
-    gender: yup.string().nullable(), // Убираем обязательность
-    name: yup.string().nullable(),
-    email: yup.string().email("Invalid email").nullable(),
-    weight: yup
-      .number()
-      .positive("Weight must be positive")
-      .nullable(), // Указываем, что поле может быть пустым
-    activeTime: yup
-      .number()
-      .min(0, "Active time must be 0 or more")
-      .nullable(),
-    waterNorma: yup.number().min(0, "Water must be at least 0").nullable(),
-  });
-  
+const schema = yup.object().shape({
+  photo: yup.mixed().nullable(),
+  gender: yup.string().nullable(),
+  name: yup.string().nullable(),
+  email: yup.string().email("Invalid email").nullable(),
+  weight: yup.number().positive("Weight must be positive").nullable(),
+  activeTime: yup.number().min(0, "Active time must be 0 or more").nullable(),
+  waterNorma: yup.number().min(0, "Water must be at least 0").nullable(),
+});
 
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const dispatch = useDispatch();
@@ -40,45 +33,34 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   console.log("Access Token from Redux:", accessToken);
   const [preview, setPreview] = useState(user?.photo || DEFAULT_AVATAR_URL);
 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      ...user,
+      waterNorma: user?.waterNorma || 1.5,
+      gender: user?.gender || "woman",
+    },
+  });
 
-    const {
-      register,
-      handleSubmit,
-      setValue,
-      formState: { errors },
-      watch,
-    } = useForm({
-      resolver: yupResolver(schema),
-      defaultValues: {
-        ...user,
-        waterNorma: user?.waterNorma || 1.5,
-        gender: user?.gender || "woman", // Устанавливаем Woman по умолчанию
-      },
-    });
-    
-    useEffect(() => {
-      if (!user) {
-        dispatch(getCurrentUser());
-      } else {
-        setPreview(user.photo || DEFAULT_AVATAR_URL);
-    
-        // Устанавливаем значения в форму после загрузки пользователя
-        Object.entries(user).forEach(([key, value]) => setValue(key, value));
-    
-        // Если gender отсутствует, задаем Woman как значение по умолчанию
-        if (!user.gender) {
-          setValue("gender", "woman");
-        }
+  useEffect(() => {
+    if (!user) {
+      dispatch(getCurrentUser());
+    } else {
+      setPreview(user.photo || DEFAULT_AVATAR_URL);
+
+      Object.entries(user).forEach(([key, value]) => setValue(key, value));
+
+      if (!user.gender) {
+        setValue("gender", "woman");
       }
-    }, [dispatch, user, setValue]);
-    
-
-
-  
-
-
-
-
+    }
+  }, [dispatch, user, setValue]);
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -297,7 +279,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
 
           <div className={style.infoMessage}>
             <span className={style.iconAttention}>
-              <BsExclamationLg style={{ width: "30px", height: "30px" }}/>
+              <BsExclamationLg style={{ width: "30px", height: "30px" }} />
             </span>
 
             <p>Active time in hours</p>

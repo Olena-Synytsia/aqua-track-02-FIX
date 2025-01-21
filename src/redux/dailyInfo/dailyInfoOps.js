@@ -37,3 +37,22 @@ export const updateWaterItem = createAsyncThunk(
     }
   }
 );
+export const deleteWaterItem = createAsyncThunk(
+  "deleteWaterItem",
+  async (_id, thunkApi) => {
+    try {
+      if (!_id || typeof _id !== "string") {
+        throw new Error("Invalid ID: ID is missing or not a valid string.");
+      }
+      const { data } = await authApi.delete(`/water/${_id}`);
+      console.log("Delete response:", data); // Перевіряємо відповідь сервера
+      return _id; // Повертаємо ID видаленого елементу
+    } catch (error) {
+      console.error(
+        "Error deleting water item:",
+        error.response?.data || error.message
+      );
+      return thunkApi.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
