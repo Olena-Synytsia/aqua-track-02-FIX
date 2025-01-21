@@ -131,7 +131,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     const allowedFields = [
       "name",
       "gender",
-      "email",
+      // "email",
       "weight",
       "waterNorma",
       "activeTime",

@@ -203,7 +203,7 @@ const DeleteWaterModal = ({ waterId, onClose = () => {} }) => {
             className={style.deleteButton}
             onClick={handleDelete}
           >
-            Confirm
+            Delete
           </button>
           <button
             type="button"
