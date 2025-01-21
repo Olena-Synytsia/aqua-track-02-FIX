@@ -1,89 +1,79 @@
-import React, { useEffect, useState } from "react";
-import { Slider, Tooltip } from "@mui/material";
+import { useEffect, useState } from "react";
+// import { Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { selectDate, selectWaterDay } from "../../../../redux/water/selectors";
-import { selectUserInfo } from "../../../../redux/auth/selectors";
-import {
-  apiGetWaterDay,
-  updateWaterDay,
-} from "../../../../redux/water/operations";
+
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import css from "./WaterProgressBar.module.css";
 import dayjs from "dayjs";
-import s from "./WaterProgressBar.module.css";
+import {
+  selectIsError,
+  selectIsLoading,
+  selectWaterData,
+} from "../../../../redux/dailyNorma/selectors.js";
+import { fetchWaterPercent } from "../../../../redux/dailyNorma/slice.js";
 
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
-  const selectedDate = useSelector(selectDate);
-  const consumedWater = useSelector(selectWaterDay);
-  const user = useSelector(selectUserInfo);
-  const dailyWaterNorm = user?.dailyWaterNorm || 1500;
-  const [localPercent, setLocalPercent] = useState(0);
+  const selectedDate = dayjs().format("YYYY-MM-DD");
+  const waterPercent = useSelector(selectWaterData);
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
+  const [localPercent, setLocalPercent] = useState(waterPercent.percent || 0);
+  const percent = localPercent.percent;
+
+  console.log("WaterProgressBar rendered");
+  console.log("Selected Date:", selectedDate);
+  console.log("Water Percent:", waterPercent.percent);
+  console.log("Local Percent:", localPercent);
 
   useEffect(() => {
     if (selectedDate) {
-      dispatch(apiGetWaterDay(selectedDate));
+      console.log("fetchWaterPercent dispatched");
+      dispatch(fetchWaterPercent(selectedDate));
     }
   }, [selectedDate, dispatch]);
 
   useEffect(() => {
-    if (consumedWater !== undefined && dailyWaterNorm > 0) {
-      const percent = Math.min((consumedWater / dailyWaterNorm) * 100, 100);
-      setLocalPercent(percent);
-    }
-  }, [consumedWater, dailyWaterNorm]);
+    setLocalPercent(waterPercent);
+  }, [waterPercent]);
 
-  const handleSliderChange = (event, newValue) => {
-    const newWaterAmount = Math.round((newValue / 100) * dailyWaterNorm);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-    setLocalPercent(newValue);
-    if (selectedDate) {
-      dispatch(updateWaterDay({ date: selectedDate, amount: newWaterAmount }));
-    }
-  };
-
-  const currentDate = dayjs().format("YYYY-MM-DD");
-  const selectedDateFormatted = dayjs(selectedDate).format("YYYY-MM-DD");
-  const formattedDate =
-    selectedDateFormatted === currentDate
-      ? "Today"
-      : dayjs(selectedDate).format("DD MMMM");
+  if (isError) {
+    return <div>Error loading data.</div>;
+  }
 
   return (
-    <div className={s.container}>
-      <div className={s.containerBar}>
-        <div className={s.title}>{formattedDate}</div>
-        <div className={s.sliderWrapper}>
-          <Slider
-            value={localPercent}
-            onChange={handleSliderChange}
-            min={0}
-            max={100}
-            step={1}
-            aria-label="Water consumption progress"
-            valueLabelDisplay="auto"
-            sx={{
-              color: "#9be1a0",
-              height: 8,
-              "& .MuiSlider-track": {
-                backgroundColor: "#9be1a0",
-              },
-              "& .MuiSlider-rail": {
-                opacity: 0.5,
-                backgroundColor: "#f0eff4",
-              },
-              "& .MuiSlider-thumb": {
-                width: 12,
-                height: 12,
-                backgroundColor: "#9be1a0",
-              },
-            }}
-          />
+    <div className={css.container}>
+      <div className={css.containerBar}>
+        <div className={css.title}>Today</div>
+        <div className={css.sliderWrapper}>
+          <div className={css.track}>
+            <div className={css.filledTrack} style={{ width: `${percent}%` }} />
+            <div
+              className={css.thumb}
+              style={{ left: `${percent}%` }}
+              data-tooltip-id="progress-tooltip"
+              data-tooltip-content={`${Math.min(percent, 100).toFixed(0)}%`}
+            />
+          </div>
         </div>
-        <div className={s.percentBar}>
+
+        <ReactTooltip
+          id="progress-tooltip"
+          className={css.customTooltip}
+          place="top"
+          effect="solid"
+          arrowClassName={css.customArrow}
+        />
+        <div className={css.percentBar}>
           <span>0%</span>
           <span>50%</span>
           <span>100%</span>
         </div>
-        <Tooltip
+        {/* <Tooltip
           title={`${localPercent.toFixed(
             0
           )}% (${consumedWater} ml / ${dailyWaterNorm} ml)`}
@@ -92,7 +82,7 @@ const WaterProgressBar = () => {
           classes={{ tooltip: s.customTooltip, arrow: s.customArrow }}
         >
           <div className={s.sliderTooltip} />
-        </Tooltip>
+        </Tooltip> */}
       </div>
     </div>
   );
