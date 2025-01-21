@@ -3,6 +3,7 @@ import WaterModal from "../../../Modal/WaterModal/WaterModal.jsx";
 import css from "./AddWaterB.module.css";
 import { useDispatch } from "react-redux";
 import { setOperationType } from "../../../../redux/dailyInfo/dailyInfoSlice.js";
+import icon from "/sprite.svg";
 
 const AddWaterB = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const AddWaterB = () => {
     <>
       <button onClick={handleAdd} className={css.addButton}>
         <svg className={css.btnIcon}>
-          <use href="src/assets/sprite.svg#icon-plus"></use>
+          <use href={`${icon}#icon-plus`}></use>
         </svg>
         <span className={css.btnTitle}>Add water</span>
       </button>

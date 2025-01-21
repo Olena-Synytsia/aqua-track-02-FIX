@@ -9,7 +9,6 @@ import Logo from "../HomePage/WelcomeSection/Logo/Logo";
 import s from "./SignUpForm.module.css";
 import { setEmail } from "../../redux/auth/slice";
 
-
 const schema = yup.object({
   email: yup
     .string()
@@ -126,7 +125,7 @@ const SignUpForm = () => {
                       viewBox="0 0 32 32"
                     >
                       <use
-                        href={`/src/assets/sprite.svg#${
+                        href={`/sprite.svg#${
                           passwordVisible ? "icon-eye" : "icon-eye-off"
                         }`}
                       ></use>
@@ -165,7 +164,7 @@ const SignUpForm = () => {
                       viewBox="0 0 32 32"
                     >
                       <use
-                        href={`/src/assets/sprite.svg#${
+                        href={`/sprite.svg#${
                           repeatPasswordVisible ? "icon-eye" : "icon-eye-off"
                         }`}
                       ></use>
