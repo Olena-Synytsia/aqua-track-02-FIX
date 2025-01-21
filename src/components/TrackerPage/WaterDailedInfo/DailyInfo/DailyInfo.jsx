@@ -6,6 +6,7 @@ import WaterList from "./WaterList/WaterList.jsx";
 import { useEffect } from "react";
 import { fetchWaterItem } from "../../../../redux/dailyInfo/dailyInfoOps.js";
 import {
+  selectIsError,
   selectIsLoading,
   selectWaterDay,
 } from "../../../../redux/dailyInfo/dailyInfoSlice.js";
@@ -15,6 +16,7 @@ import LoaderWaterList from "./LoaderForWaterList/LoaderWaterList.jsx";
 const DailyInfo = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
   let waterDay = useSelector(selectWaterDay);
 
   waterDay = waterDay ? waterDay : dayjs().format("YYYY-MM-DD");
@@ -30,7 +32,17 @@ const DailyInfo = () => {
         <ChooseDate />
         {isToday ? <AddWaterBtn /> : null}
       </div>
-      {isLoading ? <LoaderWaterList /> : <WaterList />}
+      {isLoading ? (
+        <LoaderWaterList />
+      ) : isError ? (
+        <div className={s.content}>
+          <p className={s.errorText}>
+            Something went wrong. Please try again later.
+          </p>
+        </div>
+      ) : (
+        <WaterList />
+      )}
     </div>
   );
 };

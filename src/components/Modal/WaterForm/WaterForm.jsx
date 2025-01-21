@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   selectItemId,
   selectOperationType,
+  selectWaterDay,
   selectWaterItem,
 } from "../../../redux/dailyInfo/dailyInfoSlice.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,12 +14,20 @@ import {
   addWaterItem,
   updateWaterItem,
 } from "../../../redux/dailyInfo/dailyInfoOps.js";
+import dayjs from "dayjs";
+import { fetchWaterPer } from "../../../redux/monthInfo/getWaterPercent.js";
 
 const WaterForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const operationType = useSelector(selectOperationType);
   const initialData = useSelector(selectWaterItem);
   const itemId = useSelector(selectItemId);
+  const waterDay = useSelector(selectWaterDay);
+
+  const getFormattedWaterDay = () => {
+    const date = waterDay ? dayjs(waterDay) : dayjs();
+    return date.format("YYYY-MM");
+  };
 
   const currentItem = initialData.find((item) => item._id === itemId);
 
@@ -31,7 +40,7 @@ const WaterForm = ({ onClose }) => {
   };
 
   const combineDateTime = (date, time) => {
-    const datePart = date.toISOString().split("T")[0];
+    const datePart = dayjs(date).format("YYYY-MM-DD");
     return `${datePart}T${time}`;
   };
 
@@ -84,6 +93,8 @@ const WaterForm = ({ onClose }) => {
 
     if (operationType === "add") {
       dispatch(addWaterItem(preparedData));
+
+      dispatch(fetchWaterPer(getFormattedWaterDay()));
     } else {
       dispatch(updateWaterItem(preparedData));
     }
