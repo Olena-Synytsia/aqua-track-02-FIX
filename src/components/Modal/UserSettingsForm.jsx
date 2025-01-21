@@ -147,6 +147,10 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     //   filteredData.gender
     // );
 
+    if (filteredData.waterNorma) {
+      filteredData.waterNorma = filteredData.waterNorma * 1000;
+    }
+
     const dataToSave = {
       // userId: userId,
       ...filteredData,
