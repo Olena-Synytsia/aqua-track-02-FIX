@@ -4,6 +4,7 @@
   overflow-x: auto;
   white-space: nowrap;
   padding-bottom: 24px;
+  height: 98px;
 }
 
 .list::-webkit-scrollbar {
@@ -34,6 +35,7 @@
 @media (min-width: 768px) {
   .list {
     gap: 32px;
+    height: 118px;
   }
 
   .content {

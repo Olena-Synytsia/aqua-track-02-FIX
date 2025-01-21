@@ -156,6 +156,9 @@ import style from "./DeleteWaterModal.module.css";
 import { useDispatch } from "react-redux";
 
 import { deleteWaterItem } from "../../redux/dailyInfo/dailyInfoOps";
+import { fetchWaterPercent } from "../../redux/dailyNorma/slice.js";
+import dayjs from "dayjs";
+import { fetchWaterPer } from "../../redux/monthInfo/getWaterPercent.js";
 // import { selectItemId } from "../../redux/dailyInfo/dailyInfoSlice";
 
 const DeleteWaterModal = ({ waterId, onClose = () => {} }) => {
@@ -163,11 +166,16 @@ const DeleteWaterModal = ({ waterId, onClose = () => {} }) => {
   const [errorMessage, setErrorMessage] = useState("");
   // const idItem = useSelector(selectItemId);
 
+  const today = dayjs(new Date()).format("YYYY-MM-DD");
+  const todayForMonth = dayjs(new Date()).format("YYYY-MM");
+
   const handleDelete = async () => {
     if (waterId)
       try {
         await dispatch(deleteWaterItem(waterId)).unwrap();
         console.log("Water record successfully deleted:", waterId);
+        dispatch(fetchWaterPer(todayForMonth));
+        dispatch(fetchWaterPercent(today));
         onClose();
       } catch (error) {
         console.error("Error deleting water record:", error);
@@ -182,6 +190,20 @@ const DeleteWaterModal = ({ waterId, onClose = () => {} }) => {
       onClose();
     }
   };
+
+  // Це для закривання модалки через Escape перевір чи буде працювати
+  // useEffect(() => {
+  //     const handleKeyDown = (e) => {
+  //       if (e.key === "Escape") {
+  //         onClose();
+  //       }
+  //     };
+  //     document.addEventListener("keydown", handleKeyDown);
+
+  //     return () => {
+  //       document.removeEventListener("keydown", handleKeyDown);
+  //     };
+  //   }, [onClose]);
 
   return (
     <div onClick={handleBackdropClick} className={style.modalOverlay}>

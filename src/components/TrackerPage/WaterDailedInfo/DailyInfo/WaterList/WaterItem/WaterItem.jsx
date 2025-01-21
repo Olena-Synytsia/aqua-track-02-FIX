@@ -14,7 +14,10 @@ import dayjs from "dayjs";
 
 const WaterItem = ({ _id, date, volume }) => {
   const dispatch = useDispatch();
-  const waterDay = useSelector(selectWaterDay);
+  let waterDay = useSelector(selectWaterDay);
+
+  waterDay = waterDay ? waterDay : dayjs().format("YYYY-MM-DD");
+
   const isToday = dayjs(waterDay).isSame(dayjs(), "day");
 
   const formateVolume = (volume) => {
