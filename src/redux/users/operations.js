@@ -38,18 +38,26 @@ export const updateUser = createAsyncThunk(
   async ({ data, accessToken }, thunkApi) => {
     console.log("Received token:", accessToken);
     console.log("Data to update:", data);
-    // const accessToken = thunkApi.getState().auth.accessToken;
+    // const accessToken = localStorage.getItem("accessToken");
 
-    console.log(thunkApi.getState());
+    // console.log(thunkApi.getState());
     try {
       if (!accessToken) {
+        console.error("Access token missing");
         return thunkApi.rejectWithValue("No token found");
       }
       setAuthHeader(accessToken);
 
-      const response = await authApi.patch("/users/current", data, {
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+
+      const response = await authApi.patch("/users/current", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      console.log("Update response:", response.data);
 
       return response.data.data;
     } catch (error) {

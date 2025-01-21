@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UserSettingsModal from "../../../../../Modal/UserSettingsModal";
 import LogOutModal from "../../../../../Modal/LogOutModal";
 import s from "./UserBarPopover.module.css";
@@ -8,7 +8,7 @@ import { HiOutlineArrowUpTray } from "react-icons/hi2";
 export const UserBarPopover = ({ onClose = () => {} }) => {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setLogOutModalOpen] = useState(false);
-
+  const popoverRef = useRef(null); // для перевірки кліків поза поповером
   const userBarRef = useRef(null); // для позиціонування
 
   const toggleSettingsModal = () => {
@@ -21,18 +21,29 @@ export const UserBarPopover = ({ onClose = () => {} }) => {
     if (isSettingsModalOpen) setSettingsModalOpen(false);
   };
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target) &&
+        !isSettingsModalOpen &&
+        !isLogOutModalOpen
+      ) {
+        onClose(); // Закриваємо поповер
+      }
+    };
+
+    if (!isSettingsModalOpen && !isLogOutModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
     }
-  };
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSettingsModalOpen, isLogOutModalOpen, onClose]);
 
   return (
-    <div className={s.modalPop} onClick={handleBackdropClick}>
-      <div
-        // onClick={(e) => e.stopPropagation()} // Зупиняє подію, щоб клік на кнопки не закривав поповер
-        className={s.btnssettlog}
-      >
+    <div className={s.modalPop} ref={popoverRef}>
+      <div className={s.btnssettlog}>
         <button className={s.btnset} onClick={toggleSettingsModal}>
           <CiSettings className={s.icon} width="16" height="16" />
           Settings
