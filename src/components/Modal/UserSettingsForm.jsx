@@ -141,11 +141,11 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
 
-    const waterNormaF = calculateWaterNorma(
-      filteredData.weight,
-      filteredData.activeTime,
-      filteredData.gender
-    );
+    // const waterNormaF = calculateWaterNorma(
+    //   filteredData.weight,
+    //   filteredData.activeTime,
+    //   filteredData.gender
+    // );
 
     const dataToSave = {
       // userId: userId,
