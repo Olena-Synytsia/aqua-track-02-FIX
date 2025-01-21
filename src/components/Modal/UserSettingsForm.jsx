@@ -116,6 +116,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
 
   const handleFormSubmit = async (data) => {
     console.log("Form is submitted, data:", data); // тут ок
+
     let photoURL = user?.photo || DEFAULT_AVATAR_URL;
     if (data.photo && data.photo instanceof File) {
       try {
@@ -126,18 +127,34 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       }
     }
 
+    const allowedFields = [
+      "name",
+      "gender",
+      "email",
+      "weight",
+      "waterNorma",
+      "activeTime",
+      "photo",
+    ];
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(([key]) => allowedFields.includes(key))
+    );
+
     const waterNorma = calculateWaterNorma(
-      data.weight,
-      data.activeTime,
-      data.gender
+      filteredData.weight,
+      filteredData.activeTime,
+      filteredData.gender
     );
 
     const dataToSave = {
       // userId: userId,
-      ...data,
+      ...filteredData,
       waterNorma,
       photo: photoURL,
     };
+
+    console.log("Filtered data to save:", dataToSave);
+
     const formData = new FormData();
     Object.keys(dataToSave).forEach((key) => {
       formData.append(key, dataToSave[key]);
@@ -150,7 +167,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       const response = await dispatch(
         updateUser({ data: dataToSave, accessToken })
       );
-      console.log("Response from dispatch:", response); // тут помилка!!!
+      console.log("Response from dispatch:", response);
 
       if (response.error) {
         throw new Error(response.error.message);
@@ -158,6 +175,10 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       console.log("Data to send:", dataToSave);
       dispatch(setImage(photoURL));
       dispatch(setName(data.name));
+
+      Object.entries(dataToSave).forEach(([key, value]) =>
+        setValue(key, value)
+      );
 
       onSubmit(dataToSave);
       onClose();
@@ -332,11 +353,12 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
           <input
             className={style.formInput}
             type="number"
+            defaultValue={waterNorma}
             {...register("waterNorma")}
           />
-          {errors.waterToDrink && (
+          {/* {errors.waterToDrink && (
             <p className={style.errorText}>{errors.waterToDrink.message}</p>
-          )}
+          )} */}
         </div>
       </div>
       <button type="submit" className={style.saveBtn}>
