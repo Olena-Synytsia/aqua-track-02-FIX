@@ -3,13 +3,18 @@ import { useEffect } from "react";
 import { selectWaterDay } from "../../../../redux/water/selectors.js";
 import { apiGetWaterDay } from "../../../../redux/water/operations.js";
 import css from "./WaterDailyNorma.module.css";
+
 const WaterDailyNorma = () => {
+  console.log("WaterDailyNorma");
   const dispatch = useDispatch();
   const dailyWaterNorm = useSelector(selectWaterDay);
+
   useEffect(() => {
     dispatch(apiGetWaterDay(new Date().toISOString().split("T")[0]));
   }, [dispatch]);
   const dailyUserGoal = dailyWaterNorm || "1,5 L";
+  console.log(dailyUserGoal);
+
   return (
     <div className={css.dailyNorma} data-tour="step-2">
       <div className={css.titleNorma}>{dailyUserGoal}</div>

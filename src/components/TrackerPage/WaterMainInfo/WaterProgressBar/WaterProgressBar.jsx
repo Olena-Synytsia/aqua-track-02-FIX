@@ -13,6 +13,7 @@ import {
 } from "../../../../redux/water/operations.js";
 import css from "./WaterProgressBar.module.css";
 import dayjs from "dayjs";
+
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
@@ -20,21 +21,35 @@ const WaterProgressBar = () => {
   const user = useSelector(selectUserInfo);
   const dailyWaterNorm = user?.dailyWaterNorm || 1500;
   const [localPercent, setLocalPercent] = useState(0);
+
+  console.log("WaterProgressBar rendered");
+  console.log("Selected Date:", selectedDate);
+  console.log("Consumed Water:", consumedWater);
+  console.log("Daily Water Norm:", dailyWaterNorm);
+  console.log("Local Percent:", localPercent);
+
   useEffect(() => {
     if (selectedDate) {
+      console.log("apiGetWaterDay dispatched");
       dispatch(apiGetWaterDay(selectedDate));
     }
   }, [selectedDate, dispatch]);
+
   useEffect(() => {
     if (consumedWater !== undefined && dailyWaterNorm > 0) {
       const percent = Math.min((consumedWater / dailyWaterNorm) * 100, 100);
+      console.log("Percent:", percent);
       setLocalPercent(percent);
     }
   }, [consumedWater, dailyWaterNorm]);
+
   const handleSliderChange = (newPercent) => {
+    console.log("New Percent:", newPercent);
     const newWaterAmount = Math.round((newPercent / 100) * dailyWaterNorm);
+    console.log("New Percent:", newPercent);
     setLocalPercent(newPercent);
     if (selectedDate) {
+      console.log("updateWaterDay dispatched");
       dispatch(updateWaterDay({ date: selectedDate, amount: newWaterAmount }));
     }
   };
