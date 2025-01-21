@@ -102,31 +102,34 @@ export const logout = createAsyncThunk("/auth/logout", async (_, thunkApi) => {
 //   }
 // });
 
-export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
-  // refreshToken вже має бути в cookies
-  try {
-    const { data } = await authApi.post("/auth/refresh"); // Без необхідності передавати accessToken в заголовку
-    return data;
-  } catch (error) {
-    return thunkApi.rejectWithValue(error.message);
-  }
-});
-
-// // Нові токени //
-// export const refreshToken = createAsyncThunk(
-//   "/auth/refresh",
-//   async (_, thunkApi) => {
-//     const refresh = thunkApi.getState().auth.accessToken;
-
-//     if (!refresh) return thunkApi.rejectWithValue("No refresh token provided");
-
-//     try {
-//       const { data } = await authApi.post("/auth/refresh", { refresh });
-//       return data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(
-//         error.message || "Failed to refresh token"
-//       );
-//     }
+// export const refresh = createAsyncThunk("refresh", async (_, thunkApi) => {
+//   // refreshToken вже має бути в cookies
+//   try {
+//     const { data } = await authApi.post("/auth/refresh"); // Без необхідності передавати accessToken в заголовку
+//     return data;
+//   } catch (error) {
+//     return thunkApi.rejectWithValue(error.message);
 //   }
-// );
+// });
+
+// Нові токени //
+export const refresh = createAsyncThunk(
+  "/auth/refresh",
+  async (_, thunkApi) => {
+    try {
+      const accessToken = thunkApi.getState().auth.accessToken;
+
+      if (!accessToken) {
+        return thunkApi.rejectWithValue("No refresh token provided");
+      }
+      setAuthHeader(accessToken);
+
+      const { data } = await authApi.post("/auth/refresh");
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(
+        error.message || "Failed to refresh token"
+      );
+    }
+  }
+);

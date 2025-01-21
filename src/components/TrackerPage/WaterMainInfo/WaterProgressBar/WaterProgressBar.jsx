@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+// import { Tooltip } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import css from "./WaterProgressBar.module.css";
@@ -13,8 +14,8 @@ import { fetchWaterPercent } from "../../../../redux/dailyNorma/slice.js";
 
 const WaterProgressBar = () => {
   const dispatch = useDispatch();
-  const selectedDate = dayjs().format("YYYY-MM-DD"); // Предположим, что вы хотите получить данные за сегодняшний день
-  const waterPercent = useSelector(selectWaterData); // Используем селектор для получения процента
+  const selectedDate = dayjs().format("YYYY-MM-DD");
+  const waterPercent = useSelector(selectWaterData);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const [localPercent, setLocalPercent] = useState(waterPercent.percent || 0);
@@ -72,6 +73,16 @@ const WaterProgressBar = () => {
           <span>50%</span>
           <span>100%</span>
         </div>
+        {/* <Tooltip
+          title={`${localPercent.toFixed(
+            0
+          )}% (${consumedWater} ml / ${dailyWaterNorm} ml)`}
+          placement="top"
+          arrow
+          classes={{ tooltip: s.customTooltip, arrow: s.customArrow }}
+        >
+          <div className={s.sliderTooltip} />
+        </Tooltip> */}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addWaterItem,
+  deleteWaterItem,
   fetchWaterItem,
   updateWaterItem,
 } from "./dailyInfoOps.js";
@@ -43,6 +44,13 @@ const slice = createSlice({
         if (index !== -1) {
           state.items[index] = action.payload;
         }
+      })
+      .addCase(deleteWaterItem.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item._id !== action.payload);
+      })
+      .addCase(deleteWaterItem.rejected, (state, action) => {
+        state.isError = true;
+        console.error("Failed to delete water item:", action.payload);
       });
   },
 });

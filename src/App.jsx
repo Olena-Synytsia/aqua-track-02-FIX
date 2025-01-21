@@ -21,6 +21,7 @@ const RegisterPage = lazy(() =>
 );
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage.jsx"));
 const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage.jsx"));
+
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectTokens); // Дістаємо токен із Redux

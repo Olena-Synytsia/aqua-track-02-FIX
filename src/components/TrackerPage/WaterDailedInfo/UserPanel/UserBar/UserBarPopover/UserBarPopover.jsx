@@ -5,7 +5,7 @@ import s from "./UserBarPopover.module.css";
 import { CiSettings } from "react-icons/ci";
 import { HiOutlineArrowUpTray } from "react-icons/hi2";
 
-export const UserBarPopover = () => {
+export const UserBarPopover = ({ onClose = () => {} }) => {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setLogOutModalOpen] = useState(false);
 
@@ -21,30 +21,23 @@ export const UserBarPopover = () => {
     if (isSettingsModalOpen) setSettingsModalOpen(false);
   };
 
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div ref={userBarRef}>
-      <div className={s.btnssettlog}>
+    <div className={s.modalPop} onClick={handleBackdropClick}>
+      <div
+        // onClick={(e) => e.stopPropagation()} // Зупиняє подію, щоб клік на кнопки не закривав поповер
+        className={s.btnssettlog}
+      >
         <button className={s.btnset} onClick={toggleSettingsModal}>
-          {/* <svg
-            className={s.svgsett}
-            width="16"
-            height="16"
-            shapeRendering="crispEdges"
-          >
-            <use href="src/assets/sprite.svg#icon-log-out"></use>
-          </svg> */}
           <CiSettings className={s.icon} width="16" height="16" />
           Settings
         </button>
         <button className={s.btnout} onClick={toggleLogOutModal}>
-          {/* <svg
-            className={s.svgsett}
-            width="16"
-            height="16"
-            shapeRendering="crispEdges"
-          >
-            <use href="src/assets/sprite.svg#icon-log-out"></use>
-          </svg> */}
           <HiOutlineArrowUpTray className={s.iconout} />
           Log Out
         </button>
