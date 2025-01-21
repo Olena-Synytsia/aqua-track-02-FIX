@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 import { fetchWaterPer } from "../../../../../redux/monthInfo/getWaterPercent.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectIsError,
-  selectIsLoading,
+  // selectIsError,
+  // selectIsLoading,
   selectWaterData,
 } from "../../../../../redux/monthInfo/waterSlice.js";
 
@@ -17,8 +17,8 @@ const getFormattedDate = (selectedDate) => {
 const Calendar = ({ selectedDate, setSelectedDate }) => {
   const dispatch = useDispatch();
   const waterData = useSelector(selectWaterData);
-  const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
+  // const isLoading = useSelector(selectIsLoading);
+  // const isError = useSelector(selectIsError);
 
   useEffect(() => {
     const formattedDate = getFormattedDate(selectedDate);
@@ -52,7 +52,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
   // }
   return (
     <div>
-     <div className={s.calendargrid}> {days} </div> {" "}
+      <div className={s.calendargrid}> {days} </div>{" "}
     </div>
   );
 };

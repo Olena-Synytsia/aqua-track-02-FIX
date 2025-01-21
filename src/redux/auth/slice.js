@@ -98,9 +98,10 @@ const userSlice = createSlice({
         state.isRegistered = false;
       })
       .addCase(refresh.fulfilled, (state, action) => {
-        state.userInfo = action.payload;
+        // state.userInfo = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.accessToken = action.payload.accessToken;
       })
       .addCase(refresh.pending, (state) => {
         state.isRefreshing = true;
