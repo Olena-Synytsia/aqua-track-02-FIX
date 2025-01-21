@@ -7,7 +7,13 @@ export const getCurrentUser = createAsyncThunk(
   "getCurrent",
   async (_, thunkApi) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        return thunkApi.rejectWithValue("No token provided");
+      }
       const response = await authApi.get("/users/current");
+
+      setAuthHeader(accessToken);
 
       // Перевірка на те, чи правильний формат відповіді
       if (response && response.data && response.data.data) {

@@ -45,6 +45,12 @@ const slice = createSlice({
           state.items[index] = action.payload;
         }
       })
+      .addCase(deleteWaterItem.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item._id !== action.payload);
+      })
+      .addCase(deleteWaterItem.rejected, (state, action) => {
+        console.error("Failed to delete water item:", action.payload);
+      })
 
       .addMatcher(
         isAnyOf(
@@ -71,6 +77,7 @@ const slice = createSlice({
         isAnyOf(
           fetchWaterItem.rejected,
           addWaterItem.rejected,
+          deleteWaterItem.rejected,
           updateWaterItem.rejected
         ),
         (state) => {
@@ -78,15 +85,6 @@ const slice = createSlice({
           state.isError = true;
         }
       );
-
-      .addCase(deleteWaterItem.fulfilled, (state, action) => {
-        state.items = state.items.filter((item) => item._id !== action.payload);
-      })
-      .addCase(deleteWaterItem.rejected, (state, action) => {
-        state.isError = true;
-        console.error("Failed to delete water item:", action.payload);
-      });
-
   },
 });
 
