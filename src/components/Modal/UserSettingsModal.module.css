@@ -14,6 +14,7 @@ body.modal-open {
   display: flex;
   align-items: center;
   justify-content: center;
+  inset: 0;
 
 }
 
@@ -120,7 +121,7 @@ body.modal-open {
 @media screen and (min-width: 1440px) {
 
   .modalContainer {
-    max-width: 920px;
+    max-width: 930px;
   
   }
 
