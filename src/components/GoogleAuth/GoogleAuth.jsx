@@ -1,95 +1,95 @@
-// import { useState } from "react";
-// import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-// import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для токенів
+import { useState } from "react";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для токенів
 
-// const GoogleAuth = () => {
-//   const [user, setUser] = useState(null);
-//   const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
-//   const dispatch = useDispatch(); // Підключаємо Redux
-//   const navigate = useNavigate(); // Для навігації після успішного входу
+const GoogleAuth = () => {
+  const [user, setUser] = useState(null);
+  const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
+  const dispatch = useDispatch(); // Підключаємо Redux
+  const navigate = useNavigate(); // Для навігації після успішного входу
 
-//   // Функція для обробки успішного логіну
-//   const handleLoginSuccess = async (response) => {
-//     console.log("Google Response:", response);
-//     try {
-//       // Відповідь Google містить ID Token
-//       const { credential } = response;
-//       console.log("ID Token:", credential);
+  // Функція для обробки успішного логіну
+  const handleLoginSuccess = async (response) => {
+    console.log("Google Response:", response);
+    try {
+      // Відповідь Google містить ID Token
+      const { credential } = response;
+      console.log("ID Token:", credential);
 
-//       // Надсилаємо ID Token на сервер для перевірки та отримання токенів
-//       const res = await fetch(
-//         "https://aqua-api-fkf8.onrender.com/auth/confirm-oauth",
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({ idToken: credential }), // Передаємо ID Token
-//         }
-//       );
+      // Надсилаємо ID Token на сервер для перевірки та отримання токенів
+      const res = await fetch(
+        "https://aqua-api-fkf8.onrender.com/auth/confirm-oauth",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ idToken: credential }), // Передаємо ID Token
+        }
+      );
 
-//       const data = await res.json();
-//       console.log("Server response:", data);
+      const data = await res.json();
+      console.log("Server response:", data);
 
-//       if (res.ok) {
-//         // Якщо сервер повернув токен, зберігаємо його через Redux
-//         dispatch(setToken({ accessToken: data.access_token }));
-//         localStorage.setItem("access_token", data.access_token); // Зберігаємо в localStorage
-//         setUser(data.user); // Зберігаємо дані користувача
-//         navigate("/tracker"); // Перехід на сторінку приладу
-//       } else {
-//         setNotification({
-//           message: "Failed to authenticate",
-//           type: "error",
-//         });
-//         console.error("Failed to authenticate");
-//       }
-//     } catch (error) {
-//       // Обробка помилки і додавання сповіщення в локальний стан
-//       setNotification({
-//         message: error.message || "Error during Google login.",
-//         type: "error",
-//       });
-//       console.error("Error during Google login:", error);
-//     }
-//   };
+      if (res.ok) {
+        // Якщо сервер повернув токен, зберігаємо його через Redux
+        dispatch(setToken({ accessToken: data.access_token }));
+        localStorage.setItem("access_token", data.access_token); // Зберігаємо в localStorage
+        setUser(data.user); // Зберігаємо дані користувача
+        navigate("/tracker"); // Перехід на сторінку приладу
+      } else {
+        setNotification({
+          message: "Failed to authenticate",
+          type: "error",
+        });
+        console.error("Failed to authenticate");
+      }
+    } catch (error) {
+      // Обробка помилки і додавання сповіщення в локальний стан
+      setNotification({
+        message: error.message || "Error during Google login.",
+        type: "error",
+      });
+      console.error("Error during Google login:", error);
+    }
+  };
 
-//   // Функція для обробки помилок
-//   const handleLoginFailure = (error) => {
-//     setNotification({
-//       message: error.message || "Login failed.",
-//       type: "error",
-//     });
-//     console.error("Login failed:", error);
-//   };
+  // Функція для обробки помилок
+  const handleLoginFailure = (error) => {
+    setNotification({
+      message: error.message || "Login failed.",
+      type: "error",
+    });
+    console.error("Login failed:", error);
+  };
 
-//   return (
-//     <div>
-//       {notification && (
-//         <div style={{ color: notification.type === "error" ? "red" : "green" }}>
-//           {notification.message}
-//         </div>
-//       )}
+  return (
+    <div>
+      {notification && (
+        <div style={{ color: notification.type === "error" ? "red" : "green" }}>
+          {notification.message}
+        </div>
+      )}
 
-//       {user ? (
-//         <div>
-//           <h2>Welcome, {user.name}</h2>
-//           <p>Email: {user.email}</p>
-//         </div>
-//       ) : (
-//         <GoogleOAuthProvider clientId="155129163109-dfuie6f7ee4tjtojrmn18va2lq1tn2ff.apps.googleusercontent.com">
-//           <GoogleLogin
-//             flow="implicit" // Використовуємо потік без необхідності коду
-//             onSuccess={handleLoginSuccess}
-//             onFailure={handleLoginFailure}
-//             // useOneTap={true} // Можна включити One Tap для автоматичної авторизації
-//           />
-//         </GoogleOAuthProvider>
-//       )}
-//     </div>
-//   );
-// };
+      {user ? (
+        <div>
+          <h2>Welcome, {user.name}</h2>
+          <p>Email: {user.email}</p>
+        </div>
+      ) : (
+        <GoogleOAuthProvider clientId="155129163109-dfuie6f7ee4tjtojrmn18va2lq1tn2ff.apps.googleusercontent.com">
+          <GoogleLogin
+            flow="implicit" // Використовуємо потік без необхідності коду
+            onSuccess={handleLoginSuccess}
+            onFailure={handleLoginFailure}
+            // useOneTap={true} // Можна включити One Tap для автоматичної авторизації
+          />
+        </GoogleOAuthProvider>
+      )}
+    </div>
+  );
+};
 
-// export default GoogleAuth;
+export default GoogleAuth;
