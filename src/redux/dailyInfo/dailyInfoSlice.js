@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addWaterItem,
   fetchWaterItem,
@@ -10,7 +10,7 @@ const initialState = {
   operationType: "add",
   itemId: "",
   waterDay: "",
-  isError: false,
+  isError: null,
   isLoading: false,
 };
 
@@ -43,13 +43,44 @@ const slice = createSlice({
         if (index !== -1) {
           state.items[index] = action.payload;
         }
-      });
+      })
+      .addMatcher(
+        isAnyOf(
+          fetchWaterItem.pending,
+          addWaterItem.pending,
+          updateWaterItem.pending
+        ),
+        (state) => {
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchWaterItem.fulfilled,
+          addWaterItem.fulfilled,
+          updateWaterItem.fulfilled
+        ),
+        (state) => {
+          state.isLoading = false;
+          state.isError = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchWaterItem.rejected,
+          addWaterItem.rejected,
+          updateWaterItem.rejected
+        ),
+        (state) => {
+          state.isLoading = false;
+          state.isError = true;
+        }
+      );
   },
 });
 
 export const waterItemReducer = slice.reducer;
-export const { addItems, setOperationType, setItemId, setWaterDay } =
-  slice.actions;
+export const { setOperationType, setItemId, setWaterDay } = slice.actions;
 
 export const selectWaterItem = (state) => state.waterItem.items;
 export const selectOperationType = (state) => state.waterItem.operationType;

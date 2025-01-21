@@ -5,11 +5,16 @@ import s from "./DailyInfo.module.css";
 import WaterList from "./WaterList/WaterList.jsx";
 import { useEffect } from "react";
 import { fetchWaterItem } from "../../../../redux/dailyInfo/dailyInfoOps.js";
-import { selectWaterDay } from "../../../../redux/dailyInfo/dailyInfoSlice.js";
+import {
+  selectIsLoading,
+  selectWaterDay,
+} from "../../../../redux/dailyInfo/dailyInfoSlice.js";
 import dayjs from "dayjs";
+import LoaderWaterList from "./LoaderForWaterList/LoaderWaterList.jsx";
 
 const DailyInfo = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   let waterDay = useSelector(selectWaterDay);
 
   waterDay = waterDay ? waterDay : dayjs().format("YYYY-MM-DD");
@@ -25,7 +30,7 @@ const DailyInfo = () => {
         <ChooseDate />
         {isToday ? <AddWaterBtn /> : null}
       </div>
-      <WaterList />
+      {isLoading ? <LoaderWaterList /> : <WaterList />}
     </div>
   );
 };
