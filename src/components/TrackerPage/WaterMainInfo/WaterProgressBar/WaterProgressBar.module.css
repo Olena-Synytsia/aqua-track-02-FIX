@@ -2,8 +2,8 @@
   background-image: url("../../../../assets/img/bottle_for_water_1x.png");
   background-size: contain;
   background-repeat: no-repeat;
-  width: 472px;
-  height: 604px;
+  width: 262px;
+  height: 335px;
   top: 92px;
   left: 100px;
   display: flex;
@@ -12,33 +12,6 @@
   gap: 0px;
   opacity: 1;
   transition: opacity 0.5s ease;
-}
-
-@media screen and (max-width: 767px) {
-  .container {
-    width: 300px;
-    height: 400px;
-    top: 50px;
-    left: 20px;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1439px) {
-  .container {
-    width: 374px;
-    height: 477px;
-    top: 70px;
-    left: 50px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container {
-    width: 472px;
-    height: 604px;
-    top: 92px;
-    left: 100px;
-  }
 }
 
 .containerBar {
@@ -60,24 +33,6 @@
   transition: opacity 0.5s ease;
 }
 
-@media screen and (min-width: 768px) {
-  .containerBar {
-    gap: 6px;
-    padding: 20px;
-    top: 253px;
-    left: 39px;
-    width: 295px;
-    height: 106px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .containerBar {
-    top: 358px;
-    left: 88px;
-  }
-}
-
 .title {
   pointer-events: none;
   color: #323f47;
@@ -87,13 +42,6 @@
   line-height: 1;
 }
 
-@media screen and (min-width: 768px) {
-  .title {
-    font-size: 15px;
-    line-height: 22.4px;
-  }
-}
-
 .sliderWrapper {
   width: 100%;
   max-width: 174px;
@@ -101,28 +49,29 @@
   border-radius: 9px;
   background-color: #f0eff4;
   position: relative;
-  margin-bottom: 10px;
-}
-
-@media screen and (min-width: 768px) {
-  .sliderWrapper {
-    max-width: 255px;
-    height: 8px;
-  }
 }
 
 .track {
-  /* width: 138px; */
-  height: 8px;
-  gap: 0px;
-  border-radius: 9px 0px 0px 0px;
-  opacity: 0px;
+  position: relative;
+  width: 100%;
+  height: 100%;
   background-color: #f0eff4;
-  transition: width 0.3s ease;
+  border-radius: 9px;
+}
+
+.filledTrack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #9be1a0;
+  border-radius: 9px 0 0 9px;
+  z-index: 0;
 }
 
 .thumb {
-  background-color: #9be1a0;
+  background-color: #ffffff;
+  border: 1px solid #9be1a0;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -130,25 +79,19 @@
   top: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  z-index: 1;
 }
 
 .percentBar {
   display: flex;
   align-items: center;
-  gap: 49px;
+  justify-content: space-between;
+  width: 100%;
   color: rgba(47, 47, 47, 0.6);
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: 10px;
-}
-
-@media screen and (min-width: 768px) {
-  .percentBar {
-    gap: 78px;
-    font-size: 12px;
-    line-height: 22.4px;
-  }
 }
 
 .valueLabel {
@@ -179,4 +122,52 @@
 
 .customArrow::before {
   background-color: #9be1a0 !important;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 374px;
+    height: 477px;
+    top: 50px;
+    left: 20px;
+  }
+
+  .containerBar {
+    gap: 6px;
+    padding: 20px;
+    top: 253px;
+    left: 39px;
+    width: 295px;
+    height: 106px;
+  }
+
+  .title {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+
+  .sliderWrapper {
+    max-width: 255px;
+    height: 8px;
+  }
+
+  .percentBar {
+    gap: 78px;
+    font-size: 12px;
+    line-height: 22.4px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 472px;
+    height: 604px;
+    top: 92px;
+    left: 100px;
+  }
+
+  .containerBar {
+    top: 358px;
+    left: 88px;
+  }
 }

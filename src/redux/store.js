@@ -66,6 +66,8 @@ import {
   REGISTER,
 } from "redux-persist";
 
+import waterReducer from "./dailyNorma/slice.js";
+
 import { userReducer } from "./users/slice.js";
 
 const persistConfig = {
@@ -86,6 +88,7 @@ export const store = configureStore({
     // image: avatarReducer,
 
     waterPer: waterPerReducer,
+    waterNorma: waterReducer,
 
     user: userReducer,
   },
