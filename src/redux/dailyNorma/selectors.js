@@ -1,5 +1,4 @@
 export const selectDailyGoal = (state) => {
-  console.log("selector", state.waterNorma);
   return state.waterNorma.dailyGoal;
 };
 export const selectWaterStatus = (state) => state.waterNorma.status;
