@@ -5,7 +5,6 @@ export const fetchWaterNorma = createAsyncThunk(
   "waterNorma/fetchWaterNorma",
   async () => {
     const waterNorma = await getWaterNorma();
-    console.log("get water norma", waterNorma);
     return waterNorma;
   }
 );
@@ -14,7 +13,6 @@ export const fetchWaterPercent = createAsyncThunk(
   "waterNorma/fetchWaterPercent",
   async (date) => {
     const dayPercent = await getWaterPercent(date);
-    console.log("get water norma", dayPercent);
     return dayPercent;
   }
 );
@@ -38,7 +36,6 @@ const waterSlice = createSlice({
       .addCase(fetchWaterNorma.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.dailyGoal = action.payload;
-        console.log("slice action", action);
       })
       .addCase(fetchWaterNorma.rejected, (state, action) => {
         state.status = "failed";
@@ -50,7 +47,6 @@ const waterSlice = createSlice({
       .addCase(fetchWaterPercent.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterData = action.payload;
-        console.log("State Water percent:", state.waterData);
       })
       .addCase(fetchWaterPercent.rejected, (state, action) => {
         state.isLoading = false;

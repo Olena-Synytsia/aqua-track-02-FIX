@@ -6,13 +6,12 @@ import {
   selectWaterStatus,
 } from "../../../../redux/dailyNorma/selectors.js";
 import { fetchWaterNorma } from "../../../../redux/dailyNorma/slice.js";
+import LoaderDaily from "../LoaderDailyNorma/LoaderDaily.jsx";
 
 const WaterDailyNorma = () => {
   const dispatch = useDispatch();
   const dailyGoal = useSelector(selectDailyGoal);
   const status = useSelector(selectWaterStatus);
-
-  console.log("Daily Norma", dailyGoal);
 
   useEffect(() => {
     if (status === "idle") {
@@ -30,11 +29,16 @@ const WaterDailyNorma = () => {
 
   return (
     <div className={css.dailyNorma} data-tour="step-2">
-      {" "}
-      <div className={css.titleNorma}>
-        {convertToLiters(dailyUserGoal)}L
-      </div>{" "}
-      <div className={css.subTitle}>My daily norma</div>{" "}
+      {status === "loading" ? (
+        <LoaderDaily />
+      ) : (
+        <>
+          <div className={css.titleNorma}>
+            {convertToLiters(dailyUserGoal)}L
+          </div>
+          <div className={css.subTitle}>My daily norma</div>
+        </>
+      )}
     </div>
   );
 };

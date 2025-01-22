@@ -1,4 +1,6 @@
 .dailyNorma {
+  width: 102px;
+  height: 54px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,6 +29,8 @@
   .dailyNorma {
     gap: 4px;
     padding: 14px 18px;
+    width: 129px;
+    height: 78px;
   }
   .titleNorma {
     font-size: 15px;
