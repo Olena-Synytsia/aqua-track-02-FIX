@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Logo from "../HomePage/WelcomeSection/Logo/Logo";
 import s from "./SignUpForm.module.css";
 import { setEmail } from "../../redux/auth/slice";
-import GoogleAuth from "../GoogleAuth/GoogleAuth.jsx";
 
 const schema = yup.object({
   email: yup
@@ -186,7 +185,7 @@ const SignUpForm = () => {
             <button type="submit" className={s.singUpBtn}>
               Sign Up
             </button>
-            <GoogleAuth />
+            {/* <GoogleAuth /> */}
             <p className={s.text}>
               Already have an account?
               <Link to="/signin" className={s.link}>
