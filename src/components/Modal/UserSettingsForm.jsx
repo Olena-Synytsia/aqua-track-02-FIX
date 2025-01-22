@@ -110,8 +110,17 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     }
   };
 
-  const calculateWaterNorma = (weight, activeTime, gender) => {
-    if (!weight || !activeTime || !gender) return 1.5;
+  // const calculateWaterNorma = (weight, activeTime, gender) => {
+  //   if (!weight || !activeTime || !gender) return 1.5;
+  //   const waterNormaF =
+  //     gender.toLowerCase() === "woman"
+  //       ? weight * 0.03 + activeTime * 0.4
+  //       : weight * 0.04 + activeTime * 0.6;
+  //   return Math.max(0, Number(waterNormaF.toFixed(1)));
+  // };
+
+  const calculateWaterNorma = (weight = 0, activeTime = 0, gender) => {
+    if (!weight) return 0;
     const waterNormaF =
       gender.toLowerCase() === "woman"
         ? weight * 0.03 + activeTime * 0.4
