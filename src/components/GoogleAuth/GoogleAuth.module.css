@@ -1,0 +1,29 @@
+.nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb.googleWrapBtn#google-btn {
+  display: flex;
+  width: 311px;
+  height: 50px;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #323f47;
+}
+
+@media screen and (min-width: 768px) {
+  .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb.googleWrapBtn {
+    height: 60px;
+    padding: 18px;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
