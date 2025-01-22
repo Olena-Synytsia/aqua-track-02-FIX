@@ -7,9 +7,10 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { getCurrentUser, updateUser } from "../../redux/users/operations";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setImage, setName } from "../../redux/users/slice";
+import { getUserState, setImage, setName } from "../../redux/users/slice";
 import { selectTokens } from "../../redux/auth/selectors";
 import { BsExclamationLg } from "react-icons/bs";
+import { fetchWaterNorma } from "../../redux/dailyNorma/slice";
 
 const DEFAULT_AVATAR_URL =
   "https://res.cloudinary.com/dwshxlkre/image/upload/v1736365275/avatar_yajq6q.png";
@@ -27,9 +28,7 @@ const schema = yup.object().shape({
 const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const userEmailFromRedux = useSelector((state) => state.auth.userInfo?.email);
-  // const userId = useSelector((state) => state.user.userId);
-  // console.log("User ID from Redux:", userId);
+
   const accessToken = useSelector(selectTokens);
   console.log("Access Token from Redux:", accessToken);
   const [preview, setPreview] = useState(user?.photo || DEFAULT_AVATAR_URL);
@@ -49,19 +48,43 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     },
   });
 
+  // useEffect(() => {
+  //   if (!user) {
+  //     dispatch(updateUser());
+  //   } else {
+  //     setPreview(user.photo || DEFAULT_AVATAR_URL);
+
+  //     Object.entries(user).forEach(([key, value]) => setValue(key, value));
+
+  //     if (!user.gender) {
+  //       setValue("gender", "woman");
+  //     }
+  //   }
+  // }, [dispatch, user, setValue]);
+
   useEffect(() => {
-    if (!user) {
-      dispatch(getCurrentUser());
-    } else {
-      setPreview(user.photo || DEFAULT_AVATAR_URL);
+    const fetchData = async () => {
+      try {
+        const response = await dispatch(getCurrentUser());
+        if (response.payload) {
+          const userData = { ...response.payload };
 
-      Object.entries(user).forEach(([key, value]) => setValue(key, value));
+          if (userData.waterNorma) {
+            userData.waterNorma = userData.waterNorma / 1000;
+          }
 
-      if (!user.gender) {
-        setValue("gender", "woman");
+          Object.entries(userData).forEach(([key, value]) =>
+            setValue(key, value)
+          );
+          setPreview(userData.photo || DEFAULT_AVATAR_URL);
+        }
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
       }
-    }
-  }, [dispatch, user, setValue]);
+    };
+
+    fetchData();
+  }, [dispatch, setValue]);
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -131,7 +154,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     const allowedFields = [
       "name",
       "gender",
-      // "email",
+      "email",
       "weight",
       "waterNorma",
       "activeTime",
@@ -152,7 +175,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     }
 
     const dataToSave = {
-      // userId: userId,
       ...filteredData,
       photo: photoURL,
     };
@@ -183,7 +205,8 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       Object.entries(dataToSave).forEach(([key, value]) =>
         setValue(key, value)
       );
-
+      dispatch(fetchWaterNorma());
+      dispatch(getUserState(dataToSave));
       onSubmit(dataToSave);
       onClose();
     } catch (error) {
@@ -266,8 +289,8 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
               <input
                 className={style.formInput}
                 type="email"
-                defaultValue={userEmailFromRedux}
-                {...register("userEmailFromRedux")}
+                defaultValue={user?.email}
+                {...register("email")}
               />
               {errors.email && (
                 <p className={style.errorText}>{errors.email.message}</p>
@@ -362,9 +385,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
             defaultValue={calculateWaterNorma}
             {...register("waterNorma")}
           />
-          {/* {errors.waterToDrink && (
-            <p className={style.errorText}>{errors.waterToDrink.message}</p>
-          )} */}
         </div>
       </div>
       <button type="submit" className={style.saveBtn}>

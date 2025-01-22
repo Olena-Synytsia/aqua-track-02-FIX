@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import style from "./AdvantagesSection.module.css";
 import { fetchCounter } from "./getCounter.js";
+import LoaderCustoners from "./LoaderCustoners.jsx";
 
 const formatCounter = (count) => {
   if (count >= 1000 && count <= 1100) {
@@ -16,13 +17,17 @@ const formatCounter = (count) => {
 
 const UsersCounter = () => {
   const [counter, setCounter] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const getCounter = async () => {
       try {
         const usersCount = await fetchCounter();
         setCounter(usersCount);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getCounter();
@@ -30,7 +35,11 @@ const UsersCounter = () => {
 
   return (
     <div>
-      <p className={style.counter}>{formatCounter(counter)}</p>
+      {loading ? (
+        <LoaderCustoners />
+      ) : (
+        <p className={style.counter}>{formatCounter(counter)}</p>
+      )}
     </div>
   );
 };

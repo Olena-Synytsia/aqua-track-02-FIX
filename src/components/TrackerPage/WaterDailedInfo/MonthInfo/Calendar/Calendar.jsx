@@ -14,13 +14,10 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
   const dispatch = useDispatch();
   const waterData = useSelector(selectWaterData);
 
-
   useEffect(() => {
     const formattedDate = getFormattedDate(selectedDate);
     dispatch(fetchWaterPer(formattedDate));
   }, [selectedDate, dispatch]);
-
-  console.log("Water Data:", waterData);
 
   const daysInMonth = dayjs(selectedDate).daysInMonth();
   const days = [...Array(daysInMonth)].map((_, dayIndex) => {
@@ -28,7 +25,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
     const date = dayjs(selectedDate).date(day).format("YYYY-MM-DD");
     const dayData = waterData.find((d) => d.day === date);
     const percent = dayData ? dayData.percent : undefined;
-   
+
     return (
       <CalendarItem
         key={day}

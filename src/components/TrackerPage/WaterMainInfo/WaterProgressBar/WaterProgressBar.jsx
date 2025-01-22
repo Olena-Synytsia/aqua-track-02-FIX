@@ -21,14 +21,8 @@ const WaterProgressBar = () => {
   const [localPercent, setLocalPercent] = useState(waterPercent.percent || 0);
   const percent = localPercent.percent || 0;
 
-  console.log("WaterProgressBar rendered");
-  console.log("Selected Date:", selectedDate);
-  console.log("Water Percent:", waterPercent.percent);
-  console.log("Local Percent:", localPercent);
-
   useEffect(() => {
     if (selectedDate) {
-      console.log("fetchWaterPercent dispatched");
       dispatch(fetchWaterPercent(selectedDate));
     }
   }, [selectedDate, dispatch]);
@@ -37,16 +31,12 @@ const WaterProgressBar = () => {
     setLocalPercent(waterPercent);
   }, [waterPercent]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (isError) {
     return <div>Error loading data.</div>;
   }
 
   return (
-    <div className={css.container}>
+    <div className={`${css.container} ${isLoading ? css.loading : ""}`}>
       <div className={css.containerBar}>
         <div className={css.title}>Today</div>
         <div className={css.sliderWrapper}>
@@ -73,16 +63,6 @@ const WaterProgressBar = () => {
           <span>50%</span>
           <span>100%</span>
         </div>
-        {/* <Tooltip
-          title={`${localPercent.toFixed(
-            0
-          )}% (${consumedWater} ml / ${dailyWaterNorm} ml)`}
-          placement="top"
-          arrow
-          classes={{ tooltip: s.customTooltip, arrow: s.customArrow }}
-        >
-          <div className={s.sliderTooltip} />
-        </Tooltip> */}
       </div>
     </div>
   );
