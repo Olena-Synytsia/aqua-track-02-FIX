@@ -3,6 +3,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для токенів
+import s from "./GoogleAuth.module.css";
 
 const GoogleAuth = () => {
   const [user, setUser] = useState(null);
@@ -35,8 +36,8 @@ const GoogleAuth = () => {
 
       if (res.ok) {
         // Якщо сервер повернув токен, зберігаємо його через Redux
-        dispatch(setToken({ accessToken: data.access_token }));
-        localStorage.setItem("access_token", data.access_token); // Зберігаємо в localStorage
+        dispatch(setToken({ accessToken: data.accessToken }));
+        localStorage.setItem("accessToken", data.accessToken); // Зберігаємо в localStorage
         setUser(data.user); // Зберігаємо дані користувача
         navigate("/tracker"); // Перехід на сторінку приладу
       } else {
@@ -80,12 +81,14 @@ const GoogleAuth = () => {
         </div>
       ) : (
         <GoogleOAuthProvider clientId="155129163109-dfuie6f7ee4tjtojrmn18va2lq1tn2ff.apps.googleusercontent.com">
-          <GoogleLogin
-            flow="implicit" // Використовуємо потік без необхідності коду
-            onSuccess={handleLoginSuccess}
-            onFailure={handleLoginFailure}
-            // useOneTap={true} // Можна включити One Tap для автоматичної авторизації
-          />
+          <div className={s.googleWrapBtn} id="google-btn">
+            <GoogleLogin
+              flow="implicit" // Використовуємо потік без необхідності коду
+              onSuccess={handleLoginSuccess}
+              onFailure={handleLoginFailure}
+              // useOneTap={true} // Можна включити One Tap для автоматичної авторизації
+            />
+          </div>
         </GoogleOAuthProvider>
       )}
     </div>
