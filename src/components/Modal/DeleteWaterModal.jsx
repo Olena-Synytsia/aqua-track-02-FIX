@@ -151,7 +151,7 @@
 
 // export default DeleteWaterModal;
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./DeleteWaterModal.module.css";
 import { useDispatch } from "react-redux";
 
@@ -192,18 +192,18 @@ const DeleteWaterModal = ({ waterId, onClose = () => {} }) => {
   };
 
   // Це для закривання модалки через Escape перевір чи буде працювати
-  // useEffect(() => {
-  //     const handleKeyDown = (e) => {
-  //       if (e.key === "Escape") {
-  //         onClose();
-  //       }
-  //     };
-  //     document.addEventListener("keydown", handleKeyDown);
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
 
-  //     return () => {
-  //       document.removeEventListener("keydown", handleKeyDown);
-  //     };
-  //   }, [onClose]);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
 
   return (
     <div onClick={handleBackdropClick} className={style.modalOverlay}>

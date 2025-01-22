@@ -5,6 +5,10 @@ import { setToken } from "./slice";
 
 export const authApi = axios.create({
   baseURL: "https://aqua-api-fkf8.onrender.com",
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
+  // withCredentials: true,
 });
 
 export const setAuthHeader = (accessToken) => {
@@ -40,16 +44,6 @@ export const login = createAsyncThunk(
       if (!accessToken) {
         throw new Error("Access token not found in the response.");
       }
-
-      // // Збереження токена в localStorage
-      // localStorage.setItem("accessToken", accessToken);
-
-      // console.log(
-      //   "Access token after login (localStorage):",
-      //   localStorage.getItem("accessToken")
-      // );
-
-      // Збереження токена в Redux
       thunkApi.dispatch(setToken({ accessToken }));
 
       // Встановлення заголовку авторизації
@@ -132,3 +126,27 @@ export const refresh = createAsyncThunk(
     }
   }
 );
+
+// export const refresh = createAsyncThunk(
+//   "/auth/refresh",
+//   async (_, thunkApi) => {
+//     try {
+//       const { data } = await authApi.post("/auth/refresh");
+//       const accessToken = data?.data?.accessToken;
+//       if (!accessToken) {
+//         throw new Error("Access token not found in the response.");
+//       }
+//       setAuthHeader(accessToken);
+//       return accessToken;
+//     } catch (error) {
+//       console.error("Token refresh error:", error);
+//       if (error.status === 401) {
+//         error.message || "Token not found";
+//         return thunkApi.rejectWithValue("token not found");
+//       }
+//       return thunkApi.rejectWithValue(
+//         error.message || "Failed to refresh token"
+//       );
+//     }
+//   }
+// );
