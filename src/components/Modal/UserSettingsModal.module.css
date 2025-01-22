@@ -2,22 +2,19 @@ body.modal-open {
   overflow: hidden;
 }
 
-
 .modalOverlay {
   padding-top: 80px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   inset: 0;
-
 }
-
 
 .modalContainer {
   background-color: white;
@@ -27,52 +24,40 @@ body.modal-open {
   max-width: 343px;
   overflow-y: auto;
   position: relative;
-  max-height: calc(100vh - 80px); 
+  max-height: calc(100vh - 80px);
   background: white;
   border-radius: 16px;
-
 }
 
-
-
 .modalContainer::-webkit-scrollbar {
-  width: 10px; 
+  width: 10px;
   height: 242px;
- /* margin-right: 20px; */
-  
+  /* margin-right: 20px; */
 }
 
 .modalContainer::-webkit-scrollbar-track {
-
-  margin-top: 230px; 
-  margin-bottom: 20px; 
-
-
-  
+  margin-top: 230px;
+  margin-bottom: 20px;
 }
 
 .modalContainer::-webkit-scrollbar-thumb {
-  background: #e3e3e3; 
-  border-radius: 10px; 
-  
+  background: #e3e3e3;
+  border-radius: 10px;
 }
 
 .modalContainer::-webkit-scrollbar-thumb:hover {
-  background: #737373; 
+  background: #737373;
 }
-
-
 
 .modalTitle {
   font-size: 20px;
   font-weight: bold;
-  color: #323F47;
+  color: #323f47;
   display: flex;
   margin-bottom: 20px;
 }
 
-.closeBtn{
-
+.closeBtn {
   width: 24px;
   height: 24px;
 }
@@ -85,33 +70,28 @@ body.modal-open {
   border: none;
   width: 12px;
   height: 12px;
-  color: #2F2F2F;
+  color: #2f2f2f;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .modalCloseBtn:hover {
-  color: #ff0000;
+  color: #2f2f2f;
 }
 
 @media screen and (min-width: 768px) {
-
   .modalContainer {
     max-width: 648px;
     width: 100%;
     padding: 40px;
-
-  
   }
 
   .modalCloseBtn {
-   
     top: 40px;
     right: 40px;
 
     width: 14px;
     height: 14px;
-
   }
   .modalTitle {
     font-size: 28px;
@@ -119,17 +99,12 @@ body.modal-open {
 }
 
 @media screen and (min-width: 1440px) {
-
   .modalContainer {
     max-width: 930px;
-  
   }
 
   .modalCloseBtn {
-   
     top: 47px;
     right: 47px;
-    
   }
-
 }
