@@ -19,7 +19,7 @@ const WaterProgressBar = () => {
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const [localPercent, setLocalPercent] = useState(waterPercent.percent || 0);
-  const percent = localPercent.percent;
+  const percent = localPercent.percent || 0;
 
   console.log("WaterProgressBar rendered");
   console.log("Selected Date:", selectedDate);

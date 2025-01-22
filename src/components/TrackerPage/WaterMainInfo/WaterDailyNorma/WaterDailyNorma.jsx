@@ -19,12 +19,21 @@ const WaterDailyNorma = () => {
       dispatch(fetchWaterNorma());
     }
   }, [status, dispatch]);
-  const dailyUserGoal = dailyGoal || "1,5 L";
+  const dailyUserGoal = dailyGoal || "1,5L";
+
+  const convertToLiters = (goal) => {
+    if (typeof goal === "number") {
+      return goal >= 100 ? (goal / 1000).toFixed(1) : goal.toFixed(1);
+    }
+    return goal;
+  };
 
   return (
     <div className={css.dailyNorma} data-tour="step-2">
       {" "}
-      <div className={css.titleNorma}>{dailyUserGoal / 1000}L</div>{" "}
+      <div className={css.titleNorma}>
+        {convertToLiters(dailyUserGoal)}L
+      </div>{" "}
       <div className={css.subTitle}>My daily norma</div>{" "}
     </div>
   );
