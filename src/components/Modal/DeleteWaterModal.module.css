@@ -20,8 +20,7 @@
   position: relative;
 }
 
-.closeBtn{
-
+.closeBtn {
   width: 24px;
   height: 24px;
 }
@@ -34,13 +33,13 @@
   border: none;
   width: 12px;
   height: 12px;
-  color: #2F2F2F;
+  color: #2f2f2f;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .modalCloseBtn:hover {
-  color: #ff0000;
+  color: #2f2f2f;
 }
 
 .title {
@@ -61,23 +60,23 @@
 }
 
 .deleteButton {
-  background-color: #9BE1A0;
+  background-color: #9be1a0;
   border: none;
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  color: #323F47;
+  color: #323f47;
 }
 
 .deleteButton:hover {
-  background-color: #218838;
+  background-color: #87d28d;
 }
 
 .cancelButton {
-  background-color: #F0EFF4;
-  color: #323F47;
+  background-color: #f0eff4;
+  color: #323f47;
   border: none;
   padding: 10px 20px;
   border-radius: 30px;
@@ -90,16 +89,12 @@
   background-color: #e2e6ea;
 }
 
-
 @media screen and (min-width: 768px) {
-
   .modalContainer {
- 
     padding: 40px 20px;
     border-radius: 15px;
     width: 516px;
     height: 244px;
-
   }
 
   .buttonContainer {
@@ -112,7 +107,7 @@
 
   .title {
     font-size: 32px;
- 
+
     margin-bottom: 24px;
   }
   .message {
@@ -120,22 +115,16 @@
     margin-bottom: 24px;
   }
 
-.deleteButton {
-  
-  width: 173px;
-  height: 60px;
+  .deleteButton {
+    width: 173px;
+    height: 60px;
 
-  font-size: 16px;
+    font-size: 16px;
+  }
+  .cancelButton {
+    width: 173px;
+    height: 60px;
 
-}
-.cancelButton {
-
-  width: 173px;
-  height: 60px;
-
-  font-size: 16px;
-
-  
-}
-
+    font-size: 16px;
+  }
 }
