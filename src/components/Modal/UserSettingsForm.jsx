@@ -30,7 +30,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const user = useSelector((state) => state.user.user);
 
   const accessToken = useSelector(selectTokens);
-  console.log("Access Token from Redux:", accessToken);
+  // console.log("Access Token from Redux:", accessToken);
   const [preview, setPreview] = useState(user?.photo || DEFAULT_AVATAR_URL);
 
   const {
@@ -47,20 +47,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       gender: user?.gender || "woman",
     },
   });
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     dispatch(updateUser());
-  //   } else {
-  //     setPreview(user.photo || DEFAULT_AVATAR_URL);
-
-  //     Object.entries(user).forEach(([key, value]) => setValue(key, value));
-
-  //     if (!user.gender) {
-  //       setValue("gender", "woman");
-  //     }
-  //   }
-  // }, [dispatch, user, setValue]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,7 +125,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
   const waterNormaF = calculateWaterNorma(weight, activeTime, gender);
 
   const handleFormSubmit = async (data) => {
-    console.log("Form is submitted, data:", data); // тут ок
+    // console.log("Form is submitted, data:", data);
 
     let photoURL = user?.photo || DEFAULT_AVATAR_URL;
     if (data.photo && data.photo instanceof File) {
@@ -179,7 +165,7 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       photo: photoURL,
     };
 
-    console.log("Filtered data to save:", dataToSave);
+    // console.log("Filtered data to save:", dataToSave);
 
     const formData = new FormData();
     Object.keys(dataToSave).forEach((key) => {
@@ -189,16 +175,16 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
     console.log("Token:", accessToken);
 
     try {
-      console.log("Preparing to dispatch updateUser with data:", dataToSave);
+      // console.log("Preparing to dispatch updateUser with data:", dataToSave);
       const response = await dispatch(
         updateUser({ data: dataToSave, accessToken })
       );
-      console.log("Response from dispatch:", response);
+      // console.log("Response from dispatch:", response);
 
       if (response.error) {
         throw new Error(response.error.message);
       }
-      console.log("Data to send:", dataToSave);
+      // console.log("Data to send:", dataToSave);
       dispatch(setImage(photoURL));
       dispatch(setName(data.name));
 
@@ -213,14 +199,6 @@ const UserSettingsForm = ({ onSubmit = () => {}, onClose = () => {} }) => {
       alert(error.message); // Показуємо помилку
     }
   };
-
-  //   console.log("Data to send:", dataToSave);
-  //   dispatch(updateUser(dataToSave));
-  //   dispatch(setImage(photoURL));
-  //   dispatch(setName(data.name));
-  //   onSubmit(dataToSave);
-  //   onClose();
-  // };
 
   return (
     <form

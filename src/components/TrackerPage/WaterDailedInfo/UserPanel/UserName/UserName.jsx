@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 const UserName = () => {
   const userEmailFromRedux = useSelector((state) => state.auth.userInfo?.email);
   const userNameFromRedux = useSelector((state) => state.user.user?.name);
-  console.log("userEmailFromRedux: ", userEmailFromRedux);
-  console.log("userNameFromRedux: ", userNameFromRedux);
+  // console.log("userEmailFromRedux: ", userEmailFromRedux);
+  // console.log("userNameFromRedux: ", userNameFromRedux);
 
   const [userName, setUserName] = useState(() => {
     // Ініціалізація з localStorage
