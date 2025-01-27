@@ -36,8 +36,8 @@ const GoogleAuth = () => {
 
       if (res.ok) {
         // Якщо сервер повернув токен, зберігаємо його через Redux
-        dispatch(setToken({ accessToken: data.accessToken }));
-        localStorage.setItem("accessToken", data.accessToken); // Зберігаємо в localStorage
+        dispatch(setToken({ accessToken: data.data.accessToken }));
+        localStorage.setItem("accessToken", data.data.accessToken); // Зберігаємо в localStorage
         setUser(data.user); // Зберігаємо дані користувача
         navigate("/tracker"); // Перехід на сторінку приладу
       } else {

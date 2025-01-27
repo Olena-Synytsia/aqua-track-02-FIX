@@ -2,12 +2,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { register, login } from "../../redux/auth/operations";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Logo from "../HomePage/WelcomeSection/Logo/Logo";
-import s from "./SignUpForm.module.css";
+import { register, login } from "../../redux/auth/operations";
 import { setEmail } from "../../redux/auth/slice";
+import Logo from "../HomePage/WelcomeSection/Logo/Logo";
+import GoogleAuth from "../GoogleAuth/GoogleAuth.jsx";
+import s from "./SignUpForm.module.css";
 
 const schema = yup.object({
   email: yup
@@ -185,7 +186,7 @@ const SignUpForm = () => {
             <button type="submit" className={s.singUpBtn}>
               Sign Up
             </button>
-            {/* <GoogleAuth /> */}
+            <GoogleAuth />
             <p className={s.text}>
               Already have an account?
               <Link to="/signin" className={s.link}>

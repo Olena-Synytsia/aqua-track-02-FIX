@@ -24,7 +24,7 @@ export const register = createAsyncThunk(
       // thunkApi.dispatch(setToken({ accessToken }));
       // localStorage.setItem("accessToken", accessToken);
       setAuthHeader(data.accessToken);
-
+      console.log(data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message || "Registration failed");
