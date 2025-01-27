@@ -4,7 +4,7 @@ import { setToken } from "./slice";
 // import { setToken } from "./slice";
 
 export const authApi = axios.create({
-  baseURL: "https://aqua-api-fix.onrender.com",
+  baseURL: "https://aqua-api-fkf8.onrender.com",
   // headers: {
   //   "Content-Type": "application/json",
   // },

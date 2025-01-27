@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для токенів
@@ -73,23 +73,23 @@ const GoogleAuth = () => {
           {notification.message}
         </div>
       )}
-      <GoogleOAuthProvider clientId="155129163109-dfuie6f7ee4tjtojrmn18va2lq1tn2ff.apps.googleusercontent.com">
-        <GoogleLogin
-          flow="implicit" // Використовуємо потік без необхідності коду
-          onSuccess={handleLoginSuccess}
-          onFailure={handleLoginFailure}
-          render={(renderProps) => (
-            <button
-              className={s.customGoogleButton} // Використовуємо кастомний стиль
-              onClick={renderProps.onClick} // Викликаємо onClick з renderProps
-              disabled={renderProps.disabled} // Додаємо disabled, якщо кнопка неактивна
-            >
-              <span className={s.icon}></span>
-              <span className={s.buttonText}>Login with Google</span>
-            </button>
-          )}
-        />
-      </GoogleOAuthProvider>
+
+      <GoogleLogin
+        flow="implicit" // Використовуємо потік без необхідності коду
+        onSuccess={handleLoginSuccess}
+        onFailure={handleLoginFailure}
+        render={(renderProps) => (
+          <button
+            id="googleBtn"
+            className={s.customGoogleButton} // Використовуємо кастомний стиль
+            onClick={renderProps.onClick} // Викликаємо onClick з renderProps
+            disabled={renderProps.disabled} // Додаємо disabled, якщо кнопка неактивна
+          >
+            <span className={s.icon}></span>
+            <span className={s.buttonText}>Login with Google</span>
+          </button>
+        )}
+      />
     </div>
   );
 };
