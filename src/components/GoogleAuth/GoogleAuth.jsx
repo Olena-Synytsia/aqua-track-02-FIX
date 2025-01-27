@@ -6,7 +6,7 @@ import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для т�
 import s from "./GoogleAuth.module.css";
 
 const GoogleAuth = () => {
-  const setUser = useState(null);
+  const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
   const dispatch = useDispatch(); // Підключаємо Redux
   const navigate = useNavigate(); // Для навігації після успішного входу
@@ -38,6 +38,7 @@ const GoogleAuth = () => {
         // Якщо сервер повернув токен, зберігаємо його через Redux
         dispatch(setToken({ accessToken: data.data.accessToken }));
         localStorage.setItem("accessToken", data.data.accessToken); // Зберігаємо в localStorage
+        console.log(data.data.user);
         setUser(data.data.user); // Зберігаємо дані користувача
         navigate("/tracker"); // Перехід на сторінку приладу
       } else {
@@ -67,10 +68,18 @@ const GoogleAuth = () => {
   };
 
   return (
-    <div>
+    <div className={s.GoogleAuthWrap}>
       {notification && (
         <div style={{ color: notification.type === "error" ? "red" : "green" }}>
           {notification.message}
+        </div>
+      )}
+
+      {user && (
+        <div>
+          <h3>Welcome, {user.name}!</h3>
+          <p>Email: {user.email}</p>
+          {/* Ти можеш додати більше полів, які отримуєш в response */}
         </div>
       )}
 
