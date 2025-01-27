@@ -6,7 +6,7 @@ import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для т�
 import s from "./GoogleAuth.module.css";
 
 const GoogleAuth = () => {
-  const [user, setUser] = useState(null);
+  const setUser = useState(null);
   const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
   const dispatch = useDispatch(); // Підключаємо Redux
   const navigate = useNavigate(); // Для навігації після успішного входу
@@ -38,7 +38,7 @@ const GoogleAuth = () => {
         // Якщо сервер повернув токен, зберігаємо його через Redux
         dispatch(setToken({ accessToken: data.data.accessToken }));
         localStorage.setItem("accessToken", data.data.accessToken); // Зберігаємо в localStorage
-        setUser(data.user); // Зберігаємо дані користувача
+        setUser(data.data.user); // Зберігаємо дані користувача
         navigate("/tracker"); // Перехід на сторінку приладу
       } else {
         setNotification({
@@ -73,24 +73,23 @@ const GoogleAuth = () => {
           {notification.message}
         </div>
       )}
-
-      {user ? (
-        <div>
-          <h2>Welcome, {user.name}</h2>
-          <p>Email: {user.email}</p>
-        </div>
-      ) : (
-        <GoogleOAuthProvider clientId="155129163109-dfuie6f7ee4tjtojrmn18va2lq1tn2ff.apps.googleusercontent.com">
-          <div className={s.googleWrapBtn} id="google-btn">
-            <GoogleLogin
-              flow="implicit" // Використовуємо потік без необхідності коду
-              onSuccess={handleLoginSuccess}
-              onFailure={handleLoginFailure}
-              // useOneTap={true} // Можна включити One Tap для автоматичної авторизації
-            />
-          </div>
-        </GoogleOAuthProvider>
-      )}
+      <GoogleOAuthProvider clientId="155129163109-dfuie6f7ee4tjtojrmn18va2lq1tn2ff.apps.googleusercontent.com">
+        <GoogleLogin
+          flow="implicit" // Використовуємо потік без необхідності коду
+          onSuccess={handleLoginSuccess}
+          onFailure={handleLoginFailure}
+          render={(renderProps) => (
+            <button
+              className={s.customGoogleButton} // Використовуємо кастомний стиль
+              onClick={renderProps.onClick} // Викликаємо onClick з renderProps
+              disabled={renderProps.disabled} // Додаємо disabled, якщо кнопка неактивна
+            >
+              <span className={s.icon}></span>
+              <span className={s.buttonText}>Login with Google</span>
+            </button>
+          )}
+        />
+      </GoogleOAuthProvider>
     </div>
   );
 };

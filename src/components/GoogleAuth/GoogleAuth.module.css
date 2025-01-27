@@ -1,24 +1,47 @@
-.nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb.googleWrapBtn#google-btn {
-  display: flex;
-  width: 311px;
-  height: 50px;
-  padding: 16px;
+.customGoogleButton {
+  background-color: #4285f4; /* Google Blue */
+  color: white;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
   border: none;
-  border-radius: 30px;
-  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
   justify-content: center;
-  font-family: Poppins;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: -0.01em;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: #323f47;
+  align-items: center;
+  transition: background-color 0.3s ease;
 }
 
-@media screen and (min-width: 768px) {
-  .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb.googleWrapBtn {
+.customGoogleButton:hover {
+  background-color: #357ae8; /* Змінюється колір при наведенні */
+}
+
+.customGoogleButton:disabled {
+  background-color: #dadce0; /* Колір для неактивної кнопки */
+  cursor: not-allowed;
+}
+
+.icon {
+  background: url("/identity/sign-in/g-normal.png") transparent 5px 50%
+    no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+}
+
+.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 50px; /* Відстань для тексту */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* @media screen and (min-width: 768px) {
+  .googleWrapBtn {
     height: 60px;
     padding: 18px;
     align-items: center;
@@ -26,4 +49,4 @@
     font-size: 16px;
     line-height: 24px;
   }
-}
+} */
