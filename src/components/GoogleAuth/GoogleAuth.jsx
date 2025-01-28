@@ -82,23 +82,14 @@ const GoogleAuth = () => {
           {/* Ти можеш додати більше полів, які отримуєш в response */}
         </div>
       )}
-
-      <GoogleLogin
-        flow="implicit" // Використовуємо потік без необхідності коду
-        onSuccess={handleLoginSuccess}
-        onFailure={handleLoginFailure}
-        render={(renderProps) => (
-          <button
-            id="googleBtn"
-            className={s.customGoogleButton} // Використовуємо кастомний стиль
-            onClick={renderProps.onClick} // Викликаємо onClick з renderProps
-            disabled={renderProps.disabled} // Додаємо disabled, якщо кнопка неактивна
-          >
-            <span className={s.icon}></span>
-            <span className={s.buttonText}>Login with Google</span>
-          </button>
-        )}
-      />
+      <div className={s.customGoogleBtn}>
+        <GoogleLogin
+          className={s.customGoogleBtn}
+          flow="implicit" // Використовуємо потік без необхідності коду
+          onSuccess={handleLoginSuccess}
+          onFailure={handleLoginFailure}
+        />
+      </div>
     </div>
   );
 };
