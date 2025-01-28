@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -67,6 +67,15 @@ const GoogleAuth = () => {
     console.error("Login failed:", error);
   };
 
+  useEffect(() => {
+    // Додаємо стилі до кнопки Google після монтування компонента
+    const googleButton = document.querySelector(".google-btn");
+    if (googleButton) {
+      googleButton.style.backgroundColor = "red"; // Можна задати будь-який стиль
+      googleButton.style.color = "white";
+    }
+  }, []);
+
   return (
     <div className={s.GoogleAuthWrap}>
       {notification && (
@@ -88,6 +97,17 @@ const GoogleAuth = () => {
           flow="implicit" // Використовуємо потік без необхідності коду
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
+          render={(renderProps) => (
+            <button
+              id="googleBtn"
+              className={s.customGoogleButton} // Використовуємо кастомний стиль
+              onClick={renderProps.onClick} // Викликаємо onClick з renderProps
+              disabled={renderProps.disabled} // Додаємо disabled, якщо кнопка неактивна
+            >
+              <span className={s.icon}></span>
+              <span className={s.buttonText}>Login with Google</span>
+            </button>
+          )}
         />
       </div>
     </div>
