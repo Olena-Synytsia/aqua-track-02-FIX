@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "../../redux/auth/slice.js"; // Ваш slice для токенів
-import s from "./GoogleAuth.module.css";
+import "./index.css";
 
 const GoogleAuth = () => {
   const [user, setUser] = useState(null);
@@ -67,17 +67,8 @@ const GoogleAuth = () => {
     console.error("Login failed:", error);
   };
 
-  useEffect(() => {
-    // Додаємо стилі до кнопки Google після монтування компонента
-    const googleButton = document.querySelector(".google-btn");
-    if (googleButton) {
-      googleButton.style.backgroundColor = "red"; // Можна задати будь-який стиль
-      googleButton.style.color = "white";
-    }
-  }, []);
-
   return (
-    <div className={s.GoogleAuthWrap}>
+    <div className="GoogleAuthWrap">
       {notification && (
         <div style={{ color: notification.type === "error" ? "red" : "green" }}>
           {notification.message}
@@ -91,23 +82,12 @@ const GoogleAuth = () => {
           {/* Ти можеш додати більше полів, які отримуєш в response */}
         </div>
       )}
-      <div className={s.customGoogleBtn}>
+      <div className="customGoogleBtn">
         <GoogleLogin
-          className={s.customGoogleBtn}
+          className="customGoogleBtn"
           flow="implicit" // Використовуємо потік без необхідності коду
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
-          render={(renderProps) => (
-            <button
-              id="googleBtn"
-              className={s.customGoogleButton} // Використовуємо кастомний стиль
-              onClick={renderProps.onClick} // Викликаємо onClick з renderProps
-              disabled={renderProps.disabled} // Додаємо disabled, якщо кнопка неактивна
-            >
-              <span className={s.icon}></span>
-              <span className={s.buttonText}>Login with Google</span>
-            </button>
-          )}
         />
       </div>
     </div>
