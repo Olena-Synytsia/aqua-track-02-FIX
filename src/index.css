@@ -13,7 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-div.nsm7Bb-HzV7m-LgbsSe,
+body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button {
   display: flex;
   gap: 20px;
@@ -28,7 +28,7 @@ div.nsm7Bb-HzV7m-LgbsSe,
   border: 1px solid #323f47;
 }
 
-div.nsm7Bb-HzV7m-LgbsSe,
+body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button:hover,
 div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button:focus {
@@ -36,7 +36,7 @@ div.nsm7Bb-HzV7m-LgbsSe,
   background-color: rgba(118, 216, 126, 0.2);
 }
 
-div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+body div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
@@ -107,13 +107,13 @@ body {
     margin: 0 auto;
   }
 
-  div.nsm7Bb-HzV7m-LgbsSe,
+  body div.nsm7Bb-HzV7m-LgbsSe,
   .g-id-button {
     height: 60px;
     padding: 18px;
   }
 
-  div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+  body div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
     font-size: 16px;
     line-height: 24px;
   }
