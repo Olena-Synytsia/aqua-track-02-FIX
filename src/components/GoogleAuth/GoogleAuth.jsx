@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,40 @@ const GoogleAuth = () => {
   const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
   const dispatch = useDispatch(); // Підключаємо Redux
   const navigate = useNavigate(); // Для навігації після успішного входу
+
+  useEffect(() => {
+    // Додайте стилі після завантаження компоненту GoogleLogin
+    const style = document.createElement("style");
+    style.innerHTML = `
+      .customGoogleBtn {
+          display: flex;
+  gap: 20px;
+  height: 50px;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  background-color: #f0eff4;
+  align-items: center;
+  justify-content: center;
+  color: #323f47;
+  border: 1px solid #323f47;
+  background-color: rgba(118, 216, 126, 0.2);
+      }
+      .customGoogleBtn:hover {
+        border: 1px solid #87d28d;
+  background-color: rgba(118, 216, 126, 0.2);
+      }
+      .customGoogleBtn:focus {
+        outline: none;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      // Очистити стилі, якщо компонент буде видалено
+      document.head.removeChild(style);
+    };
+  }, []);
 
   // Функція для обробки успішного логіну
   const handleLoginSuccess = async (response) => {

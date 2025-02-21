@@ -13,7 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body div.nsm7Bb-HzV7m-LgbsSe,
+/* body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button {
   display: flex;
   gap: 20px;
@@ -26,7 +26,7 @@ body div.nsm7Bb-HzV7m-LgbsSe,
   justify-content: center;
   color: #323f47;
   border: 1px solid #323f47;
-}
+} */
 
 body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button:hover,
