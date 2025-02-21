@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +10,13 @@ const GoogleAuth = () => {
   const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
   const dispatch = useDispatch(); // Підключаємо Redux
   const navigate = useNavigate(); // Для навігації після успішного входу
-  const iframeRef = useRef(null); // Створюємо ref для iframe
+  // Створюємо ref для iframe
 
   useEffect(() => {
     // Додайте стилі після завантаження компоненту GoogleLogin
     const style = document.createElement("style");
     style.innerHTML = `
-      .nsm7Bb-HzV7m-LgbsSe{
+      .nsm7Bb-HzV7m-LgbsSe-MJoBVe{
           display: flex;
   gap: 20px;
   height: 50px;
@@ -119,7 +119,7 @@ const GoogleAuth = () => {
       )}
       <div className="customGoogleBtn">
         <GoogleLogin
-          className="nsm7Bb-HzV7m-LgbsSe"
+          className="nsm7Bb-HzV7m-LgbsSe-MJoBVe"
           flow="implicit" // Використовуємо потік без необхідності коду
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
