@@ -16,7 +16,7 @@ const GoogleAuth = () => {
     // Додайте стилі після завантаження компоненту GoogleLogin
     const style = document.createElement("style");
     style.innerHTML = `
-      .nsm7Bb-HzV7m-LgbsSe-MJoBVe{
+      .nsm7Bb-HzV7m-LgbsSe jVeSEe i5vt6e-Ia7Qfc uaxL4e-RbRzKe{
           display: flex;
   gap: 20px;
   height: 50px;
@@ -119,7 +119,7 @@ const GoogleAuth = () => {
       )}
       <div className="customGoogleBtn">
         <GoogleLogin
-          className="nsm7Bb-HzV7m-LgbsSe-MJoBVe"
+          className="nsm7Bb-HzV7m-LgbsSe jVeSEe i5vt6e-Ia7Qfc uaxL4e-RbRzK"
           flow="implicit" // Використовуємо потік без необхідності коду
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
