@@ -13,7 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* body div.nsm7Bb-HzV7m-LgbsSe,
+body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button {
   display: flex;
   gap: 20px;
@@ -26,17 +26,17 @@ body {
   justify-content: center;
   color: #323f47;
   border: 1px solid #323f47;
-} */
+}
 
-/* body div.nsm7Bb-HzV7m-LgbsSe,
+body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button:hover,
 div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button:focus {
   border: 1px solid #87d28d;
   background-color: rgba(118, 216, 126, 0.2);
-} */
+}
 
-/* body div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+body div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
@@ -44,7 +44,20 @@ div.nsm7Bb-HzV7m-LgbsSe,
   letter-spacing: -0.01em;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-} */
+}
+
+@media screen and (min-width: 768px) {
+  body div.nsm7Bb-HzV7m-LgbsSe,
+  .g-id-button {
+    height: 60px;
+    padding: 18px;
+  }
+
+  body div.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
 
 h1,
 h2,
