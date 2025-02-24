@@ -16,27 +16,28 @@ const GoogleAuth = () => {
     // Додайте стилі після завантаження компоненту GoogleLogin
     const style = document.createElement("style");
     style.innerHTML = `
-      .nsm7Bb-HzV7m-LgbsSe jVeSEe i5vt6e-Ia7Qfc uaxL4e-RbRzKe{
-          display: flex;
+ .nsm7Bb-HzV7m-LgbsSe {
+  display: flex;
   gap: 20px;
   height: 50px;
   padding: 16px;
   border: none;
   border-radius: 30px;
-  background-color: #f0eff4;
+  background-color: rgba(118, 216, 126, 0.2);
   align-items: center;
   justify-content: center;
   color: #323f47;
   border: 1px solid #323f47;
+}
+
+.nsm7Bb-HzV7m-LgbsSe:hover {
+  border: 1px solid #87d28d;
   background-color: rgba(118, 216, 126, 0.2);
-      }
-      .customGoogleBtn:hover {
-        border: 1px solid #87d28d;
-  background-color: rgba(118, 216, 126, 0.2);
-      }
-      .customGoogleBtn:focus {
-        outline: none;
-      }
+}
+
+.nsm7Bb-HzV7m-LgbsSe:focus {
+  outline: none;
+}
     `;
     document.head.appendChild(style);
 
@@ -45,6 +46,25 @@ const GoogleAuth = () => {
       document.head.removeChild(style);
     };
   }, []);
+
+  // const IframeExample = () => {
+  //   useEffect(() => {
+  //     const iframe = document.getElementById("myIframe");
+  //     const iframeDocument = iframe.contentWindow.document;
+
+  //     // Стилізуємо iframe
+  //     const style = document.createElement("style");
+  //     style.innerHTML = `
+  //     body {
+  //       background-color: #f0eff4;
+  //     }
+  //     h1 {
+  //       color: #323f47;
+  //     }
+  //   `;
+  //     iframeDocument.head.appendChild(style);
+  //   }, []);
+  // }
 
   // Функція для обробки успішного логіну
   const handleLoginSuccess = async (response) => {
@@ -119,7 +139,7 @@ const GoogleAuth = () => {
       )}
       <div className="customGoogleBtn">
         <GoogleLogin
-          className="nsm7Bb-HzV7m-LgbsSe jVeSEe i5vt6e-Ia7Qfc uaxL4e-RbRzK"
+          className="nsm7Bb-HzV7m-LgbsSe"
           flow="implicit" // Використовуємо потік без необхідності коду
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
