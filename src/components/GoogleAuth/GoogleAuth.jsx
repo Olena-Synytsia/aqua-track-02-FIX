@@ -58,7 +58,7 @@ const GoogleAuth = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ idToken: credential }), // Передаємо ID Token
+          body: JSON.stringify({ idToken: credential }),
         }
       );
 
