@@ -126,7 +126,7 @@ const GoogleAuth = () => {
         {/* Кастомна кнопка для виклику GoogleLogin */}
         <button
           className="googleBtn" // Ваш стиль для кнопки
-          onClick={() => document.querySelector(".nsm7Bb-HzV7m-LgbsSe").click()} // натискання кастомної кнопки
+          onClick={() => document.querySelector(".S9gUrf-YoZ4jf ").click()} // натискання кастомної кнопки
         >
           <img src="/path-to-google-logo.svg" alt="Google" /> Sign in with
           Google
