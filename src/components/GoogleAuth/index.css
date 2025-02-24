@@ -1,4 +1,4 @@
-/* body div.nsm7Bb-HzV7m-LgbsSe,
+body div.nsm7Bb-HzV7m-LgbsSe,
 .g-id-button {
   display: flex;
   gap: 20px;
@@ -11,7 +11,8 @@
   justify-content: center;
   color: #323f47;
   border: 1px solid #323f47;
-} */
+  display: none;
+}
 
 /* #gsi_962542_358474 {
   display: flex;

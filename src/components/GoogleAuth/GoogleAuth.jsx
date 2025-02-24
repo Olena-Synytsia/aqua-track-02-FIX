@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,70 +8,46 @@ import "./index.css";
 const GoogleAuth = () => {
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null); // Локальний стан для сповіщень
+  const [isGoogleLoginLoaded, setIsGoogleLoginLoaded] = useState(false); // Стан для відстеження завантаження бібліотеки
   const dispatch = useDispatch(); // Підключаємо Redux
   const navigate = useNavigate(); // Для навігації після успішного входу
-  // Створюємо ref для iframe
+  const googleBtnRef = useRef(null);
 
+  // Завантаження Google API скрипта
   useEffect(() => {
-    // Додайте стилі після завантаження компоненту GoogleLogin
-    const style = document.createElement("style");
-    style.innerHTML = `
- .nsm7Bb-HzV7m-LgbsSe {
-  display: flex;
-  gap: 20px;
-  height: 50px;
-  padding: 16px;
-  border: none;
-  border-radius: 30px;
-  background-color: rgba(118, 216, 126, 0.2);
-  align-items: center;
-  justify-content: center;
-  color: #323f47;
-  border: 1px solid #323f47;
-}
+    const loadGoogleLoginScript = () => {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true;
+      script.onload = () => setIsGoogleLoginLoaded(true);
+      document.body.appendChild(script);
+    };
 
-.nsm7Bb-HzV7m-LgbsSe:hover {
-  border: 1px solid #87d28d;
-  background-color: rgba(118, 216, 126, 0.2);
-}
-
-.nsm7Bb-HzV7m-LgbsSe:focus {
-  outline: none;
-}
-    `;
-    document.head.appendChild(style);
+    loadGoogleLoginScript();
 
     return () => {
-      // Очистити стилі, якщо компонент буде видалено
-      document.head.removeChild(style);
+      // Очистити після відключення компонента
+      const script = document.querySelector(
+        `script[src="https://accounts.google.com/gsi/client"]`
+      );
+      if (script) script.remove();
     };
   }, []);
-
-  // const IframeExample = () => {
-  //   useEffect(() => {
-  //     const iframe = document.getElementById("myIframe");
-  //     const iframeDocument = iframe.contentWindow.document;
-
-  //     // Стилізуємо iframe
-  //     const style = document.createElement("style");
-  //     style.innerHTML = `
-  //     body {
-  //       background-color: #f0eff4;
-  //     }
-  //     h1 {
-  //       color: #323f47;
-  //     }
-  //   `;
-  //     iframeDocument.head.appendChild(style);
-  //   }, []);
-  // }
 
   // Функція для обробки успішного логіну
   const handleLoginSuccess = async (response) => {
     console.log("Google Response:", response);
+
     try {
-      // Відповідь Google містить ID Token
       const { credential } = response;
+      if (!credential) {
+        setNotification({
+          message: "No credential received.",
+          type: "error",
+        });
+        return;
+      }
+
       console.log("ID Token:", credential);
 
       // Надсилаємо ID Token на сервер для перевірки та отримання токенів
@@ -90,10 +66,8 @@ const GoogleAuth = () => {
       console.log("Server response:", data);
 
       if (res.ok) {
-        // Якщо сервер повернув токен, зберігаємо його через Redux
         dispatch(setToken({ accessToken: data.data.accessToken }));
-        localStorage.setItem("accessToken", data.data.accessToken); // Зберігаємо в localStorage
-        console.log(data.data.user);
+        localStorage.setItem("accessToken", data.data.accessToken);
         setUser(data.data.user); // Зберігаємо дані користувача
         navigate("/tracker"); // Перехід на сторінку приладу
       } else {
@@ -101,31 +75,31 @@ const GoogleAuth = () => {
           message: "Failed to authenticate",
           type: "error",
         });
-        console.error("Failed to authenticate");
       }
     } catch (error) {
-      // Обробка помилки і додавання сповіщення в локальний стан
       setNotification({
         message: error.message || "Error during Google login.",
         type: "error",
       });
-      console.error("Error during Google login:", error);
     }
   };
 
-  // Функція для обробки помилок
   const handleLoginFailure = (error) => {
     setNotification({
       message: error.message || "Login failed.",
       type: "error",
     });
-    console.error("Login failed:", error);
   };
 
   return (
     <div className="GoogleAuthWrap">
       {notification && (
-        <div style={{ color: notification.type === "error" ? "red" : "green" }}>
+        <div
+          style={{
+            color: notification.type === "error" ? "red" : "green",
+            marginBottom: "20px",
+          }}
+        >
           {notification.message}
         </div>
       )}
@@ -134,16 +108,29 @@ const GoogleAuth = () => {
         <div>
           <h3>Welcome, {user.name}!</h3>
           <p>Email: {user.email}</p>
-          {/* Ти можеш додати більше полів, які отримуєш в response */}
         </div>
       )}
+
+      {/* Ваш кастомний UI для кнопки */}
       <div className="customGoogleBtn">
-        <GoogleLogin
-          className="nsm7Bb-HzV7m-LgbsSe"
-          flow="implicit" // Використовуємо потік без необхідності коду
-          onSuccess={handleLoginSuccess}
-          onFailure={handleLoginFailure}
-        />
+        {/* Перевіряємо, чи бібліотека завантажена */}
+        {isGoogleLoginLoaded && (
+          <GoogleLogin
+            ref={googleBtnRef}
+            onSuccess={handleLoginSuccess}
+            onFailure={handleLoginFailure}
+            useOneTap={true} // Можна активувати функцію "One Tap"
+          />
+        )}
+
+        {/* Кастомна кнопка для виклику GoogleLogin */}
+        <button
+          className="googleBtn" // Ваш стиль для кнопки
+          onClick={() => document.querySelector(".nsm7Bb-HzV7m-LgbsSe").click()} // натискання кастомної кнопки
+        >
+          <img src="/path-to-google-logo.svg" alt="Google" /> Sign in with
+          Google
+        </button>
       </div>
     </div>
   );
