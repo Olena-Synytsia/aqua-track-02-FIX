@@ -30,14 +30,10 @@ const GoogleAuth2 = () => {
 
     try {
       // Відповідь Google містить ID Token
-      const { credential, access_token } = response;
+      const { credential } = response;
 
       // Логування отриманих токенів
       console.log("ID Token:", credential);
-      console.log("Access Token:", access_token);
-
-      // Якщо є ID Token, використовуємо його
-      const tokenToSend = credential || access_token;
 
       // Надсилаємо токен на сервер для перевірки та отримання токенів
       const res = await fetch(
@@ -47,7 +43,7 @@ const GoogleAuth2 = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ idToken: tokenToSend }), // Передаємо ID Token або Access Token
+          body: JSON.stringify({ idToken: credential }), // Передаємо ID Token або Access Token
         }
       );
 
