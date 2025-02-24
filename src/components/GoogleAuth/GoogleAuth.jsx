@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ const GoogleAuth = () => {
   const [isGoogleLoginLoaded, setIsGoogleLoginLoaded] = useState(false); // Стан для відстеження завантаження бібліотеки
   const dispatch = useDispatch(); // Підключаємо Redux
   const navigate = useNavigate(); // Для навігації після успішного входу
-  const googleBtnRef = useRef(null);
 
   // Завантаження Google API скрипта
   useEffect(() => {
@@ -116,7 +115,6 @@ const GoogleAuth = () => {
         {/* Перевіряємо, чи бібліотека завантажена */}
         {isGoogleLoginLoaded && (
           <GoogleLogin
-            ref={googleBtnRef}
             onSuccess={handleLoginSuccess}
             onFailure={handleLoginFailure}
             useOneTap={true} // Можна активувати функцію "One Tap"
