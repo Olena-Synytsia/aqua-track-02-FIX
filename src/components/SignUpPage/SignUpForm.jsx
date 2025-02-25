@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { register, login } from "../../redux/auth/operations";
 import { setEmail } from "../../redux/auth/slice";
 import Logo from "../HomePage/WelcomeSection/Logo/Logo";
-import GoogleAuth from "../GoogleAuth/GoogleAuth.jsx";
+// import GoogleAuth from "../GoogleAuth/GoogleAuth.jsx";
 // import GoogleAuth2 from "../GoogleAuth/GoogleAuth2.jsx";
 import s from "./SignUpForm.module.css";
 
@@ -187,7 +187,7 @@ const SignUpForm = () => {
             <button type="submit" className={s.singUpBtn}>
               Sign Up
             </button>
-            <GoogleAuth />
+            {/* <GoogleAuth /> */}
             {/* <GoogleAuth2 /> */}
             <p className={s.text}>
               Already have an account?
