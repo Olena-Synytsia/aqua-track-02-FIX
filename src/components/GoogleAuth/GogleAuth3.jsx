@@ -1,4 +1,5 @@
-const GogleAuth3 = () => {
-  return <div>GogleAuth3</div>;
+const GoogleAuth3 = () => {
+  return <div>GoogleAuth3</div>;
 };
-export default GogleAuth3;
+
+export default GoogleAuth3;
