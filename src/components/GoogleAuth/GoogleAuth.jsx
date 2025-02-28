@@ -117,7 +117,7 @@ const GoogleAuth = () => {
           <GoogleLogin
             onSuccess={handleLoginSuccess}
             onFailure={handleLoginFailure}
-            useOneTap={true} // Можна активувати функцію "One Tap"
+            // useOneTap={true} // Можна активувати функцію "One Tap"
           />
         )}
 
