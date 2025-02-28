@@ -117,7 +117,6 @@ const GoogleAuth = () => {
           <GoogleLogin
             onSuccess={handleLoginSuccess}
             onFailure={handleLoginFailure}
-            // useOneTap={true} // Можна активувати функцію "One Tap"
           />
         )}
 
@@ -126,8 +125,11 @@ const GoogleAuth = () => {
           className="googleBtn" // Ваш стиль для кнопки
           onClick={() => document.querySelector(".nsm7Bb-HzV7m-LgbsSe").click()} // натискання кастомної кнопки
         >
-          <img src="/path-to-google-logo.svg" alt="Google" /> Sign in with
-          Google
+          <img
+            src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
+            alt="Google"
+          />
+          Sign up with Google
         </button>
       </div>
     </div>
