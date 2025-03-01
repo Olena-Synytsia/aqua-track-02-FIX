@@ -90,12 +90,15 @@ const GoogleAuth = () => {
     });
   };
 
-  const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
-  if (googleButton) {
-    googleButton.click();
-  } else {
-    console.log("Google button not found");
-  }
+  useEffect(() => {
+    const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
+
+    if (googleButton) {
+      googleButton.click();
+    } else {
+      console.log("Google button not found");
+    }
+  }, []);
 
   return (
     <div className="googleAuthWrap">
