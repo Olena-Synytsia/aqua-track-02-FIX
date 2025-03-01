@@ -25,7 +25,7 @@ const GoogleAuth = () => {
     loadGoogleLoginScript();
 
     return () => {
-      // Очистка після відключення компонента
+      // Очистити після відключення компонента
       const script = document.querySelector(
         `script[src="https://accounts.google.com/gsi/client"]`
       );
@@ -90,26 +90,14 @@ const GoogleAuth = () => {
     });
   };
 
-  // Використовуємо MutationObserver для спостереження за DOM
   useEffect(() => {
-    // Спостерігаємо за змінами в DOM
-    const observer = new MutationObserver(() => {
-      const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
-      if (googleButton) {
-        googleButton.click(); // Кликаємо, коли кнопка з'являється
-        observer.disconnect(); // Зупиняємо спостереження, коли знайшли кнопку
-      }
-    });
+    const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
 
-    // Стартуємо спостереження за body
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    return () => {
-      observer.disconnect(); // Очистка спостереження
-    };
+    if (googleButton) {
+      googleButton.click();
+    } else {
+      console.log("Google button not found");
+    }
   }, []);
 
   return (
