@@ -98,7 +98,7 @@ const GoogleAuth = () => {
     } else {
       console.log("Google button not found");
     }
-  }, []);
+  }, [isGoogleLoginLoaded]);
 
   return (
     <div className="googleAuthWrap">
