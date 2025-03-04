@@ -91,14 +91,27 @@ const GoogleAuth = () => {
   };
 
   useEffect(() => {
-    const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
+    const timer = setTimeout(() => {
+      const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
+      if (googleButton) {
+        googleButton.click();
+      } else {
+        console.log("Google button not found");
+      }
+    }, 500); // Затримка 500 мс
 
-    if (googleButton) {
-      googleButton.click();
-    } else {
-      console.log("Google button not found");
-    }
+    return () => clearTimeout(timer); // Очистити таймер при відключенні компонента
   }, [isGoogleLoginLoaded]);
+
+  // useEffect(() => {
+  //   const googleButton = document.querySelector(".nsm7Bb-HzV7m-LgbsSe");
+
+  //   if (googleButton) {
+  //     googleButton.click();
+  //   } else {
+  //     console.log("Google button not found");
+  //   }
+  // }, [isGoogleLoginLoaded]);
 
   return (
     <div className="googleAuthWrap">
