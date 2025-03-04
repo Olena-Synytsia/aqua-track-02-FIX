@@ -51,7 +51,7 @@ const GoogleAuth = () => {
 
       // Надсилаємо ID Token на сервер для перевірки та отримання токенів
       const res = await fetch(
-        "https://aqua-api-fkf8.onrender.com/auth/confirm-oauth",
+        "https://aqua-api-fix.onrender.com/auth/confirm-oauth",
         {
           method: "POST",
           headers: {
