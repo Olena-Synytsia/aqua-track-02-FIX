@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getUsersApi = axios.create({
-  baseURL: "https://aqua-api-fkf8.onrender.com",
+  baseURL: "https://aqua-api-fix.onrender.com",
 });
 
 export const fetchCounter = async () => {
